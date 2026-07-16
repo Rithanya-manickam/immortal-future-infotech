@@ -1,24 +1,44 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BackgroundFX } from "@/components/BackgroundFX";
+import { ClientOnly } from "@/components/ClientOnly";
+import { CustomCursor } from "@/components/CustomCursor";
+import { LenisProvider } from "@/components/LenisProvider";
+import { Navbar } from "@/components/Navbar";
+import { PageLoader } from "@/components/PageLoader";
+import { Hero } from "@/components/sections/Hero";
+import { Journey } from "@/components/sections/Journey";
+import { CreativeVault } from "@/components/sections/CreativeVault";
+import { Expertise } from "@/components/sections/Expertise";
+import { Gallery } from "@/components/sections/Gallery";
+import { Stats } from "@/components/sections/Stats";
+import { CTA } from "@/components/sections/CTA";
+import { Footer } from "@/components/sections/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <LenisProvider>
+      <ClientOnly>
+        <PageLoader />
+      </ClientOnly>
+      <ClientOnly>
+        <CustomCursor />
+      </ClientOnly>
+      <BackgroundFX />
+      <Navbar />
+      <main className="relative z-10">
+        <Hero />
+        <Journey />
+        <CreativeVault />
+        <Expertise />
+        <Gallery />
+        <Stats />
+        <CTA />
+        <Footer />
+      </main>
+    </LenisProvider>
   );
 }
