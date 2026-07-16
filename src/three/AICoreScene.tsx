@@ -1,0 +1,201 @@
+import { Suspense, useMemo, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Float,
+  Environment,
+  MeshDistortMaterial,
+  Sparkles,
+  Html,
+} from "@react-three/drei";
+import * as THREE from "three";
+
+const ORBIT_LABELS = ["AI", "Cloud", "Automation", "Enterprise", "Finacle", "Cyber Security"];
+
+function Core() {
+  const inner = useRef<THREE.Mesh>(null);
+  const outer = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    if (inner.current) {
+      inner.current.rotation.y = t * 0.25;
+      inner.current.rotation.x = Math.sin(t * 0.2) * 0.15;
+    }
+    if (outer.current) {
+      outer.current.rotation.y = -t * 0.1;
+      outer.current.rotation.z = t * 0.05;
+    }
+  });
+
+  return (
+    <group>
+      {/* Glowing inner core */}
+      <mesh ref={inner}>
+        <icosahedronGeometry args={[1.1, 4]} />
+        <MeshDistortMaterial
+          color="#3a7dff"
+          emissive="#5aa8ff"
+          emissiveIntensity={0.9}
+          distort={0.35}
+          speed={1.6}
+          roughness={0.25}
+          metalness={0.85}
+        />
+      </mesh>
+
+      {/* Glass sphere shell — subtle refractive halo */}
+      <mesh ref={outer}>
+        <sphereGeometry args={[1.75, 64, 64]} />
+        <meshPhysicalMaterial
+          color="#7fb6ff"
+          transmission={0.6}
+          thickness={0.4}
+          roughness={0.15}
+          ior={1.3}
+          clearcoat={1}
+          clearcoatRoughness={0.1}
+          transparent
+          opacity={0.15}
+          envMapIntensity={0.6}
+        />
+      </mesh>
+
+      {/* Wireframe field */}
+      <mesh>
+        <icosahedronGeometry args={[2.2, 1]} />
+        <meshBasicMaterial color="#a78bff" wireframe transparent opacity={0.25} />
+      </mesh>
+
+      {/* Inner glow point */}
+      <pointLight position={[0, 0, 0]} intensity={3} color="#6bd6ff" distance={4} />
+    </group>
+  );
+}
+
+function Orbits() {
+  return (
+    <>
+      {ORBIT_LABELS.map((label, i) => {
+        const radius = 2.8 + (i % 3) * 0.4;
+        const speed = 0.15 + i * 0.03;
+        const offset = (i / ORBIT_LABELS.length) * Math.PI * 2;
+        const tilt = (i % 2 === 0 ? 1 : -1) * (0.25 + i * 0.05);
+        return (
+          <OrbitLabel
+            key={label}
+            label={label}
+            radius={radius}
+            speed={speed}
+            offset={offset}
+            tilt={tilt}
+          />
+        );
+      })}
+    </>
+  );
+}
+
+function OrbitLabel({
+  label,
+  radius,
+  speed,
+  offset,
+  tilt,
+}: {
+  label: string;
+  radius: number;
+  speed: number;
+  offset: number;
+  tilt: number;
+}) {
+  const g = useRef<THREE.Group>(null);
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime() * speed + offset;
+    if (g.current) {
+      g.current.position.x = Math.cos(t) * radius;
+      g.current.position.z = Math.sin(t) * radius;
+      g.current.position.y = Math.sin(t * 1.3 + offset) * 0.4 + tilt;
+    }
+  });
+  return (
+    <group ref={g}>
+      <mesh>
+        <sphereGeometry args={[0.06, 16, 16]} />
+        <meshBasicMaterial color="#a7e8ff" />
+      </mesh>
+      <Html center distanceFactor={9} zIndexRange={[0, 10]}>
+        <div
+          className="whitespace-nowrap rounded-full border border-white/15 bg-black/40 px-2.5 py-1 text-[10px] uppercase tracking-[0.25em] text-white/80 backdrop-blur-md"
+          style={{ boxShadow: "0 0 20px oklch(0.78 0.17 220 / .35)" }}
+        >
+          {label}
+        </div>
+      </Html>
+    </group>
+  );
+}
+
+function Nodes() {
+  const pts = useMemo(() => {
+    const p: THREE.Vector3[] = [];
+    for (let i = 0; i < 40; i++) {
+      const r = 2.3 + Math.random() * 1.5;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      p.push(new THREE.Vector3(r * Math.sin(phi) * Math.cos(theta), r * Math.cos(phi), r * Math.sin(phi) * Math.sin(theta)));
+    }
+    return p;
+  }, []);
+
+  const g = useRef<THREE.Group>(null);
+  useFrame((s) => {
+    if (g.current) g.current.rotation.y = s.clock.getElapsedTime() * 0.05;
+  });
+
+  return (
+    <group ref={g}>
+      {pts.map((p, i) => (
+        <mesh key={i} position={p}>
+          <sphereGeometry args={[0.02, 8, 8]} />
+          <meshBasicMaterial color="#c9b3ff" />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+function CameraParallax() {
+  useFrame((state) => {
+    const { mouse, camera } = state;
+    camera.position.x += (mouse.x * 0.8 - camera.position.x) * 0.04;
+    camera.position.y += (-mouse.y * 0.5 + 0.2 - camera.position.y) * 0.04;
+    camera.lookAt(0, 0, 0);
+  });
+  return null;
+}
+
+export function AICoreScene() {
+  return (
+    <Canvas
+      dpr={[1, 2]}
+      camera={{ position: [0, 0.2, 6], fov: 45 }}
+      gl={{ antialias: true, alpha: true }}
+    >
+      <ambientLight intensity={0.15} />
+      <directionalLight position={[5, 5, 5]} intensity={0.6} color="#a7c8ff" />
+      <pointLight position={[-4, -2, -3]} intensity={1.2} color="#c56bff" />
+      <pointLight position={[3, 3, 2]} intensity={0.9} color="#6bd6ff" />
+
+      <Suspense fallback={null}>
+        <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.6}>
+          <Core />
+        </Float>
+        <Orbits />
+        <Nodes />
+        <Sparkles count={80} scale={7} size={2} speed={0.35} color="#a7c8ff" />
+        <Environment preset="night" background={false} environmentIntensity={0.4} />
+      </Suspense>
+      <CameraParallax />
+    </Canvas>
+  );
+}
