@@ -43,27 +43,14 @@ function Core() {
         />
       </mesh>
 
-      {/* Glass sphere shell — subtle refractive halo */}
-      <mesh ref={outer}>
-        <sphereGeometry args={[1.75, 64, 64]} />
-        <meshPhysicalMaterial
-          color="#7fb6ff"
-          transmission={0.6}
-          thickness={0.4}
-          roughness={0.15}
-          ior={1.3}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
-          transparent
-          opacity={0.15}
-          envMapIntensity={0.6}
-        />
-      </mesh>
-
-      {/* Wireframe field */}
+      {/* Wireframe halo */}
       <mesh>
-        <icosahedronGeometry args={[2.2, 1]} />
-        <meshBasicMaterial color="#a78bff" wireframe transparent opacity={0.25} />
+        <icosahedronGeometry args={[1.9, 2]} />
+        <meshBasicMaterial color="#8fb8ff" wireframe transparent opacity={0.35} />
+      </mesh>
+      <mesh ref={outer}>
+        <icosahedronGeometry args={[2.4, 1]} />
+        <meshBasicMaterial color="#c56bff" wireframe transparent opacity={0.18} />
       </mesh>
 
       {/* Inner glow point */}
