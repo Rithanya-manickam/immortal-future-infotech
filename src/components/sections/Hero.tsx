@@ -56,12 +56,18 @@ export function Hero() {
             Immortal Future · Info Tech
           </motion.div>
 
-          <h1 className="text-[clamp(2.6rem,7vw,6rem)] font-semibold leading-[0.95] tracking-tight text-white">
+          <h1 className="text-[clamp(2.6rem,7vw,6rem)] font-semibold leading-[1] tracking-tight text-white">
             <SplitReveal text="Technology" delay={0.15} />
             <br />
-            <span className="text-gradient">
-              <SplitReveal text="lives forever." delay={0.45} />
-            </span>
+            <motion.span
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-gradient inline-block"
+              style={{ paddingBottom: "0.15em" }}
+            >
+              lives forever.
+            </motion.span>
           </h1>
 
           <motion.p
