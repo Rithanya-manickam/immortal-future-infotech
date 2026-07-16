@@ -77,21 +77,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Immortal Future Info Tech — Technology Lives Forever" },
+      { title: "Immortal Future Infotech" },
       { name: "description", content: "Engineering intelligent enterprise solutions across AI, cloud, cyber security and automation. Technology lives forever." },
       { name: "author", content: "Immortal Future Info Tech" },
       { name: "theme-color", content: "#0a0a14" },
-      { property: "og:title", content: "Immortal Future Info Tech — Technology Lives Forever" },
-      { property: "og:description", content: "Engineering intelligent enterprise solutions. AI. Cloud. Cyber Security. Finacle. Automation." },
+      { property: "og:title", content: "Immortal Future Infotech" },
+      { property: "og:description", content: "Engineering intelligent enterprise solutions across AI, cloud, cyber security and automation. Technology lives forever." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Immortal Future Infotech" },
+      { name: "twitter:description", content: "Engineering intelligent enterprise solutions across AI, cloud, cyber security and automation. Technology lives forever." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/34c35517-5c85-4183-a9ea-8c669cdc8aa4/id-preview-7c868857--77196281-e6ac-4446-80a9-b263b1da8e7c.lovable.app-1784204464204.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/34c35517-5c85-4183-a9ea-8c669cdc8aa4/id-preview-7c868857--77196281-e6ac-4446-80a9-b263b1da8e7c.lovable.app-1784204464204.png" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
