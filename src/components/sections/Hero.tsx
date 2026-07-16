@@ -30,7 +30,7 @@ function SplitReveal({ text, delay = 0, className = "" }: { text: string; delay?
   return (
     <span ref={ref} className={className} aria-label={text}>
       {text.split("").map((c, i) => (
-        <span key={i} className="inline-block overflow-hidden align-baseline" style={{ lineHeight: 1.05 }}>
+        <span key={i} className="inline-block overflow-hidden align-baseline" style={{ lineHeight: 1.15, paddingBottom: "0.15em" }}>
           <span data-char className="inline-block will-change-transform">
             {c === " " ? "\u00A0" : c}
           </span>
