@@ -1,5 +1,6 @@
 import { Suspense, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 import {
   Float,
   Environment,
@@ -7,7 +8,6 @@ import {
   Sparkles,
   Html,
 } from "@react-three/drei";
-import * as THREE from "three";
 
 const ORBIT_LABELS = ["AI", "Cloud", "Automation", "Enterprise", "Finacle", "Cyber Security"];
 
@@ -179,7 +179,11 @@ export function AICoreScene() {
     <Canvas
       dpr={[1, 2]}
       camera={{ position: [0, 0.2, 6], fov: 45 }}
-      gl={{ antialias: true, alpha: true }}
+      gl={{ antialias: true, alpha: true, premultipliedAlpha: false }}
+      onCreated={({ gl, scene }) => {
+        gl.setClearColor(0x000000, 0);
+        scene.background = null;
+      }}
     >
       <ambientLight intensity={0.15} />
       <directionalLight position={[5, 5, 5]} intensity={0.6} color="#a7c8ff" />
