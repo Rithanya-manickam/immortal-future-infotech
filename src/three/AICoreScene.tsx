@@ -31,15 +31,15 @@ function Core() {
     <group>
       {/* Glowing inner core */}
       <mesh ref={inner}>
-        <icosahedronGeometry args={[1.1, 4]} />
+        <icosahedronGeometry args={[1.0, 6]} />
         <MeshDistortMaterial
-          color="#3a7dff"
-          emissive="#5aa8ff"
-          emissiveIntensity={0.9}
-          distort={0.35}
-          speed={1.6}
-          roughness={0.25}
-          metalness={0.85}
+          color="#1a3a8a"
+          emissive="#4a9fff"
+          emissiveIntensity={0.6}
+          distort={0.55}
+          speed={2}
+          roughness={0.2}
+          metalness={0.9}
         />
       </mesh>
 
