@@ -60,7 +60,7 @@ export function PageLoader() {
                 style={{
                   left: p.left,
                   top: p.top,
-                  boxShadow: "0 0 8px oklch(0.85 0.18 220)",
+                  boxShadow: "0 0 8px oklch(0.85 0.18 168)",
                 }}
               />
             ))}
@@ -81,7 +81,7 @@ export function PageLoader() {
           </motion.div>
 
           <div className="mt-10 flex w-64 items-center gap-3">
-            <div className="relative h-[2px] flex-1 overflow-hidden bg-white/10">
+            <div className="relative h-[2px] flex-1 overflow-hidden bg-foreground/10">
               <motion.div
                 initial={{ width: "0%" }}
                 animate={{ width: `${pct}%` }}

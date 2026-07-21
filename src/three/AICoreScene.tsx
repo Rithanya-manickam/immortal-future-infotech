@@ -33,8 +33,8 @@ function Core() {
       <mesh ref={inner}>
         <icosahedronGeometry args={[1.0, 6]} />
         <MeshDistortMaterial
-          color="#1a3a8a"
-          emissive="#4a9fff"
+          color="#0f3a35"
+          emissive="#2ecc9b"
           emissiveIntensity={0.6}
           distort={0.55}
           speed={2}
@@ -46,15 +46,15 @@ function Core() {
       {/* Wireframe halo */}
       <mesh>
         <icosahedronGeometry args={[1.9, 2]} />
-        <meshBasicMaterial color="#8fb8ff" wireframe transparent opacity={0.35} />
+        <meshBasicMaterial color="#7ee8c6" wireframe transparent opacity={0.35} />
       </mesh>
       <mesh ref={outer}>
         <icosahedronGeometry args={[2.4, 1]} />
-        <meshBasicMaterial color="#c56bff" wireframe transparent opacity={0.18} />
+        <meshBasicMaterial color="#3fbfa5" wireframe transparent opacity={0.2} />
       </mesh>
 
       {/* Inner glow point */}
-      <pointLight position={[0, 0, 0]} intensity={3} color="#6bd6ff" distance={4} />
+      <pointLight position={[0, 0, 0]} intensity={3} color="#4de3b3" distance={4} />
     </group>
   );
 }
@@ -108,12 +108,12 @@ function OrbitLabel({
     <group ref={g}>
       <mesh>
         <sphereGeometry args={[0.06, 16, 16]} />
-        <meshBasicMaterial color="#a7e8ff" />
+        <meshBasicMaterial color="#9df2d1" />
       </mesh>
       <Html center distanceFactor={9} zIndexRange={[0, 10]}>
         <div
-          className="whitespace-nowrap rounded-full border border-white/15 bg-black/40 px-2.5 py-1 text-[10px] uppercase tracking-[0.25em] text-white/80 backdrop-blur-md"
-          style={{ boxShadow: "0 0 20px oklch(0.78 0.17 220 / .35)" }}
+          className="whitespace-nowrap rounded-full border border-white/20 bg-black/50 px-2.5 py-1 text-[10px] uppercase tracking-[0.25em] text-white/90 backdrop-blur-md"
+          style={{ boxShadow: "0 0 20px oklch(0.62 0.14 170 / .4)" }}
         >
           {label}
         </div>
@@ -144,7 +144,7 @@ function Nodes() {
       {pts.map((p, i) => (
         <mesh key={i} position={p}>
           <sphereGeometry args={[0.02, 8, 8]} />
-          <meshBasicMaterial color="#c9b3ff" />
+          <meshBasicMaterial color="#b8f0d8" />
         </mesh>
       ))}
     </group>
@@ -173,9 +173,9 @@ export function AICoreScene() {
       }}
     >
       <ambientLight intensity={0.15} />
-      <directionalLight position={[5, 5, 5]} intensity={0.6} color="#a7c8ff" />
-      <pointLight position={[-4, -2, -3]} intensity={1.2} color="#c56bff" />
-      <pointLight position={[3, 3, 2]} intensity={0.9} color="#6bd6ff" />
+      <directionalLight position={[5, 5, 5]} intensity={0.6} color="#c8f5e2" />
+      <pointLight position={[-4, -2, -3]} intensity={1.2} color="#3fbfa5" />
+      <pointLight position={[3, 3, 2]} intensity={0.9} color="#4de3b3" />
 
       <Suspense fallback={null}>
         <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.6}>
@@ -183,7 +183,7 @@ export function AICoreScene() {
         </Float>
         <Orbits />
         <Nodes />
-        <Sparkles count={80} scale={7} size={2} speed={0.35} color="#a7c8ff" />
+        <Sparkles count={80} scale={7} size={2} speed={0.35} color="#9df2d1" />
         <Environment preset="night" background={false} environmentIntensity={0.4} />
       </Suspense>
       <CameraParallax />

@@ -16,8 +16,8 @@ export function Expertise() {
     <section id="expertise" className="relative px-6 py-32">
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-16 max-w-2xl">
-          <div className="text-[10px] uppercase tracking-[0.4em] text-white/50">Section 04 — Expertise</div>
-          <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-white">
+          <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Section 04 — Expertise</div>
+          <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-foreground">
             A stack forged for <span className="text-gradient">the next century.</span>
           </h2>
         </div>
@@ -42,14 +42,14 @@ export function Expertise() {
                   style={{ background: `radial-gradient(circle, oklch(0.75 0.22 ${c.hue} / .6), transparent 60%)` }}
                 />
                 <div
-                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10"
+                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border/10"
                   style={{ background: `linear-gradient(135deg, oklch(0.75 0.20 ${c.hue} / .35), oklch(0.4 0.15 ${c.hue} / .15))` }}
                 >
-                  <Icon className="h-5 w-5 text-white" />
+                  <Icon className="h-5 w-5 text-foreground" />
                 </div>
-                <h3 className="text-base font-semibold text-white">{c.name}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-white/55">{c.desc}</p>
-                <div className="mt-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-white/40 transition-colors group-hover:text-white">
+                <h3 className="text-base font-semibold text-foreground">{c.name}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-foreground/55">{c.desc}</p>
+                <div className="mt-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-foreground/40 transition-colors group-hover:text-foreground">
                   <span>Explore</span>
                   <span>→</span>
                 </div>
