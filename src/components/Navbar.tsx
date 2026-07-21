@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import logoUrl from "@/assets/logo.png";
+import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
   { label: "The Journey", href: "#journey" },
@@ -37,13 +39,13 @@ function MagneticLink({ label, href }: { label: string; href: string }) {
       ref={ref}
       href={href}
       data-cursor="Explore"
-      className="group relative inline-block px-3 py-2 text-sm font-medium text-foreground/80 transition-[color,letter-spacing] duration-300 hover:text-foreground hover:tracking-[0.08em]"
+      className="group relative inline-block px-3 py-2 text-[13px] font-medium text-foreground/70 transition-[color,letter-spacing] duration-300 hover:text-foreground hover:tracking-[0.06em]"
       style={{ transition: "transform .35s cubic-bezier(.2,.9,.2,1), color .3s, letter-spacing .35s" }}
     >
       <span className="relative">
         {label}
         <span
-          className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-[var(--brand-cyan)] to-[var(--brand-magenta)] transition-[width] duration-500 group-hover:w-full"
+          className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-[var(--brand-emerald)] to-[var(--brand-teal)] transition-[width] duration-500 group-hover:w-full"
         />
       </span>
     </a>
@@ -78,23 +80,23 @@ export function Navbar() {
             : "0 10px 30px -15px oklch(0 0 0 / .5)",
         }}
       >
-        <Link to="/" data-cursor="Home" className="group flex items-center gap-2">
+        <Link to="/" data-cursor="Home" className="group flex items-center gap-2.5">
           <span
-            className="relative inline-flex h-7 w-7 items-center justify-center rounded-md"
+            className="relative inline-flex items-center justify-center"
             style={{
-              background: "var(--gradient-hero)",
-              boxShadow: "0 0 24px oklch(0.78 0.17 220 / .5)",
-              transform: scrolled ? "scale(0.9)" : "scale(1)",
-              transition: "transform .4s",
+              width: scrolled ? 28 : 34,
+              height: scrolled ? 28 : 34,
+              filter: "drop-shadow(0 0 14px oklch(0.62 0.14 170 / .55))",
+              transition: "width .4s, height .4s",
             }}
           >
-            <span className="text-[13px] font-bold text-[oklch(0.12_0.02_275)]">i</span>
+            <img src={logoUrl} alt="Immortal Future Info Tech" className="h-full w-full object-contain" />
           </span>
           <div className="hidden flex-col leading-none sm:flex">
-            <span className="text-[13px] font-semibold tracking-tight text-foreground">
+            <span className="text-[15px] font-semibold tracking-tight text-foreground" style={{ fontFamily: "var(--font-display)" }}>
               Immortal Future
             </span>
-            <span className="text-[9px] uppercase tracking-[0.3em] text-foreground/50">
+            <span className="mt-0.5 text-[9px] uppercase tracking-[0.34em] text-foreground/50">
               Info Tech
             </span>
           </div>
@@ -106,14 +108,17 @@ export function Navbar() {
           ))}
         </nav>
 
-        <a
-          href="#connect"
-          data-cursor="Launch"
-          className="relative inline-flex items-center gap-2 rounded-full border border-border/15 bg-foreground/5 px-4 py-1.5 text-xs font-medium text-foreground transition-all hover:border-border/30 hover:bg-foreground/10"
-        >
-          <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-[var(--brand-glow)]" />
-          Book Consultation
-        </a>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <a
+            href="#connect"
+            data-cursor="Launch"
+            className="relative hidden sm:inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.04] px-4 py-1.5 text-xs font-medium text-foreground transition-all hover:border-primary/50 hover:bg-primary/10"
+          >
+            <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-[var(--brand-glow)]" />
+            Book Consultation
+          </a>
+        </div>
       </div>
     </motion.header>
   );
