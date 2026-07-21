@@ -69,8 +69,8 @@ export function CustomCursor() {
           width: active ? 72 : 34,
           height: active ? 72 : 34,
           borderRadius: 9999,
-          border: "1px solid oklch(0.85 0.18 220 / 0.55)",
-          boxShadow: "0 0 30px oklch(0.78 0.17 220 / 0.35)",
+          border: "1px solid oklch(0.85 0.18 168 / 0.55)",
+          boxShadow: "0 0 30px oklch(0.78 0.17 168 / 0.35)",
           mixBlendMode: "screen",
           transition: "width .25s ease, height .25s ease, opacity .2s",
           opacity: hidden ? 0 : 1,
@@ -80,7 +80,7 @@ export function CustomCursor() {
         {label ? (
           <span
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-medium uppercase tracking-[0.2em]"
-            style={{ fontSize: 10, color: "oklch(0.98 0.01 260)" }}
+            style={{ fontSize: 10, color: "oklch(0.98 0.01 175)" }}
           >
             {label}
           </span>
@@ -94,8 +94,8 @@ export function CustomCursor() {
           width: 6,
           height: 6,
           borderRadius: 9999,
-          background: "oklch(0.95 0.02 260)",
-          boxShadow: "0 0 12px oklch(0.85 0.18 220)",
+          background: "oklch(0.95 0.02 175)",
+          boxShadow: "0 0 12px oklch(0.85 0.18 168)",
           opacity: hidden ? 0 : 1,
         }}
       />

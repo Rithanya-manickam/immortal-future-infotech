@@ -60,7 +60,7 @@ export function PageLoader() {
                 style={{
                   left: p.left,
                   top: p.top,
-                  boxShadow: "0 0 8px oklch(0.85 0.18 220)",
+                  boxShadow: "0 0 8px oklch(0.85 0.18 168)",
                 }}
               />
             ))}

@@ -6,21 +6,21 @@ const PROJECTS = [
     title: "Continental Core Migration",
     body: "Zero-downtime migration of a 40M-account core banking platform onto next-gen Finacle.",
     stats: [{ k: "40M", v: "Accounts" }, { k: "0", v: "Downtime" }, { k: "6mo", v: "Rollout" }],
-    accent: "linear-gradient(135deg, oklch(0.78 0.17 220), oklch(0.72 0.18 180))",
+    accent: "linear-gradient(135deg, oklch(0.78 0.17 168), oklch(0.72 0.18 195))",
   },
   {
     tag: "AI · Automation",
     title: "Sentinel Autonomous Ops",
     body: "Self-healing AI agent mesh handling 12k enterprise workflows without human intervention.",
     stats: [{ k: "12k", v: "Workflows" }, { k: "99.99%", v: "Uptime" }, { k: "3×", v: "Throughput" }],
-    accent: "linear-gradient(135deg, oklch(0.72 0.24 340), oklch(0.65 0.24 300))",
+    accent: "linear-gradient(135deg, oklch(0.72 0.24 160), oklch(0.65 0.24 175))",
   },
   {
     tag: "Cyber · Defense",
     title: "Obsidian Threat Grid",
     body: "Real-time anomaly detection across a global perimeter — trained on 4B daily signals.",
     stats: [{ k: "4B", v: "Signals/day" }, { k: "<40ms", v: "Response" }, { k: "18", v: "Regions" }],
-    accent: "linear-gradient(135deg, oklch(0.82 0.16 90), oklch(0.72 0.24 340))",
+    accent: "linear-gradient(135deg, oklch(0.82 0.16 155), oklch(0.72 0.24 160))",
   },
 ];
 

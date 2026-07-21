@@ -122,7 +122,7 @@ export function Hero() {
 
         {/* Right — 3D scene */}
         <div className="relative h-[62vh] min-h-[420px] w-full lg:h-[80vh]">
-          <div className="absolute inset-0 -z-10" style={{ background: "radial-gradient(circle at center, oklch(0.65 0.24 300 / .25), transparent 60%)", filter: "blur(20px)" }} />
+          <div className="absolute inset-0 -z-10" style={{ background: "radial-gradient(circle at center, oklch(0.65 0.24 175 / .25), transparent 60%)", filter: "blur(20px)" }} />
           <ClientOnly
             fallback={
               <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-[0.35em] text-foreground/40">

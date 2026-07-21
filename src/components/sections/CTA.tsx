@@ -13,14 +13,14 @@ export function CTA() {
                   key={i}
                   className="absolute inset-0 rounded-full border animate-pulse-glow"
                   style={{
-                    borderColor: "oklch(0.78 0.17 220 / 0.35)",
+                    borderColor: "oklch(0.78 0.17 168 / 0.35)",
                     transform: `scale(${1 - i * 0.16})`,
                     animationDelay: `${i * 0.4}s`,
-                    boxShadow: "0 0 60px oklch(0.78 0.17 220 / 0.3), inset 0 0 60px oklch(0.72 0.24 340 / 0.15)",
+                    boxShadow: "0 0 60px oklch(0.78 0.17 168 / 0.3), inset 0 0 60px oklch(0.72 0.24 160 / 0.15)",
                   }}
                 />
               ))}
-              <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle at center, oklch(0.78 0.17 220 / 0.35), transparent 60%)", filter: "blur(30px)" }} />
+              <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle at center, oklch(0.78 0.17 168 / 0.35), transparent 60%)", filter: "blur(30px)" }} />
             </div>
           </div>
 
@@ -28,7 +28,7 @@ export function CTA() {
           <div
             className="pointer-events-none absolute inset-x-0 -bottom-20 -z-10 h-72 opacity-40"
             style={{
-              backgroundImage: "linear-gradient(oklch(0.85 0.18 220 / .5) 1px, transparent 1px), linear-gradient(90deg, oklch(0.85 0.18 220 / .5) 1px, transparent 1px)",
+              backgroundImage: "linear-gradient(oklch(0.85 0.18 168 / .5) 1px, transparent 1px), linear-gradient(90deg, oklch(0.85 0.18 168 / .5) 1px, transparent 1px)",
               backgroundSize: "40px 40px",
               maskImage: "linear-gradient(180deg, transparent, black 30%, transparent)",
               transform: "perspective(600px) rotateX(60deg)",
@@ -69,7 +69,7 @@ export function CTA() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.9 }}
             className="group relative mt-12 inline-flex items-center gap-3 overflow-hidden rounded-full px-8 py-4 text-sm font-medium text-[oklch(0.1_0.02_275)]"
-            style={{ background: "var(--gradient-hero)", boxShadow: "0 0 80px -10px oklch(0.78 0.17 220 / 0.7)" }}
+            style={{ background: "var(--gradient-hero)", boxShadow: "0 0 80px -10px oklch(0.78 0.17 168 / 0.7)" }}
           >
             <span>Start Your Journey</span>
             <span className="transition-transform group-hover:translate-x-1">→</span>

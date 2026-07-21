@@ -68,7 +68,7 @@ export function Journey() {
             </div>
           ))}
           {/* Connecting line */}
-          <div className="pointer-events-none absolute left-0 right-0 top-1/2 -z-0 h-px" style={{ background: "linear-gradient(90deg, transparent, oklch(0.78 0.17 220 / .5), oklch(0.72 0.24 340 / .5), transparent)" }} />
+          <div className="pointer-events-none absolute left-0 right-0 top-1/2 -z-0 h-px" style={{ background: "linear-gradient(90deg, transparent, oklch(0.78 0.17 168 / .5), oklch(0.72 0.24 160 / .5), transparent)" }} />
         </div>
       </div>
     </section>
