@@ -15,8 +15,8 @@ export function Gallery() {
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-16 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.4em] text-white/50">Section 05 — Frames</div>
-            <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-white">
+            <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Section 05 — Frames</div>
+            <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-foreground">
               Where our work <span className="text-gradient">lives.</span>
             </h2>
           </div>
@@ -31,17 +31,17 @@ export function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, delay: i * 0.05 }}
-              className={`group relative overflow-hidden rounded-2xl border border-white/10 ${t.h ?? ""}`}
+              className={`group relative overflow-hidden rounded-2xl border border-border/10 ${t.h ?? ""}`}
               style={{ background: t.grad, boxShadow: "var(--shadow-elegant)" }}
             >
               <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(circle at 30% 25%, oklch(1 0 0 / 0.4), transparent 55%)" }} />
               <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "linear-gradient(180deg, transparent 40%, oklch(0.05 0.02 275 / 0.85))" }} />
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                 <div>
-                  <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/70">Frame {String(i + 1).padStart(2, "0")}</div>
-                  <div className="mt-1 text-lg font-semibold text-white">{t.label}</div>
+                  <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-foreground/70">Frame {String(i + 1).padStart(2, "0")}</div>
+                  <div className="mt-1 text-lg font-semibold text-foreground">{t.label}</div>
                 </div>
-                <div className="translate-x-2 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 text-white text-sm">→</div>
+                <div className="translate-x-2 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 text-foreground text-sm">→</div>
               </div>
               <div className="noise-overlay" />
             </motion.div>

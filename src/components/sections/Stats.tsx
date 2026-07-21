@@ -38,8 +38,8 @@ export function Stats() {
     <section className="relative px-6 py-32">
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-16 max-w-2xl">
-          <div className="text-[10px] uppercase tracking-[0.4em] text-white/50">Section 06 — Signal</div>
-          <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-white">
+          <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Section 06 — Signal</div>
+          <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-foreground">
             Measured in <span className="text-gradient">outcomes.</span>
           </h2>
         </div>
@@ -56,11 +56,11 @@ export function Stats() {
               className="glass-panel relative overflow-hidden p-8"
             >
               <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-40 blur-3xl" style={{ background: "var(--gradient-hero)" }} />
-              <div className="relative text-[10px] uppercase tracking-[0.3em] text-white/40">{`0${i + 1}`.slice(-2)}</div>
-              <div className="relative mt-6 text-[clamp(2.2rem,5vw,3.6rem)] font-semibold text-white">
+              <div className="relative text-[10px] uppercase tracking-[0.3em] text-foreground/40">{`0${i + 1}`.slice(-2)}</div>
+              <div className="relative mt-6 text-[clamp(2.2rem,5vw,3.6rem)] font-semibold text-foreground">
                 <Counter target={s.v} suffix={s.suffix} />
               </div>
-              <div className="relative mt-2 text-xs text-white/60">{s.label}</div>
+              <div className="relative mt-2 text-xs text-foreground/60">{s.label}</div>
             </motion.div>
           ))}
         </div>

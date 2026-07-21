@@ -50,13 +50,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.35em] text-white/70 backdrop-blur"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/10 bg-foreground/5 px-3 py-1 text-[10px] uppercase tracking-[0.35em] text-foreground/70 backdrop-blur"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-glow)] shadow-[0_0_10px_var(--brand-glow)]" />
             Immortal Future · Info Tech
           </motion.div>
 
-          <h1 className="text-[clamp(2.6rem,7vw,6rem)] font-semibold leading-[1] tracking-tight text-white">
+          <h1 className="text-[clamp(2.6rem,7vw,6rem)] font-semibold leading-[1] tracking-tight text-foreground">
             <SplitReveal text="Technology" delay={0.15} />
             <br />
             <span
@@ -71,7 +71,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.9 }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-white/60 md:text-lg"
+            className="mt-6 max-w-xl text-base leading-relaxed text-foreground/60 md:text-lg"
           >
             We engineer intelligent enterprise systems — AI, cloud, cyber security,
             automation and Finacle — designed to outlive the era that built them.
@@ -95,7 +95,7 @@ export function Hero() {
             <a
               href="#connect"
               data-cursor="Connect"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-medium text-white transition-colors hover:border-white/30 hover:bg-white/[0.08]"
+              className="inline-flex items-center gap-2 rounded-full border border-border/15 bg-white/[0.03] px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-border/30 hover:bg-white/[0.08]"
             >
               Book Consultation
             </a>
@@ -105,10 +105,10 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 1 }}
-            className="mt-14 flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] text-white/40"
+            className="mt-14 flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] text-foreground/40"
           >
             <div className="flex items-center gap-2">
-              <span className="h-px w-8 bg-white/30" />
+              <span className="h-px w-8 bg-foreground/30" />
               Scroll to enter
             </div>
             <div className="hidden md:flex gap-6">
@@ -125,7 +125,7 @@ export function Hero() {
           <div className="absolute inset-0 -z-10" style={{ background: "radial-gradient(circle at center, oklch(0.65 0.24 300 / .25), transparent 60%)", filter: "blur(20px)" }} />
           <ClientOnly
             fallback={
-              <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-[0.35em] text-white/40">
+              <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-[0.35em] text-foreground/40">
                 Initializing core…
               </div>
             }

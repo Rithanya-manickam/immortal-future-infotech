@@ -81,7 +81,7 @@ export function PageLoader() {
           </motion.div>
 
           <div className="mt-10 flex w-64 items-center gap-3">
-            <div className="relative h-[2px] flex-1 overflow-hidden bg-white/10">
+            <div className="relative h-[2px] flex-1 overflow-hidden bg-foreground/10">
               <motion.div
                 initial={{ width: "0%" }}
                 animate={{ width: `${pct}%` }}

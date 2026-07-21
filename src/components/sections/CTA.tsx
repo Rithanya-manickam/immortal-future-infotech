@@ -41,7 +41,7 @@ export function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.4em] text-white/70 backdrop-blur"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/15 bg-foreground/5 px-3 py-1 text-[10px] uppercase tracking-[0.4em] text-foreground/70 backdrop-blur"
           >
             <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-[var(--brand-glow)]" />
             Enter the portal
@@ -52,12 +52,12 @@ export function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[1] tracking-tight text-white"
+            className="max-w-3xl text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[1] tracking-tight text-foreground"
           >
             Let's build the <span className="text-gradient">future</span> together.
           </motion.h2>
 
-          <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/60 md:text-base">
+          <p className="mt-6 max-w-lg text-sm leading-relaxed text-foreground/60 md:text-base">
             Bring us the ambition — the impossible enterprise system, the intelligent product, the platform meant to endure. We'll engineer it to last.
           </p>
 

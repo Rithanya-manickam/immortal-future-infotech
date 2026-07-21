@@ -37,7 +37,7 @@ function MagneticLink({ label, href }: { label: string; href: string }) {
       ref={ref}
       href={href}
       data-cursor="Explore"
-      className="group relative inline-block px-3 py-2 text-sm font-medium text-white/80 transition-[color,letter-spacing] duration-300 hover:text-white hover:tracking-[0.08em]"
+      className="group relative inline-block px-3 py-2 text-sm font-medium text-foreground/80 transition-[color,letter-spacing] duration-300 hover:text-foreground hover:tracking-[0.08em]"
       style={{ transition: "transform .35s cubic-bezier(.2,.9,.2,1), color .3s, letter-spacing .35s" }}
     >
       <span className="relative">
@@ -91,10 +91,10 @@ export function Navbar() {
             <span className="text-[13px] font-bold text-[oklch(0.12_0.02_275)]">i</span>
           </span>
           <div className="hidden flex-col leading-none sm:flex">
-            <span className="text-[13px] font-semibold tracking-tight text-white">
+            <span className="text-[13px] font-semibold tracking-tight text-foreground">
               Immortal Future
             </span>
-            <span className="text-[9px] uppercase tracking-[0.3em] text-white/50">
+            <span className="text-[9px] uppercase tracking-[0.3em] text-foreground/50">
               Info Tech
             </span>
           </div>
@@ -109,7 +109,7 @@ export function Navbar() {
         <a
           href="#connect"
           data-cursor="Launch"
-          className="relative inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white transition-all hover:border-white/30 hover:bg-white/10"
+          className="relative inline-flex items-center gap-2 rounded-full border border-border/15 bg-foreground/5 px-4 py-1.5 text-xs font-medium text-foreground transition-all hover:border-border/30 hover:bg-foreground/10"
         >
           <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-[var(--brand-glow)]" />
           Book Consultation

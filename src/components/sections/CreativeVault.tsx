@@ -30,12 +30,12 @@ export function CreativeVault() {
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-16 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.4em] text-white/50">Section 03 — Creative Vault</div>
-            <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-white">
+            <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Section 03 — Creative Vault</div>
+            <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-foreground">
               Signature builds from <span className="text-gradient">our archives.</span>
             </h2>
           </div>
-          <p className="max-w-md text-sm text-white/55">
+          <p className="max-w-md text-sm text-foreground/55">
             A curated vault of enterprise systems shipping in production — banking cores, autonomous operations, and adversarial defense at planetary scale.
           </p>
         </div>
@@ -57,19 +57,19 @@ export function CreativeVault() {
                 className="absolute -inset-px -z-10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
                 style={{ background: p.accent }}
               />
-              <div className="h-40 w-full overflow-hidden rounded-lg border border-white/10" style={{ background: p.accent }}>
+              <div className="h-40 w-full overflow-hidden rounded-lg border border-border/10" style={{ background: p.accent }}>
                 <div className="relative h-full w-full">
                   <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(circle at 30% 20%, oklch(1 0 0 / 0.5), transparent 60%)" }} />
                   <div className="absolute bottom-3 left-3 text-[10px] font-mono uppercase tracking-[0.25em] text-black/70">{p.tag}</div>
                 </div>
               </div>
-              <h3 className="mt-6 text-xl font-semibold text-white">{p.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/60">{p.body}</p>
-              <div className="mt-6 grid grid-cols-3 gap-4 border-t border-white/10 pt-5">
+              <h3 className="mt-6 text-xl font-semibold text-foreground">{p.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-foreground/60">{p.body}</p>
+              <div className="mt-6 grid grid-cols-3 gap-4 border-t border-border/10 pt-5">
                 {p.stats.map((s) => (
                   <div key={s.v}>
-                    <div className="text-lg font-semibold text-white">{s.k}</div>
-                    <div className="text-[10px] uppercase tracking-[0.25em] text-white/40">{s.v}</div>
+                    <div className="text-lg font-semibold text-foreground">{s.k}</div>
+                    <div className="text-[10px] uppercase tracking-[0.25em] text-foreground/40">{s.v}</div>
                   </div>
                 ))}
               </div>
