@@ -1,28 +1,33 @@
 import { motion } from "framer-motion";
-import { Brain, Cloud, Building2, Globe, Smartphone, Workflow, ShieldCheck } from "lucide-react";
+import { Brain, Cloud, Building2, Cpu, Network, ShieldCheck } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const CARDS = [
-  { icon: Brain, name: "Artificial Intelligence", desc: "Agents, LLM pipelines, RAG, MLOps.", hue: "220" },
-  { icon: Cloud, name: "Cloud Native", desc: "Multi-cloud architectures at planetary scale.", hue: "200" },
-  { icon: Building2, name: "Enterprise", desc: "Core platforms, Finacle, mission systems.", hue: "260" },
-  { icon: Globe, name: "Web", desc: "Product-grade immersive frontends.", hue: "320" },
-  { icon: Smartphone, name: "Mobile", desc: "Native iOS & Android performance targets.", hue: "180" },
-  { icon: Workflow, name: "Automation", desc: "Workflow orchestration and autonomous ops.", hue: "40" },
-  { icon: ShieldCheck, name: "Cyber Security", desc: "Zero-trust, detection, response.", hue: "10" },
+  { icon: Brain, name: "AI Banking Automation", desc: "IIS + ASKBOT — Finacle EOD, KYC, loan workflows, RAG assistants.", hue: "170" },
+  { icon: Building2, name: "Finacle Expertise", desc: "Certified implementation, migration, upgrades and staff training.", hue: "160" },
+  { icon: Cloud, name: "AWS Cloud", desc: "Architecture, migration, EC2/RDS/S3/Lambda/EKS, FinOps.", hue: "195" },
+  { icon: ShieldCheck, name: "Cyber Security", desc: "VAPT, SOC, endpoint security, compliance, incident response.", hue: "185" },
+  { icon: Cpu, name: "IoT Solutions", desc: "Device fleets, telemetry, edge, predictive maintenance, healthcare.", hue: "175" },
+  { icon: Network, name: "Enterprise Networking", desc: "LAN/WAN/SD-WAN, firewalls, IDS, NOC with 99.9% uptime.", hue: "200" },
 ];
 
 export function Expertise() {
   return (
     <section id="expertise" className="relative px-6 py-32">
       <div className="mx-auto max-w-[1400px]">
-        <div className="mb-16 max-w-2xl">
-          <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Section 04 — Expertise</div>
-          <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-foreground">
-            A stack forged for <span className="text-gradient">the next century.</span>
-          </h2>
+        <div className="mb-16 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Expertise</div>
+            <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-foreground">
+              Six pillars, built for <span className="text-gradient">Indian enterprise.</span>
+            </h2>
+          </div>
+          <Link to="/services" className="text-xs uppercase tracking-[0.3em] text-foreground/60 hover:text-foreground">
+            All 18 services →
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {CARDS.map((c, i) => {
             const Icon = c.icon;
             return (
@@ -49,10 +54,6 @@ export function Expertise() {
                 </div>
                 <h3 className="text-base font-semibold text-foreground">{c.name}</h3>
                 <p className="mt-1 text-xs leading-relaxed text-foreground/55">{c.desc}</p>
-                <div className="mt-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-foreground/40 transition-colors group-hover:text-foreground">
-                  <span>Explore</span>
-                  <span>→</span>
-                </div>
               </motion.div>
             );
           })}

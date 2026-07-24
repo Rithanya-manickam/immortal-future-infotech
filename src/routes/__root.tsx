@@ -12,6 +12,12 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { BackgroundFX } from "@/components/BackgroundFX";
+import { ClientOnly } from "@/components/ClientOnly";
+import { CustomCursor } from "@/components/CustomCursor";
+import { LenisProvider } from "@/components/LenisProvider";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/sections/Footer";
 
 function NotFoundComponent() {
   return (
@@ -132,8 +138,15 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
+        <LenisProvider>
+          <ClientOnly><CustomCursor /></ClientOnly>
+          <BackgroundFX />
+          <Navbar />
+          <main className="relative z-10">
+            <Outlet />
+          </main>
+          <Footer />
+        </LenisProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

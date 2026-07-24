@@ -1,25 +1,27 @@
 import { motion } from "framer-motion";
 
+import { Link } from "@tanstack/react-router";
+
 const PROJECTS = [
   {
     tag: "Banking · Finacle",
-    title: "Continental Core Migration",
-    body: "Zero-downtime migration of a 40M-account core banking platform onto next-gen Finacle.",
-    stats: [{ k: "40M", v: "Accounts" }, { k: "0", v: "Downtime" }, { k: "6mo", v: "Rollout" }],
+    title: "EOD Automation — Cooperative Bank",
+    body: "Automated End-of-Day reconciliation on Finacle. Zero errors, four hours saved daily.",
+    stats: [{ k: "80%", v: "Effort ↓" }, { k: "4hr", v: "Saved/day" }, { k: "0", v: "Errors" }],
     accent: "linear-gradient(135deg, oklch(0.78 0.17 168), oklch(0.72 0.18 195))",
   },
   {
-    tag: "AI · Automation",
-    title: "Sentinel Autonomous Ops",
-    body: "Self-healing AI agent mesh handling 12k enterprise workflows without human intervention.",
-    stats: [{ k: "12k", v: "Workflows" }, { k: "99.99%", v: "Uptime" }, { k: "3×", v: "Throughput" }],
+    tag: "AI · Training",
+    title: "ASKBOT Deployment — Private Bank",
+    body: "RAG-powered Finacle assistant serving 200+ staff across multiple branches.",
+    stats: [{ k: "3×", v: "Onboarding" }, { k: "70%", v: "Faster Q&A" }, { k: "200+", v: "Staff" }],
     accent: "linear-gradient(135deg, oklch(0.72 0.24 160), oklch(0.65 0.24 175))",
   },
   {
-    tag: "Cyber · Defense",
-    title: "Obsidian Threat Grid",
-    body: "Real-time anomaly detection across a global perimeter — trained on 4B daily signals.",
-    stats: [{ k: "4B", v: "Signals/day" }, { k: "<40ms", v: "Response" }, { k: "18", v: "Regions" }],
+    tag: "Cloud · AWS",
+    title: "AWS Migration — Regional Bank",
+    body: "Lift-and-modernize onto AWS with FinOps guardrails and multi-AZ high availability.",
+    stats: [{ k: "40%", v: "Cost ↓" }, { k: "99.9%", v: "Uptime" }, { k: "3×", v: "Perf" }],
     accent: "linear-gradient(135deg, oklch(0.82 0.16 155), oklch(0.72 0.24 160))",
   },
 ];
@@ -30,14 +32,12 @@ export function CreativeVault() {
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-16 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Section 03 — Creative Vault</div>
+            <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Featured Work</div>
             <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-foreground">
-              Signature builds from <span className="text-gradient">our archives.</span>
+              Case studies from <span className="text-gradient">real deployments.</span>
             </h2>
           </div>
-          <p className="max-w-md text-sm text-foreground/55">
-            A curated vault of enterprise systems shipping in production — banking cores, autonomous operations, and adversarial defense at planetary scale.
-          </p>
+          <Link to="/portfolio" className="text-xs uppercase tracking-[0.3em] text-foreground/60 hover:text-foreground">Full portfolio →</Link>
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">

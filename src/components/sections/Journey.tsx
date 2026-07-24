@@ -3,12 +3,12 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const MILESTONES = [
-  { year: "Origin", title: "Technology Lives Forever", body: "A promise, not a slogan — systems built to outlast the era." },
-  { year: "01", title: "Company Started", body: "Foundation laid in enterprise-grade engineering." },
-  { year: "02", title: "Innovation", body: "R&D labs across AI, automation and finance." },
-  { year: "03", title: "Enterprise Solutions", body: "Finacle, cloud and cyber security at scale." },
-  { year: "04", title: "AI Transformation", body: "Intelligent agents woven into operating cores." },
-  { year: "05", title: "The Future", body: "Post-human infrastructure. Always-on intelligence." },
+  { year: "May 2024", title: "Company Founded", body: "Immortal Future Info Tech Pvt. Ltd. incorporated in Tiruchirapalli." },
+  { year: "Jun 2024", title: "First Finacle Engagement", body: "First cooperative banking client — Finacle implementation and customization." },
+  { year: "Aug 2024", title: "IIS Launched", body: "Immortal Intelligence Suite — AI automation platform for Infosys Finacle." },
+  { year: "Oct 2024", title: "ASKBOT Launched", body: "RAG-powered Finacle training assistant for banking staff." },
+  { year: "Dec 2024", title: "AWS Technology Partner", body: "Became an official AWS Technology Partner." },
+  { year: "Mar 2025", title: "Pan-India Expansion", body: "Serving Tamil Nadu, Karnataka, Maharashtra and more." },
 ];
 
 export function Journey() {
