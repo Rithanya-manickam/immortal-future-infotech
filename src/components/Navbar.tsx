@@ -37,8 +37,7 @@ function MagneticLink({ label, to }: { label: string; to: string }) {
 
   return (
     <Link
-      // @ts-expect-error typed routes generated at build
-      to={to}
+      to={to as "/about"}
       ref={ref as any}
       data-cursor="Explore"
       activeProps={{ className: "text-foreground" }}
