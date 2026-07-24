@@ -2,10 +2,10 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 const STATS = [
-  { v: 480, suffix: "+", label: "Projects Shipped" },
-  { v: 120, suffix: "+", label: "Global Clients" },
-  { v: 34, suffix: "", label: "Countries" },
-  { v: 260, suffix: "+", label: "Engineers" },
+  { v: 50, suffix: "+", label: "Projects Delivered" },
+  { v: 20, suffix: "+", label: "Enterprise Clients" },
+  { v: 3, suffix: "", label: "Industry Verticals" },
+  { v: 80, suffix: "%", label: "Avg Effort Reduction" },
 ];
 
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -38,10 +38,11 @@ export function Stats() {
     <section className="relative px-6 py-32">
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-16 max-w-2xl">
-          <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Section 06 — Signal</div>
+          <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Signal</div>
           <h2 className="mt-3 text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-tight text-foreground">
             Measured in <span className="text-gradient">outcomes.</span>
           </h2>
+          <p className="mt-4 text-sm text-foreground/55">One year in market. Certified by Finacle, AWS, NASSCOM, MCA and MSME.</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
