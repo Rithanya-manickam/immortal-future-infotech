@@ -5,13 +5,14 @@ import logoUrl from "@/assets/logo.png";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
-  { label: "The Journey", href: "#journey" },
-  { label: "Creative Vault", href: "#vault" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Connect", href: "#connect" },
+  { label: "About", to: "/about" as const },
+  { label: "Services", to: "/services" as const },
+  { label: "Products", to: "/products" as const },
+  { label: "Portfolio", to: "/portfolio" as const },
+  { label: "Contact", to: "/contact" as const },
 ];
 
-function MagneticLink({ label, href }: { label: string; href: string }) {
+function MagneticLink({ label, to }: { label: string; to: string }) {
   const ref = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -35,20 +36,20 @@ function MagneticLink({ label, href }: { label: string; href: string }) {
   }, []);
 
   return (
-    <a
-      ref={ref}
-      href={href}
+    <Link
+      // @ts-expect-error typed routes generated at build
+      to={to}
+      ref={ref as any}
       data-cursor="Explore"
+      activeProps={{ className: "text-foreground" }}
       className="group relative inline-block px-3 py-2 text-[13px] font-medium text-foreground/70 transition-[color,letter-spacing] duration-300 hover:text-foreground hover:tracking-[0.06em]"
       style={{ transition: "transform .35s cubic-bezier(.2,.9,.2,1), color .3s, letter-spacing .35s" }}
     >
       <span className="relative">
         {label}
-        <span
-          className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-[var(--brand-emerald)] to-[var(--brand-teal)] transition-[width] duration-500 group-hover:w-full"
-        />
+        <span className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-[var(--brand-emerald)] to-[var(--brand-teal)] transition-[width] duration-500 group-hover:w-full" />
       </span>
-    </a>
+    </Link>
   );
 }
 
@@ -110,14 +111,14 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <a
-            href="#connect"
+          <Link
+            to="/contact"
             data-cursor="Launch"
             className="relative hidden sm:inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.04] px-4 py-1.5 text-xs font-medium text-foreground transition-all hover:border-primary/50 hover:bg-primary/10"
           >
             <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-[var(--brand-glow)]" />
             Book Consultation
-          </a>
+          </Link>
         </div>
       </div>
     </motion.header>
