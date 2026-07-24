@@ -1,11 +1,10 @@
-import { lazy, Suspense, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
-import { ClientOnly } from "@/components/ClientOnly";
-
-const AICoreScene = lazy(() =>
-  import("@/three/AICoreScene").then((m) => ({ default: m.AICoreScene })),
-);
+import heroBank from "@/assets/hero-bank.jpg";
+import accentCircuit from "@/assets/accent-circuit.jpg";
+import accentDashboard from "@/assets/accent-dashboard.jpg";
 
 function SplitReveal({ text, delay = 0, className = "" }: { text: string; delay?: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -53,7 +52,7 @@ export function Hero() {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/10 bg-foreground/5 px-3 py-1 text-[10px] uppercase tracking-[0.35em] text-foreground/70 backdrop-blur"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-glow)] shadow-[0_0_10px_var(--brand-glow)]" />
-            Immortal Future · Info Tech
+            AI-First · Banking · Enterprise IT
           </motion.div>
 
           <h1 className="text-[clamp(2.6rem,7vw,6rem)] font-semibold leading-[1] tracking-tight text-foreground">
@@ -73,8 +72,8 @@ export function Hero() {
             transition={{ delay: 0.9, duration: 0.9 }}
             className="mt-6 max-w-xl text-base leading-relaxed text-foreground/60 md:text-lg"
           >
-            We engineer intelligent enterprise systems — AI, cloud, cyber security,
-            automation and Finacle — designed to outlive the era that built them.
+            We embed AI directly into Indian banking workflows — Finacle automation,
+            AWS cloud, cyber security and IoT — engineered to serve real people.
           </motion.p>
 
           <motion.div
@@ -83,22 +82,22 @@ export function Hero() {
             transition={{ delay: 1.1, duration: 0.9 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <a
-              href="#journey"
+            <Link
+              to="/products"
               data-cursor="Launch"
               className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-6 py-3 text-sm font-medium text-[oklch(0.1_0.02_275)] transition-transform hover:-translate-y-0.5"
               style={{ background: "var(--gradient-hero)", boxShadow: "var(--shadow-glow)" }}
             >
-              <span>Explore Journey</span>
+              <span>Explore Products</span>
               <span className="transition-transform group-hover:translate-x-1">→</span>
-            </a>
-            <a
-              href="#connect"
+            </Link>
+            <Link
+              to="/contact"
               data-cursor="Connect"
               className="inline-flex items-center gap-2 rounded-full border border-border/15 bg-white/[0.03] px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-border/30 hover:bg-white/[0.08]"
             >
               Book Consultation
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div
@@ -109,32 +108,53 @@ export function Hero() {
           >
             <div className="flex items-center gap-2">
               <span className="h-px w-8 bg-foreground/30" />
-              Scroll to enter
+              Since May 2024 · Tiruchirapalli
             </div>
             <div className="hidden md:flex gap-6">
-              <span>AI</span>
-              <span>Cloud</span>
               <span>Finacle</span>
-              <span>Security</span>
+              <span>AWS</span>
+              <span>AI</span>
+              <span>Finacle</span>
             </div>
           </motion.div>
         </div>
 
-        {/* Right — 3D scene */}
-        <div className="relative h-[62vh] min-h-[420px] w-full lg:h-[80vh]">
-          <div className="absolute inset-0 -z-10" style={{ background: "radial-gradient(circle at center, oklch(0.65 0.24 175 / .25), transparent 60%)", filter: "blur(20px)" }} />
-          <ClientOnly
-            fallback={
-              <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-[0.35em] text-foreground/40">
-                Initializing core…
+        {/* Right — editorial image collage */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative h-[62vh] min-h-[460px] w-full lg:h-[78vh]"
+        >
+          <div className="absolute inset-0 -z-10" style={{ background: "radial-gradient(circle at 60% 40%, oklch(0.65 0.24 175 / .3), transparent 65%)", filter: "blur(30px)" }} />
+          <div className="relative h-full w-full">
+            <div className="glass-panel absolute inset-y-0 right-0 w-[76%] overflow-hidden rounded-3xl border border-border/15 shadow-[var(--shadow-elegant)]">
+              <img src={heroBank} alt="Modern Indian bank branch with AI data overlay" className="h-full w-full object-cover" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 40%, oklch(0.06 0.01 180 / 0.55))" }} />
+              <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-foreground">
+                <div>
+                  <div className="text-[10px] font-mono uppercase tracking-[0.3em] opacity-70">Live in production</div>
+                  <div className="mt-1 text-lg font-semibold">Banking, reimagined with AI</div>
+                </div>
+                <div className="rounded-full bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.25em] backdrop-blur">80% ↓ manual</div>
               </div>
-            }
-          >
-            <Suspense fallback={null}>
-              <AICoreScene />
-            </Suspense>
-          </ClientOnly>
-        </div>
+            </div>
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute left-0 top-8 w-[42%] overflow-hidden rounded-2xl border border-border/15 shadow-[var(--shadow-elegant)]"
+            >
+              <img src={accentCircuit} alt="Emerald circuit board detail" className="h-40 w-full object-cover md:h-48" />
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+              className="absolute bottom-6 left-4 w-[46%] overflow-hidden rounded-2xl border border-border/15 shadow-[var(--shadow-elegant)]"
+            >
+              <img src={accentDashboard} alt="Finacle analytics dashboard on a laptop" className="h-40 w-full object-cover md:h-48" />
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
