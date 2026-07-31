@@ -56,16 +56,15 @@ function Contact() {
 
           <h1 className="mt-4 max-w-4xl text-[clamp(2.2rem,6vw,4.8rem)] font-semibold leading-[1.12] tracking-tight text-foreground">
             {["Tell us what", "you want to", "automate."].map((line, i) => (
-              <span key={line} className="block overflow-hidden">
-                <motion.span
-                  className="block"
-                  initial={{ y: "110%" }}
-                  animate={{ y: "0%" }}
-                  transition={{ delay: 0.1 + i * 0.12, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {i === 2 ? <span className="text-gradient">{line}</span> : line}
-                </motion.span>
-              </span>
+              <motion.span
+                key={line}
+                className="block"
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.12, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {i === 2 ? <span className="text-gradient">{line}</span> : line}
+              </motion.span>
             ))}
           </h1>
 
