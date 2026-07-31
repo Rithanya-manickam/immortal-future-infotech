@@ -35,7 +35,7 @@ function Contact() {
       {/* Cinematic split hero — no circles, pure lines + light */}
       <section className="relative overflow-hidden px-6 pt-36 pb-14">
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <img src={imgNetwork} alt="" loading="lazy" className="h-full w-full object-cover opacity-25" />
+          <img src={imgNetwork} alt="" loading="lazy" className="h-full w-full object-cover opacity-[0.16]" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 5%, transparent 45%, var(--background) 95%)" }} />
           <div
             className="absolute inset-0 opacity-[0.18]"
@@ -54,9 +54,9 @@ function Contact() {
             Contact
           </motion.div>
 
-          <h1 className="mt-4 max-w-4xl text-[clamp(2.2rem,6vw,4.8rem)] font-semibold leading-[0.98] tracking-tight text-foreground">
+          <h1 className="mt-4 max-w-4xl text-[clamp(2.2rem,6vw,4.8rem)] font-semibold leading-[1.12] tracking-tight text-foreground">
             {["Tell us what", "you want to", "automate."].map((line, i) => (
-              <span key={line} className="block overflow-hidden py-[0.06em]">
+              <span key={line} className="block overflow-hidden">
                 <motion.span
                   className="block"
                   initial={{ y: "110%" }}
