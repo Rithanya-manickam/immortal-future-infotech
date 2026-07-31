@@ -7,6 +7,7 @@ import imgAi from "@/assets/img-ai.jpg";
 import imgHealth from "@/assets/img-healthcare.jpg";
 import imgSec from "@/assets/img-security.jpg";
 import imgDash from "@/assets/accent-dashboard.jpg";
+import bgPortfolio from "@/assets/bg-portfolio.jpg";
 
 type Case = { title: string; client: string; body: string; stats: [string, string][]; tech: string[]; image: string };
 
@@ -53,6 +54,11 @@ export const Route = createFileRoute("/portfolio")({
 function Portfolio() {
   return (
     <>
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <img src={bgPortfolio} alt="" className="h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, var(--background) 0%, transparent 35%, var(--background) 100%)" }} />
+      </div>
+
       <PageHeader eyebrow="Portfolio" title="Work that already|ships in production.">
         Selected case studies across banking, healthcare and enterprise — with the numbers that matter.
       </PageHeader>
