@@ -17,6 +17,7 @@ import { ClientOnly } from "@/components/ClientOnly";
 import { CustomCursor } from "@/components/CustomCursor";
 import { LenisProvider } from "@/components/LenisProvider";
 import { Navbar } from "@/components/Navbar";
+import { ContactFab } from "@/components/ContactFab";
 import { Footer } from "@/components/sections/Footer";
 
 function NotFoundComponent() {
@@ -146,6 +147,7 @@ function RootComponent() {
             <Outlet />
           </main>
           <Footer />
+          <ContactFab />
         </LenisProvider>
       </ThemeProvider>
     </QueryClientProvider>

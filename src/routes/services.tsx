@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/PageHeader";
-import { CTA } from "@/components/sections/CTA";
 
 type Cat = "All" | "AI & Banking" | "Cloud & Infra" | "Development" | "Business";
 
@@ -25,6 +24,20 @@ const SERVICES: { name: string; cat: Exclude<Cat, "All">; body: string; tags: st
   { name: "Customized Billing Software", cat: "Business", body: "GST billing, multi-currency, recurring billing, payment tracking and reports.", tags: ["GST"] },
   { name: "HR & Payroll", cat: "Business", body: "Payroll, attendance, leave, tax, employee portal and recruitment.", tags: ["HRMS"] },
   { name: "Digital Marketing", cat: "Business", body: "SEO, PPC, Google Ads, social, email marketing and analytics.", tags: ["SEO", "Ads"] },
+  { name: "Core Banking Support (AMS)", cat: "AI & Banking", body: "24×7 application managed services, L1–L3 support and release management for Finacle estates.", tags: ["AMS", "L3 Support"] },
+  { name: "Digital Banking Channels", cat: "AI & Banking", body: "Internet banking, mobile banking, UPI and payment channel integration.", tags: ["UPI", "Mobile"] },
+  { name: "RBI Compliance & Reporting", cat: "AI & Banking", body: "Automated regulatory returns, audit trails and compliance dashboards.", tags: ["RBI", "Audit"] },
+  { name: "Loan Origination Automation", cat: "AI & Banking", body: "Digital LOS with credit scoring, document AI and disbursement workflows.", tags: ["LOS", "OCR"] },
+  { name: "DevOps & SRE", cat: "Cloud & Infra", body: "CI/CD pipelines, IaC with Terraform, observability and on-call runbooks.", tags: ["Terraform", "K8s"] },
+  { name: "Disaster Recovery & BCP", cat: "Cloud & Infra", body: "DR strategy, backup automation, failover drills and RPO/RTO assurance.", tags: ["DR", "Backup"] },
+  { name: "Managed IT & Helpdesk", cat: "Cloud & Infra", body: "End-user support, asset management, patching and branch IT operations.", tags: ["ITSM"] },
+  { name: "Data Engineering & Warehousing", cat: "Development", body: "ETL pipelines, data lakes, warehouse modelling and real-time streaming.", tags: ["ETL", "Kafka"] },
+  { name: "API & System Integration", cat: "Development", body: "Middleware, REST/SOAP integration, message queues and partner onboarding.", tags: ["API", "MQ"] },
+  { name: "QA & Test Automation", cat: "Development", body: "Automated regression, performance testing and UAT support for core systems.", tags: ["Cypress", "JMeter"] },
+  { name: "Generative AI Solutions", cat: "Development", body: "Custom LLM assistants, document intelligence and agentic workflows.", tags: ["LLM", "RAG"] },
+  { name: "IT Consulting & Advisory", cat: "Business", body: "Technology roadmaps, vendor evaluation, architecture reviews and audits.", tags: ["Advisory"] },
+  { name: "Staff Augmentation", cat: "Business", body: "Certified Finacle, AWS and full-stack engineers embedded in your team.", tags: ["Talent"] },
+  { name: "Document Management System", cat: "Business", body: "Digitization, OCR indexing, e-sign workflows and retention policies.", tags: ["DMS", "OCR"] },
 ];
 
 const CATS: Cat[] = ["All", "AI & Banking", "Cloud & Infra", "Development", "Business"];
@@ -33,8 +46,8 @@ export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Services — Immortal Future Info Tech" },
-      { name: "description", content: "18 services across AI banking automation, Finacle, AWS cloud, cyber security, IoT, development and business systems." },
-      { property: "og:title", content: "IFIT Services — 18 offerings" },
+      { name: "description", content: "32 services across AI banking automation, Finacle, AWS cloud, cyber security, IoT, development and business systems." },
+      { property: "og:title", content: "IFIT Services — 32 offerings" },
       { property: "og:description", content: "AI banking, Finacle, AWS, cyber security, IoT and more." },
     ],
   }),
@@ -47,7 +60,7 @@ function Services() {
 
   return (
     <>
-      <PageHeader eyebrow="Services" title="Eighteen offerings.|One delivery bar.">
+      <PageHeader eyebrow="Services" title="Thirty-two offerings.|One delivery bar.">
         Everything IFIT ships — from AI banking automation to enterprise networking — organized so you can find what you need in seconds.
       </PageHeader>
 
@@ -78,7 +91,6 @@ function Services() {
         </div>
       </section>
 
-      <CTA />
     </>
   );
 }

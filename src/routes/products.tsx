@@ -2,9 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Check, Sparkles, Bot } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-import { CTA } from "@/components/sections/CTA";
 import imgAi from "@/assets/img-ai.jpg";
 import imgDash from "@/assets/accent-dashboard.jpg";
+import imgOps from "@/assets/img-ops.jpg";
+import imgBank from "@/assets/hero-bank.jpg";
+import imgTraining from "@/assets/img-training.jpg";
+import imgNetwork from "@/assets/img-network.jpg";
+import imgCloud from "@/assets/img-cloud.jpg";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -22,6 +26,52 @@ export const Route = createFileRoute("/products")({
 
 const IIS_FEATURES = ["EOD Automation", "Loan Workflow Automation", "KYC Processing", "Treasury Automation", "RBI Reporting", "Finacle API Integration"];
 const ASKBOT_FEATURES = ["Natural Language Q&A", "Retrieval-Augmented Generation", "FAISS Vector Search", "Role-Based Access", "Staff Onboarding Kits", "Multi-Branch Deployment"];
+
+const IIS_WORK = [
+  { image: imgOps, title: "EOD Automation", client: "Cooperative Bank", metric: "80% effort ↓" },
+  { image: imgBank, title: "KYC Straight-Through", client: "Regional Bank", metric: "4hr saved / day" },
+  { image: imgNetwork, title: "RBI Reporting Engine", client: "NBFC", metric: "Zero manual returns" },
+];
+
+const ASKBOT_WORK = [
+  { image: imgTraining, title: "Staff Onboarding", client: "Private Bank · 200+ staff", metric: "3× faster" },
+  { image: imgAi, title: "Finacle Knowledge Base", client: "Multi-branch rollout", metric: "70% faster Q&A" },
+  { image: imgCloud, title: "Secure Cloud Deployment", client: "AWS private VPC", metric: "99.9% uptime" },
+];
+
+function FeaturedWork({ label, items }: { label: string; items: { image: string; title: string; client: string; metric: string }[] }) {
+  return (
+    <section className="px-6 pb-8">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="mb-6 flex items-center gap-3">
+          <span className="h-px w-10 bg-gradient-to-r from-transparent to-[var(--brand-glow)]" />
+          <div className="text-[10px] uppercase tracking-[0.4em] text-foreground/50">Featured work — {label}</div>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {items.map((w, i) => (
+            <motion.figure
+              key={w.title}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7, delay: i * 0.08 }}
+              className="glass-panel group relative overflow-hidden"
+            >
+              <div className="h-44 overflow-hidden">
+                <img src={w.image} alt={w.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-105" />
+              </div>
+              <figcaption className="p-5">
+                <div className="text-[10px] uppercase tracking-[0.3em] text-[var(--brand-glow)]">{w.client}</div>
+                <div className="mt-2 text-base font-semibold text-foreground">{w.title}</div>
+                <div className="mt-3 inline-flex rounded-full border border-border/15 px-3 py-1 text-[11px] text-foreground/70">{w.metric}</div>
+              </figcaption>
+            </motion.figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function ProductPanel({ icon: Icon, tag, title, subtitle, body, features, metric, image, reverse }: any) {
   return (
@@ -72,6 +122,8 @@ function Products() {
         image={imgDash}
       />
 
+      <FeaturedWork label="IIS" items={IIS_WORK} />
+
       <ProductPanel
         icon={Bot}
         tag="ASKBOT"
@@ -84,7 +136,7 @@ function Products() {
         reverse
       />
 
-      <CTA />
+      <FeaturedWork label="ASKBOT" items={ASKBOT_WORK} />
     </>
   );
 }

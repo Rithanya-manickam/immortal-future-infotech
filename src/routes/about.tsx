@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/PageHeader";
-import { CTA } from "@/components/sections/CTA";
 import teamImg from "@/assets/img-team.jpg";
 
 const VALUES = [
@@ -86,7 +85,6 @@ function About() {
         </div>
       </section>
 
-      <CTA />
     </>
   );
 }

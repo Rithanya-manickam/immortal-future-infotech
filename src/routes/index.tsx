@@ -6,7 +6,6 @@ import { Journey } from "@/components/sections/Journey";
 import { CreativeVault } from "@/components/sections/CreativeVault";
 import { Expertise } from "@/components/sections/Expertise";
 import { Stats } from "@/components/sections/Stats";
-import { CTA } from "@/components/sections/CTA";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ProductsStrip } from "@/components/sections/ProductsStrip";
 
@@ -33,7 +32,6 @@ function Index() {
       <Expertise />
       <CreativeVault />
       <Stats />
-      <CTA />
     </>
   );
 }
