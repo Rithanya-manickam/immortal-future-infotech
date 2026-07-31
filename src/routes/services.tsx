@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/PageHeader";
-import { CTA } from "@/components/sections/CTA";
 
 type Cat = "All" | "AI & Banking" | "Cloud & Infra" | "Development" | "Business";
 
@@ -78,7 +77,6 @@ function Services() {
         </div>
       </section>
 
-      <CTA />
     </>
   );
 }

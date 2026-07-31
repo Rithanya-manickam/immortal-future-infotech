@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/PageHeader";
-import { CTA } from "@/components/sections/CTA";
 import imgBank from "@/assets/hero-bank.jpg";
 import imgCloud from "@/assets/img-cloud.jpg";
 import imgAi from "@/assets/img-ai.jpg";
@@ -109,7 +108,6 @@ function Portfolio() {
         </section>
       ))}
 
-      <CTA />
     </>
   );
 }

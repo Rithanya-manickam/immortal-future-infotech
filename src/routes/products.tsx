@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Check, Sparkles, Bot } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-import { CTA } from "@/components/sections/CTA";
 import imgAi from "@/assets/img-ai.jpg";
 import imgDash from "@/assets/accent-dashboard.jpg";
 
@@ -84,7 +83,6 @@ function Products() {
         reverse
       />
 
-      <CTA />
     </>
   );
 }
