@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import logoUrl from "@/assets/logo.png";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
+  { label: "Home", to: "/" as const },
   { label: "About", to: "/about" as const },
   { label: "Services", to: "/services" as const },
   { label: "Products", to: "/products" as const },
@@ -40,6 +42,7 @@ function MagneticLink({ label, to }: { label: string; to: string }) {
       to={to as "/about"}
       ref={ref as any}
       data-cursor="Explore"
+      activeOptions={{ exact: to === "/" }}
       activeProps={{ className: "text-foreground" }}
       className="group relative inline-block px-3 py-2 text-[13px] font-medium text-foreground/70 transition-[color,letter-spacing] duration-300 hover:text-foreground hover:tracking-[0.06em]"
       style={{ transition: "transform .35s cubic-bezier(.2,.9,.2,1), color .3s, letter-spacing .35s" }}
@@ -54,6 +57,12 @@ function MagneticLink({ label, to }: { label: string; to: string }) {
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -118,8 +127,42 @@ export function Navbar() {
             <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-[var(--brand-glow)]" />
             Book Consultation
           </Link>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border bg-foreground/[0.04] text-foreground transition-colors hover:border-primary/50 hover:bg-primary/10 md:hidden"
+          >
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-panel absolute left-4 right-4 top-[calc(100%+8px)] flex flex-col gap-1 p-3 md:hidden"
+          >
+            {NAV.map((n) => (
+              <Link
+                key={n.label}
+                to={n.to as "/about"}
+                activeOptions={{ exact: n.to === "/" }}
+                activeProps={{ className: "text-foreground bg-foreground/[0.06]" }}
+                onClick={() => setOpen(false)}
+                className="rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
+              >
+                {n.label}
+              </Link>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
