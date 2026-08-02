@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import imgBank from "@/assets/hero-bank.jpg";
@@ -17,11 +17,15 @@ const MILESTONES = [
   { year: "Mar 2025", title: "Pan-India Expansion", body: "Serving Tamil Nadu, Karnataka, Maharashtra and more.", image: imgNetwork },
 ];
 
+// Layout effect on the client so GSAP's pin-spacer is unwrapped BEFORE React
+// removes the section from the DOM on route change (avoids removeChild crash).
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function Journey() {
   const wrap = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       if (!track.current || !wrap.current) return;
@@ -40,7 +44,10 @@ export function Journey() {
         },
       });
     }, wrap);
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.refresh();
+    };
   }, []);
 
   return (

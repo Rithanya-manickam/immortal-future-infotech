@@ -121,7 +121,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark has-custom-cursor">
+    <html lang="en" className="dark has-custom-cursor" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

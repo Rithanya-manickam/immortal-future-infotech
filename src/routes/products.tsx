@@ -209,6 +209,90 @@ const SOLUTIONS = [
   },
 ];
 
+/* What we can build for each solution — shown on the solution cards */
+const BUILD_HIGHLIGHTS: Record<string, string[]> = {
+  "Finacle Implementation": [
+    "Core module rollout & customization",
+    "Data migration and parallel runs",
+    "RBI-ready reporting setup",
+  ],
+  "AWS Cloud Services": [
+    "Landing zone & VPC architecture",
+    "Multi-AZ HA and DR strategy",
+    "Cost optimization reviews",
+  ],
+  "Enterprise Networking": [
+    "Branch SD-WAN rollouts",
+    "Firewall & segmentation design",
+    "24/7 NOC monitoring",
+  ],
+  "IoT Solutions": [
+    "Sensor-to-cloud gateways",
+    "Real-time monitoring dashboards",
+    "Predictive alerting rules",
+  ],
+  "Fullstack Development": [
+    "React + Node/Python platforms",
+    "Secure API and auth layers",
+    "CI/CD and observability",
+  ],
+  "Mobile App Development": [
+    "iOS, Android and cross-platform",
+    "Offline-first field apps",
+    "Store release management",
+  ],
+  "E-Commerce Development": [
+    "Payments and UPI checkout",
+    "Inventory and order workflows",
+    "Conversion analytics",
+  ],
+  "CRM Implementation": [
+    "Lead-to-service pipelines",
+    "Custom modules and automations",
+    "Migration from legacy CRMs",
+  ],
+  "ERP & SAP Solutions": [
+    "Finance, inventory and HR modules",
+    "SAP integration and interfaces",
+    "Process mapping workshops",
+  ],
+  "Data Science & Analytics": [
+    "Executive KPI dashboards",
+    "Forecasting and risk models",
+    "Data warehouse pipelines",
+  ],
+  "UI/UX Design": [
+    "Design systems and tokens",
+    "Accessibility-first interfaces",
+    "Interactive prototypes",
+  ],
+  "Cybersecurity Services": [
+    "VAPT and security audits",
+    "SOC monitoring and response",
+    "Compliance hardening",
+  ],
+  "Finacle Training Programs": [
+    "Role-based teller & officer tracks",
+    "Hands-on sandbox exercises",
+    "ASKBOT-assisted refreshers",
+  ],
+  "Custom Billing Software": [
+    "GST-compliant invoicing",
+    "Recurring and usage billing",
+    "Payment gateway integration",
+  ],
+  "HR & Payroll Management": [
+    "Attendance and leave workflows",
+    "Payroll runs with statutory filings",
+    "Employee self-service portals",
+  ],
+  "Digital Marketing": [
+    "SEO and content strategy",
+    "Performance campaigns",
+    "Analytics and attribution",
+  ],
+};
+
 const IMPLEMENTATIONS = [
   {
     image: imgOps,
@@ -385,7 +469,7 @@ const fadeUp = {
     y: 0,
     transition: {
       duration: 0.7,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
@@ -544,9 +628,20 @@ function SolutionCard({
         {solution.description}
       </p>
 
-      <div className="mt-6 flex items-center gap-2 text-xs text-foreground/40 transition-colors group-hover:text-[var(--brand-glow)]">
-        Discover what we can build
-        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+      <div className="mt-5 border-t border-border/15 pt-4">
+        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-foreground/40 transition-colors group-hover:text-[var(--brand-glow)]">
+          Discover what we can build
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+        </div>
+
+        <ul className="mt-3 space-y-2">
+          {(BUILD_HIGHLIGHTS[solution.title] ?? []).map((point) => (
+            <li key={point} className="flex items-start gap-2 text-[13px] leading-5 text-foreground/65">
+              <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--brand-glow)]" />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </motion.article>
   );
