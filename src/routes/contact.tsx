@@ -41,10 +41,10 @@ function Field({
   textarea?: boolean;
 }) {
   const base =
-    "mt-2 w-full rounded-xl border border-border/15 bg-foreground/[0.03] px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-[var(--brand-glow)]";
+    "mt-2 w-full rounded-xl border border-border/15 bg-foreground/[0.03] px-4 py-3 text-sm text-[var(--brand-emerald)] caret-[var(--brand-glow)] outline-none transition-colors placeholder:text-foreground/30 focus:border-[var(--brand-glow)]";
   return (
     <label className="block">
-      <span className="text-[11px] uppercase tracking-[0.25em] text-foreground/50">{label}</span>
+      <span className="text-[11px] uppercase tracking-[0.25em] text-[var(--brand-teal)]">{label}</span>
       {textarea ? (
         <textarea name={name} required={required} rows={4} className={base} />
       ) : (
@@ -118,7 +118,7 @@ function Contact() {
                 </div>
 
                 <div>
-                  <span className="text-[11px] uppercase tracking-[0.25em] text-foreground/50">
+                  <span className="text-[11px] uppercase tracking-[0.25em] text-[var(--brand-teal)]">
                     What can we help you with?
                   </span>
                   <div className="mt-3 flex flex-wrap gap-2">

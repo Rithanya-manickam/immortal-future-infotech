@@ -1,10 +1,42 @@
-import { Github, Linkedin, Twitter, MapPin, Mail } from "lucide-react";
+import { Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import type { CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import logoUrl from "@/assets/logo.png";
+import footerBg from "@/assets/footer-bg.jpg";
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-border/10 px-6 py-16">
+    <footer
+      className="relative z-10 mt-20 overflow-hidden border-t border-[var(--brand-emerald)]/25 px-6 py-16"
+      style={
+        {
+          "--foreground": "oklch(0.97 0.01 165)",
+          "--border": "oklch(0.72 0.12 168)",
+        } as CSSProperties
+      }
+    >
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <img
+          src={footerBg}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          width={1920}
+          height={720}
+          className="h-full w-full object-cover opacity-40"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, var(--background) 0%, oklch(0.16 0.05 175 / 0.92) 45%, oklch(0.12 0.05 175 / 0.96) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-x-0 top-0 h-px"
+          style={{ background: "var(--gradient-hero)", opacity: 0.6 }}
+        />
+      </div>
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
@@ -19,8 +51,9 @@ export function Footer() {
               AI-first technology company building intelligent solutions for Indian banking, healthcare and enterprise IT.
             </p>
             <div className="mt-6 flex flex-col gap-2 text-xs text-foreground/60">
-              <div className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> Tiruchirapalli, Tamil Nadu, India</div>
-              <a href="mailto:hello@immortalfuture.tech" className="flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> hello@immortalfuture.tech</a>
+              <div className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> Tiruchirapalli, Tamil Nadu 621211, India</div>
+              <a href="mailto:info@ifitipl.com" className="flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> info@ifitipl.com</a>
+              <a href="tel:+919159855985" className="flex items-center gap-2 hover:text-foreground"><Phone className="h-3.5 w-3.5" /> +91 91598 55985</a>
             </div>
           </div>
 
@@ -51,8 +84,19 @@ export function Footer() {
             © {new Date().getFullYear()} Immortal Future Info Tech Pvt. Ltd. · All rights reserved
           </div>
           <div className="flex items-center gap-3">
-            {[Github, Linkedin, Twitter].map((Icon, i) => (
-              <a key={i} href="#" data-cursor="Follow" aria-label="social" className="glass-panel flex h-9 w-9 items-center justify-center transition-transform hover:-translate-y-0.5">
+            {[
+              { Icon: Linkedin, href: "https://www.linkedin.com/company/immortal-future-info-tech", label: "LinkedIn" },
+              { Icon: Mail, href: "mailto:info@ifitipl.com", label: "Email us" },
+              { Icon: Phone, href: "tel:+919159855985", label: "Call us" },
+            ].map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer noopener" } : {})}
+                data-cursor="Follow"
+                aria-label={label}
+                className="glass-panel flex h-9 w-9 items-center justify-center transition-transform hover:-translate-y-0.5"
+              >
                 <Icon className="h-3.5 w-3.5 text-foreground/70" />
               </a>
             ))}

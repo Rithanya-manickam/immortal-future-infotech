@@ -23,7 +23,6 @@ import {
   Users,
   WalletCards,
 } from "lucide-react";
-import { DataToAction } from "@/components/sections/DataToAction";
 import { RealResults } from "@/components/sections/RealResults";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { CTABand } from "@/components/sections/CTABand";
@@ -442,7 +441,6 @@ function Products() {
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <DataToAction />
             <RealResults />
             <TrustedBy compact />
           </motion.div>
