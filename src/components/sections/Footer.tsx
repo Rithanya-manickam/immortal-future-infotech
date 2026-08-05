@@ -51,8 +51,9 @@ export function Footer() {
               AI-first technology company building intelligent solutions for Indian banking, healthcare and enterprise IT.
             </p>
             <div className="mt-6 flex flex-col gap-2 text-xs text-foreground/60">
-              <div className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> Tiruchirapalli, Tamil Nadu, India</div>
-              <a href="mailto:hello@immortalfuture.tech" className="flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> hello@immortalfuture.tech</a>
+              <div className="flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> Tiruchirapalli, Tamil Nadu 621211, India</div>
+              <a href="mailto:info@ifitipl.com" className="flex items-center gap-2 hover:text-foreground"><Mail className="h-3.5 w-3.5" /> info@ifitipl.com</a>
+              <a href="tel:+919159855985" className="flex items-center gap-2 hover:text-foreground"><Phone className="h-3.5 w-3.5" /> +91 91598 55985</a>
             </div>
           </div>
 
