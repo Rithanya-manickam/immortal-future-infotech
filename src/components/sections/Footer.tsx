@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, MapPin, Mail } from "lucide-react";
+import { Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import type { CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import logoUrl from "@/assets/logo.png";
@@ -84,8 +84,19 @@ export function Footer() {
             © {new Date().getFullYear()} Immortal Future Info Tech Pvt. Ltd. · All rights reserved
           </div>
           <div className="flex items-center gap-3">
-            {[Github, Linkedin, Twitter].map((Icon, i) => (
-              <a key={i} href="#" data-cursor="Follow" aria-label="social" className="glass-panel flex h-9 w-9 items-center justify-center transition-transform hover:-translate-y-0.5">
+            {[
+              { Icon: Linkedin, href: "https://www.linkedin.com/company/immortal-future-info-tech", label: "LinkedIn" },
+              { Icon: Mail, href: "mailto:info@ifitipl.com", label: "Email us" },
+              { Icon: Phone, href: "tel:+919159855985", label: "Call us" },
+            ].map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer noopener" } : {})}
+                data-cursor="Follow"
+                aria-label={label}
+                className="glass-panel flex h-9 w-9 items-center justify-center transition-transform hover:-translate-y-0.5"
+              >
                 <Icon className="h-3.5 w-3.5 text-foreground/70" />
               </a>
             ))}
