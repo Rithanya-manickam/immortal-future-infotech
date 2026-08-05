@@ -1,10 +1,33 @@
 import { Github, Linkedin, Twitter, MapPin, Mail } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import logoUrl from "@/assets/logo.png";
+import footerBg from "@/assets/footer-bg.jpg";
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-border/10 px-6 py-16">
+    <footer className="relative z-10 mt-20 overflow-hidden border-t border-[var(--brand-emerald)]/25 px-6 py-16">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <img
+          src={footerBg}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          width={1920}
+          height={720}
+          className="h-full w-full object-cover opacity-40"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, var(--background) 0%, oklch(0.16 0.05 175 / 0.92) 45%, oklch(0.12 0.05 175 / 0.96) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-x-0 top-0 h-px"
+          style={{ background: "var(--gradient-hero)", opacity: 0.6 }}
+        />
+      </div>
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
