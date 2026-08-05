@@ -442,7 +442,6 @@ function Products() {
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <DataToAction />
             <RealResults />
             <TrustedBy compact />
           </motion.div>

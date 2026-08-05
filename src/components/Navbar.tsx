@@ -6,7 +6,6 @@ import logoUrl from "@/assets/logo.png";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
-  { label: "Home", to: "/" as const },
   { label: "About", to: "/about" as const },
   { label: "Services", to: "/services" as const },
   { label: "Products", to: "/products" as const },
