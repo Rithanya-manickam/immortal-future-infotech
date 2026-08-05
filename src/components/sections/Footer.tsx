@@ -5,7 +5,15 @@ import footerBg from "@/assets/footer-bg.jpg";
 
 export function Footer() {
   return (
-    <footer className="relative z-10 mt-20 overflow-hidden border-t border-[var(--brand-emerald)]/25 px-6 py-16">
+    <footer
+      className="relative z-10 mt-20 overflow-hidden border-t border-[var(--brand-emerald)]/25 px-6 py-16"
+      style={
+        {
+          "--foreground": "oklch(0.97 0.01 165)",
+          "--border": "oklch(0.72 0.12 168)",
+        } as React.CSSProperties
+      }
+    >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <img
           src={footerBg}
