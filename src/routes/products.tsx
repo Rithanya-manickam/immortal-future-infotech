@@ -23,7 +23,6 @@ import {
   Users,
   WalletCards,
 } from "lucide-react";
-import { DataToAction } from "@/components/sections/DataToAction";
 import { RealResults } from "@/components/sections/RealResults";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { CTABand } from "@/components/sections/CTABand";

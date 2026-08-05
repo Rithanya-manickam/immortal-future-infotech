@@ -151,7 +151,6 @@ export function Navbar() {
               <Link
                 key={n.label}
                 to={n.to as "/about"}
-                activeOptions={{ exact: n.to === "/" }}
                 activeProps={{ className: "text-foreground bg-foreground/[0.06]" }}
                 onClick={() => setOpen(false)}
                 className="rounded-xl px-4 py-3 text-sm font-medium text-foreground/70 transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
