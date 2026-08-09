@@ -14,7 +14,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BackgroundFX } from "@/components/BackgroundFX";
 import { ClientOnly } from "@/components/ClientOnly";
-import { CustomCursor } from "@/components/CustomCursor";
 import { LenisProvider } from "@/components/LenisProvider";
 import { Navbar } from "@/components/Navbar";
 import { ContactFab } from "@/components/ContactFab";
@@ -121,7 +120,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark has-custom-cursor" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
@@ -140,7 +139,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <LenisProvider>
-          <ClientOnly><CustomCursor /></ClientOnly>
           <BackgroundFX />
           <Navbar />
           <main className="relative z-10">

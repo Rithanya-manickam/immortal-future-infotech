@@ -188,11 +188,28 @@
   }
 }
 
-/* Hide native cursor when custom cursor is active (desktop only) */
-@media (hover: hover) and (pointer: fine) {
-  html.has-custom-cursor,
-  html.has-custom-cursor * {
-    cursor: none !important;
+/* Product identity accents */
+:root {
+  --p-hrm: oklch(0.74 0.15 168);
+  --p-campus: oklch(0.76 0.14 205);
+  --p-worktrack: oklch(0.78 0.13 145);
+  --p-iis: oklch(0.75 0.13 185);
+  --p-askbot: oklch(0.77 0.12 155);
+}
+
+/* Accessibility: always show a visible focus ring */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand-glow, currentColor);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
