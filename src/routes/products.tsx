@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { PRODUCTS as FLAGSHIP } from "@/data/products";
+import { TiltCard } from "@/components/TiltCard";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -293,12 +295,49 @@ function Products() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="mt-3 max-w-3xl text-[clamp(2rem,4.6vw,3.4rem)] font-semibold leading-[1.06] tracking-tight text-foreground"
           >
-            Two products in banks. <span className="text-gradient">One delivery bar.</span>
+            Five products. <span className="text-gradient">One delivery bar.</span>
           </motion.h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/65">
-            Built on deep Finacle and enterprise IT domain expertise — and backed by solutions
-            across cloud, security, data and development.
+            IIS and ASKBOT for banking, HRM for people operations, Campus for institutions and
+            WorkTrack for delivery teams — backed by solutions across cloud, security, data and
+            development.
           </p>
+        </div>
+      </section>
+
+      {/* Flagship products */}
+      <section className="px-6 pb-4">
+        <div className="mx-auto grid max-w-[1200px] gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {FLAGSHIP.map((fp, i) => (
+            <motion.div
+              key={fp.slug}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, delay: (i % 3) * 0.06 }}
+              className={i === 0 ? "lg:col-span-2" : ""}
+            >
+              <TiltCard accent={fp.accent} className="h-full">
+                <Link
+                  to="/products/$slug"
+                  params={{ slug: fp.slug }}
+                  className="flex h-full flex-col justify-between rounded-2xl border border-border/15 p-6"
+                  style={{ background: `linear-gradient(150deg, color-mix(in oklab, ${fp.accent} 11%, transparent), transparent 65%)` }}
+                >
+                  <div className="min-w-0">
+                    <div className="text-[10px] uppercase tracking-[0.3em]" style={{ color: fp.accent }}>
+                      {fp.category}
+                    </div>
+                    <h2 className="mt-2 text-lg font-semibold text-foreground">{fp.name}</h2>
+                    <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/60">{fp.tagline}</p>
+                  </div>
+                  <span className="mt-6 inline-flex items-center gap-1.5 text-[12px]" style={{ color: fp.accent }}>
+                    {fp.cta} <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              </TiltCard>
+            </motion.div>
+          ))}
         </div>
       </section>
 
