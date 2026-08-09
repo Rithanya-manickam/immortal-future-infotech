@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { PRODUCTS, getProduct } from "@/data/products";
+import { PRODUCTS, getProduct, type Product } from "@/data/products";
 import { ProductDemo } from "@/components/ProductDemo";
 import { TiltCard } from "@/components/TiltCard";
 
@@ -41,7 +41,7 @@ function Num({ n, label }: { n: string; label: string }) {
 }
 
 function ProductDetail() {
-  const { product: p } = Route.useLoaderData();
+  const { product: p } = Route.useLoaderData() as { product: Product };
   const others = PRODUCTS.filter((x) => x.slug !== p.slug);
 
   return (
