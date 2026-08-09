@@ -44,6 +44,53 @@ const SERVICES: { name: string; cat: Exclude<Cat, "All">; body: string; tags: st
 
 const CATS: Cat[] = ["All", "AI & Banking", "Cloud & Infra", "Development", "Business"];
 
+const GROUPS: { cat: Exclude<Cat, "All">; blurb: string; tech: string[]; outcomes: string[] }[] = [
+  {
+    cat: "AI & Banking",
+    blurb: "Core banking platforms, Finacle expertise and applied AI for Indian banks and NBFCs.",
+    tech: ["Python", "Finacle APIs", "Oracle", "LangChain", "FAISS", "LLMs"],
+    outcomes: ["Manual back-office work removed", "Regulatory reporting on time", "Faster staff onboarding", "Fewer processing errors"],
+  },
+  {
+    cat: "Cloud & Infra",
+    blurb: "Cloud architecture, networks, security and operations that stay up and stay affordable.",
+    tech: ["AWS", "Terraform", "Kubernetes", "SD-WAN", "Linux", "Grafana"],
+    outcomes: ["Reliable multi-branch connectivity", "Predictable cloud spend", "Faster incident response", "Recoverable by design"],
+  },
+  {
+    cat: "Development",
+    blurb: "Product engineering — web, mobile, data and AI — built to be maintained, not rewritten.",
+    tech: ["React", "TypeScript", "Node.js", "Java", "Spring Boot", "FastAPI", "PostgreSQL", "MongoDB"],
+    outcomes: ["Ideas shipped as working products", "Scalable, testable codebases", "Insight from operational data", "Interfaces people can actually use"],
+  },
+  {
+    cat: "Business",
+    blurb: "Enterprise systems and advisory that make day-to-day operations measurable.",
+    tech: ["SAP", "CRM platforms", "Power BI", "GST billing", "HRMS", "DMS"],
+    outcomes: ["Operations centralised", "Compliance handled", "Better decisions from live data", "Teams supported, not slowed"],
+  },
+];
+
+const PROCESS = [
+  ["Discover", "Understand the requirement, constraints and the people affected."],
+  ["Design", "Shape the experience and the architecture before writing code."],
+  ["Develop", "Build in increments you can see and review."],
+  ["Test", "Validate functionality, performance and security."],
+  ["Deploy", "Release with rollback, monitoring and handover."],
+  ["Improve", "Measure, refine and extend once it is live."],
+];
+
+const QUALITY = [
+  ["Quality", "Reviewed code, documented decisions, repeatable delivery."],
+  ["Performance", "Measured under realistic load before go-live."],
+  ["Scalability", "Designed for multi-branch, multi-entity growth."],
+  ["Security", "Least privilege, audit trails and hardening by default."],
+  ["Maintainability", "Readable systems your team can own."],
+  ["User Experience", "Accessible interfaces that reduce training time."],
+  ["Reliability", "Monitoring, alerting and clear runbooks."],
+  ["Continuous Improvement", "Post-release reviews turn into the next iteration."],
+];
+
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
