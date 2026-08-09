@@ -113,8 +113,100 @@ function Services() {
         Everything IFIT ships — from AI banking automation to enterprise networking — organized so you can find what you need in seconds.
       </PageHeader>
 
-      <section className="px-6 pb-24">
+      {/* Category groups — horizontal panels with tech + outcomes */}
+      <section className="px-6 pb-10">
+        <div className="mx-auto grid max-w-[1400px] gap-4 lg:grid-cols-2">
+          {GROUPS.map((g, i) => (
+            <motion.div
+              key={g.cat}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: (i % 2) * 0.06 }}
+            >
+              <TiltCard className="h-full">
+                <div className="glass-panel h-full p-6 md:p-7">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <h2 className="text-lg font-semibold text-foreground">{g.cat}</h2>
+                    <button
+                      onClick={() => setCat(g.cat)}
+                      className="inline-flex items-center gap-1.5 text-[12px] text-[var(--brand-glow)]"
+                    >
+                      View services <ArrowRight className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/65">{g.blurb}</p>
+                  <div className="mt-5 grid gap-5 sm:grid-cols-2">
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.25em] text-foreground/45">Technologies</div>
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {g.tech.map((t) => (
+                          <span key={t} className="rounded-lg border border-border/15 bg-foreground/[0.03] px-2.5 py-1 font-mono text-[11px] text-foreground/70">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.25em] text-foreground/45">Outcomes</div>
+                      <ul className="mt-2 space-y-1">
+                        {g.outcomes.map((o) => (
+                          <li key={o} className="flex gap-2 text-[13px] text-foreground/65">
+                            <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-[var(--brand-glow)]" />
+                            {o}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </TiltCard>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="px-6 py-10">
         <div className="mx-auto max-w-[1400px]">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-foreground/50">How we deliver</div>
+          <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+            {PROCESS.map(([step, body], i) => (
+              <motion.li
+                key={step}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="rounded-2xl border border-border/15 p-4"
+              >
+                <span className="font-mono text-[11px] text-[var(--brand-glow)]">0{i + 1}</span>
+                <div className="mt-1.5 text-sm font-semibold text-foreground">{step}</div>
+                <p className="mt-1 text-[12px] leading-relaxed text-foreground/60">{body}</p>
+              </motion.li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Quality */}
+      <section className="px-6 py-10">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-foreground/50">How we judge our work</div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {QUALITY.map(([t, b]) => (
+              <div key={t} className="rounded-2xl border border-border/15 bg-foreground/[0.03] p-4">
+                <div className="text-sm font-semibold text-foreground">{t}</div>
+                <p className="mt-1 text-[12px] leading-relaxed text-foreground/60">{b}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-24 pt-6">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="mb-4 text-[10px] uppercase tracking-[0.3em] text-foreground/50">All services</div>
           <div className="mb-8 flex flex-wrap gap-2">
             {CATS.map((c) => (
               <button key={c} onClick={() => setCat(c)} className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.2em] transition-colors ${cat === c ? "border-[var(--brand-glow)] bg-[var(--brand-glow)]/10 text-foreground" : "border-border/20 text-foreground/60 hover:text-foreground"}`}>
@@ -136,6 +228,12 @@ function Services() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          <div className="mt-10">
+            <Link to="/contact" className="btn-primary text-xs">
+              Discuss your requirement <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
