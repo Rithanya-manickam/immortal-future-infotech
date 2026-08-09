@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { TiltCard } from "@/components/TiltCard";
 
 type Cat = "All" | "AI & Banking" | "Cloud & Infra" | "Development" | "Business";
 
