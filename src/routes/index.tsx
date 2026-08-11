@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ClientOnly } from "@/components/ClientOnly";
 import { PageLoader } from "@/components/PageLoader";
 import { Hero } from "@/components/sections/Hero";
-import { ProductShowcase } from "@/components/sections/ProductShowcase";
+import { HoloProducts } from "@/components/sections/HoloProducts";
+import { Ecosystem } from "@/components/sections/Ecosystem";
 import { ProductFinder } from "@/components/sections/ProductFinder";
 import { DataToAction } from "@/components/sections/DataToAction";
 import { RealResults } from "@/components/sections/RealResults";
@@ -28,7 +29,8 @@ function Index() {
     <>
       <ClientOnly><PageLoader /></ClientOnly>
       <Hero />
-      <ProductShowcase />
+      <HoloProducts />
+      <Ecosystem />
       <ProductFinder />
       <DataToAction />
       <RealResults />
