@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import heroBank from "@/assets/hero-bank.jpg";
+import heroVideo from "@/assets/hero-tech.mp4.asset.json";
 
 const CHIPS = ["Finacle & Core Banking", "AI Automation", "AWS Cloud", "Cyber Security", "IoT"];
 
@@ -83,13 +84,42 @@ export function Hero() {
             style={{ background: "var(--gradient-hero)" }}
           />
           <div className="glass-panel overflow-hidden rounded-2xl border border-border/15 shadow-[var(--shadow-elegant)]">
-            <img
-              src={heroBank}
-              alt="AI-assisted banking operations at Immortal Future Info Tech"
-              width={1280}
-              height={860}
-              className="h-[280px] w-full object-cover md:h-[380px]"
-            />
+            <div className="relative h-[280px] w-full overflow-hidden md:h-[380px]">
+              {/* Futuristic hero video. Swap the src for your own MP4/WebM anytime. */}
+              <video
+                className="h-full w-full object-cover"
+                src={heroVideo.url}
+                poster={heroBank}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Abstract visualisation of connected enterprise systems and AI automation"
+              />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to top, var(--glass-bg) 2%, color-mix(in oklab, var(--brand-glow) 8%, transparent) 60%, transparent)",
+                }}
+              />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-[0.14]"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, var(--brand-glow) 1px, transparent 1px), linear-gradient(to bottom, var(--brand-glow) 1px, transparent 1px)",
+                  backgroundSize: "38px 38px",
+                  maskImage: "radial-gradient(120% 80% at 50% 100%, #000 20%, transparent 70%)",
+                }}
+              />
+              <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-border/15 bg-background/40 px-2.5 py-1 text-[10px] uppercase tracking-[0.22em] text-foreground/75 backdrop-blur">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-glow)]" />
+                Live systems view
+              </span>
+            </div>
             <div className="grid grid-cols-3 divide-x divide-border/10 border-t border-border/10">
               {[
                 ["IIS", "Finacle automation"],
