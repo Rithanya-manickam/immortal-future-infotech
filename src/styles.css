@@ -190,11 +190,11 @@
 
 /* Product identity accents */
 :root {
-  --p-hrm: oklch(0.74 0.15 168);
-  --p-campus: oklch(0.76 0.14 205);
-  --p-worktrack: oklch(0.78 0.13 145);
-  --p-iis: oklch(0.75 0.13 185);
-  --p-askbot: oklch(0.77 0.12 155);
+  --p-iis: oklch(0.74 0.15 175);
+  --p-askbot: oklch(0.68 0.19 300);
+  --p-hrm: oklch(0.66 0.17 255);
+  --p-campus: oklch(0.75 0.16 65);
+  --p-worktrack: oklch(0.68 0.2 350);
 }
 
 /* Accessibility: always show a visible focus ring */
