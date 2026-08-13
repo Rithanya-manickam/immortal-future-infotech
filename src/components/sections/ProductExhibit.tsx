@@ -13,7 +13,7 @@ export function ProductExhibit() {
           A product exhibition, not a list — each platform has its own shape, colour and interface.
         </SectionHead>
 
-        <div className="relative mt-14 flex flex-col gap-16 md:gap-24 lg:gap-8">
+        <div className="relative mt-14 flex flex-col gap-16 md:gap-24 lg:gap-14">
           {ordered.map((p, i) => (
             <ExhibitCard key={p.slug} product={p} layout={EXHIBIT[p.slug]} index={i} />
           ))}
