@@ -10,7 +10,7 @@ const PILLARS = [
     body: "Implementation, customisation, EOD automation and reconciliation on Finacle.",
     detail: ["Finacle scripting & menus", "EOD / BOD automation", "Migration & UAT support"],
     accent: "var(--p-iis)",
-    cls: "md:col-span-3 md:row-span-2",
+    cls: "md:col-span-3",
     shape: "rounded-[32px]",
   },
   {
@@ -70,7 +70,7 @@ export function ExpertiseNodes() {
           Hover a node to expand what sits underneath it.
         </SectionHead>
 
-        <div className="mt-12 grid gap-4 md:auto-rows-[minmax(120px,auto)] md:grid-cols-6">
+        <div className="mt-12 grid gap-4 md:grid-cols-6">
           {PILLARS.map(({ icon: Icon, ...n }, i) => {
             const on = open === n.title;
             return (

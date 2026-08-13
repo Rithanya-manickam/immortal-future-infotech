@@ -7,7 +7,7 @@ export function ProductExhibit() {
   const ordered = EXHIBIT_ORDER.map((s) => PRODUCTS.find((p) => p.slug === s)!).filter(Boolean);
 
   return (
-    <section id="products" className="relative px-6 py-20 md:py-28">
+    <section id="products" className="relative px-6 py-16 md:py-24">
       <div className="mx-auto max-w-[1200px]">
         <SectionHead eyebrow="Products" title="Five platforms." accent="Hover to open one.">
           A product exhibition, not a list — each platform has its own shape, colour and interface.
