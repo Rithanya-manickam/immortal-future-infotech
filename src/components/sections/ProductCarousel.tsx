@@ -60,44 +60,44 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
         >
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-stretch">
             <article
-              className="relative isolate overflow-hidden rounded-[32px] border border-foreground/10 bg-foreground text-background shadow-[0_24px_70px_-30px_rgba(0,0,0,0.5)]"
+              className="relative isolate overflow-hidden rounded-[32px] border border-emerald-200 bg-emerald-100 text-emerald-950 shadow-[0_24px_70px_-30px_rgba(0,0,0,0.18)]"
               aria-live="polite"
             >
               <img
                 src={PRODUCT_IMAGES[activeProduct.slug]}
                 alt=""
                 aria-hidden="true"
-                className="absolute inset-0 -z-10 size-full object-cover object-left-top opacity-55 transition-opacity duration-700"
+                className="absolute inset-0 -z-10 size-full object-cover object-left-top opacity-35 transition-opacity duration-700"
               />
-              <div className="absolute inset-0 -z-10 bg-foreground/75" aria-hidden="true" />
+              <div className="absolute inset-0 -z-10 bg-emerald-100/75" aria-hidden="true" />
               <div className="flex min-h-[440px] flex-col justify-between gap-8 p-7 sm:p-10 lg:min-h-[520px] lg:p-12">
                 <div className="flex items-start justify-between gap-6">
                   <div>
-                    <p className="font-mono text-xs uppercase tracking-[0.22em] text-background/70">
+                    <p className="font-mono text-xs uppercase tracking-[0.22em] text-emerald-950/70">
                       0{activeIndex + 1} / 05
                     </p>
-                    <p className="mt-4 text-sm font-medium text-background/75">
+                    <p className="mt-4 text-sm font-medium text-emerald-950/75">
                       {activeProduct.category}
                     </p>
                     <h3 className="mt-2 max-w-[560px] text-balance font-serif text-5xl leading-[0.95] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
                       {activeProduct.name}
                     </h3>
                   </div>
-                  <span className="hidden rounded-full border border-background/30 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-background/75 sm:inline-flex">
+                  <span className="hidden rounded-full border border-emerald-950/25 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-950/75 sm:inline-flex">
                     Live system
                   </span>
                 </div>
 
                 <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
                   <div>
-                    <p className="max-w-sm text-pretty text-lg leading-7 text-background/85">
+                    <p className="max-w-sm text-pretty text-lg leading-7 text-emerald-950/85">
                       {activeProduct.tagline}
                     </p>
-                    <p className="mt-4 max-w-md text-sm leading-6 text-background/65">
+                    <p className="mt-4 max-w-md text-sm leading-6 text-emerald-950/65">
                       {activeProduct.overview}
                     </p>
                   </div>
-                  <div className="overflow-hidden rounded-2xl border border-background/20 bg-background/10 shadow-2xl">
+                  <div className="overflow-hidden rounded-2xl border border-emerald-950/20 bg-emerald-50/70 shadow-2xl">
                     <img
                       src={PRODUCT_IMAGES[activeProduct.slug]}
                       alt={`${activeProduct.name} product interface`}
