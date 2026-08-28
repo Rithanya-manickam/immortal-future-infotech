@@ -60,10 +60,16 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
         >
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-stretch">
             <article
-              className="relative overflow-hidden rounded-[32px] border border-foreground/10 bg-foreground text-background shadow-[0_24px_70px_-30px_rgba(0,0,0,0.5)]"
-              style={{ backgroundColor: activeProduct.accent }}
+              className="relative isolate overflow-hidden rounded-[32px] border border-foreground/10 bg-foreground text-background shadow-[0_24px_70px_-30px_rgba(0,0,0,0.5)]"
               aria-live="polite"
             >
+              <img
+                src={PRODUCT_IMAGES[activeProduct.slug]}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 size-full object-cover object-left-top opacity-55 transition-opacity duration-700"
+              />
+              <div className="absolute inset-0 -z-10 bg-foreground/75" aria-hidden="true" />
               <div className="flex min-h-[440px] flex-col justify-between gap-8 p-7 sm:p-10 lg:min-h-[520px] lg:p-12">
                 <div className="flex items-start justify-between gap-6">
                   <div>
@@ -117,18 +123,27 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                     onClick={() => goTo(index)}
                     className={`group min-w-[148px] shrink-0 border-b px-4 py-4 text-left transition-colors lg:min-w-0 lg:px-5 lg:py-5 ${isActive ? "border-foreground" : "border-foreground/15 hover:border-foreground/50"}`}
                   >
-                    <span className="flex items-center justify-between gap-3">
-                      <span
-                        className={`font-serif text-2xl tracking-[-0.04em] transition-opacity ${isActive ? "opacity-100" : "opacity-45 group-hover:opacity-75"}`}
-                      >
-                        {product.name}
+                    <span className="flex items-center gap-3">
+                      <img
+                        src={PRODUCT_IMAGES[product.slug]}
+                        alt={`${product.name} interface preview`}
+                        className={`size-14 shrink-0 rounded-lg border object-cover object-left-top grayscale transition duration-300 sm:size-16 ${isActive ? "border-foreground/40 grayscale-0 opacity-100" : "border-foreground/10 opacity-60 group-hover:grayscale-0 group-hover:opacity-90"}`}
+                      />
+                      <span className="min-w-0 flex-1">
+                        <span className="flex items-center justify-between gap-3">
+                          <span
+                            className={`font-serif text-2xl tracking-[-0.04em] transition-opacity ${isActive ? "opacity-100" : "opacity-45 group-hover:opacity-75"}`}
+                          >
+                            {product.name}
+                          </span>
+                          <span className="font-mono text-[10px] text-muted-foreground">
+                            0{index + 1}
+                          </span>
+                        </span>
+                        <span className="mt-2 block text-xs leading-5 text-muted-foreground">
+                          {product.short}
+                        </span>
                       </span>
-                      <span className="font-mono text-[10px] text-muted-foreground">
-                        0{index + 1}
-                      </span>
-                    </span>
-                    <span className="mt-2 block text-xs leading-5 text-muted-foreground">
-                      {product.short}
                     </span>
                   </button>
                 );
