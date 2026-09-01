@@ -71,20 +71,25 @@ export function HomeJourney() {
                     className={`group relative min-w-[148px] shrink-0 rounded-[24px] border px-3 pb-3 pt-3 text-left transition-all duration-300 md:min-w-0 md:flex-1 ${on ? "border-[var(--brand-glow)] bg-[var(--brand-glow)]/10 shadow-[0_10px_28px_-16px_var(--brand-glow)]" : "border-transparent bg-background/15 hover:border-[var(--brand-glow)]/50 hover:bg-[var(--brand-glow)]/5"}`}
                   >
                     <span
-                      className={`mx-auto flex size-11 items-center justify-center rounded-2xl border bg-background/35 transition-all duration-300 ${on ? "scale-105" : "group-hover:scale-105"}`}
+                      className={`mx-auto flex size-12 items-center justify-center rounded-full border transition-all duration-300 ${on ? "scale-110" : "group-hover:scale-105"}`}
                       style={{
+                        borderWidth: 1,
                         borderColor: on
                           ? "var(--brand-glow)"
-                          : "color-mix(in oklab, var(--brand-glow) 45%, transparent)",
+                          : "color-mix(in oklab, var(--brand-glow) 38%, transparent)",
                         background: on
-                          ? "color-mix(in oklab, var(--brand-glow) 18%, transparent)"
-                          : "color-mix(in oklab, var(--brand-glow) 6%, transparent)",
+                          ? "color-mix(in oklab, var(--brand-glow) 16%, transparent)"
+                          : "color-mix(in oklab, var(--brand-glow) 5%, transparent)",
                         boxShadow: on
-                          ? "0 0 0 6px color-mix(in oklab, var(--brand-glow) 14%, transparent)"
+                          ? "0 0 0 7px color-mix(in oklab, var(--brand-glow) 12%, transparent), 0 12px 30px -14px var(--brand-glow)"
                           : "none",
                       }}
                     >
-                      <s.icon className="size-5" aria-hidden="true" />
+                      <s.icon
+                        className={`size-5 transition-colors ${on ? "text-[var(--brand-glow)]" : "text-foreground/60"}`}
+                        strokeWidth={1.6}
+                        aria-hidden="true"
+                      />
                     </span>
                     <span
                       className={`mt-3 block min-w-[92px] text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${on ? "text-foreground" : "text-foreground/45"}`}
