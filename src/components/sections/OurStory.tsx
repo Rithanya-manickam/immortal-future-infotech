@@ -12,7 +12,7 @@ export function OurStory() {
     <section id="our-story" className="px-6 py-8 md:py-12" aria-labelledby="our-story-title">
       <div className="relative mx-auto min-h-[680px] max-w-[1200px] overflow-hidden rounded-[32px] border border-sky-200/70 bg-sky-50 shadow-[0_24px_60px_-30px_rgba(14,116,144,0.35)] md:min-h-[620px]">
         <img
-          src={storyImage.src}
+          src={storyImage}
           alt="Professionals collaborating across banking, technology, and business operations"
           className="absolute inset-0 size-full object-cover object-center"
         />

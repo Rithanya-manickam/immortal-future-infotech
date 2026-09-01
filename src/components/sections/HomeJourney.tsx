@@ -71,20 +71,25 @@ export function HomeJourney() {
                     className={`group relative min-w-[148px] shrink-0 rounded-[24px] border px-3 pb-3 pt-3 text-left transition-all duration-300 md:min-w-0 md:flex-1 ${on ? "border-[var(--brand-glow)] bg-[var(--brand-glow)]/10 shadow-[0_10px_28px_-16px_var(--brand-glow)]" : "border-transparent bg-background/15 hover:border-[var(--brand-glow)]/50 hover:bg-[var(--brand-glow)]/5"}`}
                   >
                     <span
-                      className={`mx-auto flex size-11 items-center justify-center rounded-2xl border bg-background/35 transition-all duration-300 ${on ? "scale-105" : "group-hover:scale-105"}`}
+                      className={`mx-auto flex size-12 items-center justify-center rounded-full border transition-all duration-300 ${on ? "scale-110" : "group-hover:scale-105"}`}
                       style={{
+                        borderWidth: 1,
                         borderColor: on
                           ? "var(--brand-glow)"
-                          : "color-mix(in oklab, var(--brand-glow) 45%, transparent)",
+                          : "color-mix(in oklab, var(--brand-glow) 38%, transparent)",
                         background: on
-                          ? "color-mix(in oklab, var(--brand-glow) 18%, transparent)"
-                          : "color-mix(in oklab, var(--brand-glow) 6%, transparent)",
+                          ? "color-mix(in oklab, var(--brand-glow) 16%, transparent)"
+                          : "color-mix(in oklab, var(--brand-glow) 5%, transparent)",
                         boxShadow: on
-                          ? "0 0 0 6px color-mix(in oklab, var(--brand-glow) 14%, transparent)"
+                          ? "0 0 0 7px color-mix(in oklab, var(--brand-glow) 12%, transparent), 0 12px 30px -14px var(--brand-glow)"
                           : "none",
                       }}
                     >
-                      <s.icon className="size-5" aria-hidden="true" />
+                      <s.icon
+                        className={`size-5 transition-colors ${on ? "text-[var(--brand-glow)]" : "text-foreground/60"}`}
+                        strokeWidth={1.6}
+                        aria-hidden="true"
+                      />
                     </span>
                     <span
                       className={`mt-3 block min-w-[92px] text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${on ? "text-foreground" : "text-foreground/45"}`}
@@ -99,30 +104,47 @@ export function HomeJourney() {
 
           <motion.article
             key={STEPS[active].title}
-            initial={{ opacity: 0, y: 16, rotate: -0.6 }}
-            animate={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="relative isolate mx-auto w-full max-w-[720px] overflow-hidden rounded-[28px] border border-border/15 bg-[var(--glass-bg)] p-7 shadow-[inset_12px_12px_28px_rgba(255,255,255,0.08),inset_-12px_-12px_28px_rgba(0,0,0,0.08),0_22px_50px_-32px_var(--brand-glow)] backdrop-blur-xl"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+            className="relative isolate mx-auto flex w-full max-w-[760px] gap-5 overflow-hidden rounded-[28px] border p-7 backdrop-blur-xl"
+            style={{
+              borderColor: "color-mix(in oklab, var(--brand-glow) 32%, transparent)",
+              background:
+                "linear-gradient(150deg, color-mix(in oklab, var(--brand-glow) 10%, var(--card)), var(--card))",
+              boxShadow:
+                "0 34px 80px -56px color-mix(in oklab, var(--brand-glow) 90%, transparent), inset 0 1px 0 color-mix(in oklab, var(--brand-glow) 18%, transparent)",
+            }}
           >
             <div
-              className="pointer-events-none absolute inset-0 -z-10 opacity-70"
+              className="pointer-events-none absolute -right-16 -top-16 -z-10 size-52 rounded-full blur-3xl"
+              style={{ background: "color-mix(in oklab, var(--brand-glow) 22%, transparent)" }}
+              aria-hidden="true"
+            />
+            <span
+              className="mt-1 hidden size-12 shrink-0 items-center justify-center rounded-2xl border sm:flex"
               style={{
-                background:
-                  "radial-gradient(circle at 85% 15%, color-mix(in oklab, var(--brand-glow) 24%, transparent), transparent 34%), linear-gradient(135deg, color-mix(in oklab, var(--brand-glow) 8%, transparent), transparent 58%)",
+                borderColor: "color-mix(in oklab, var(--brand-glow) 45%, transparent)",
+                background: "color-mix(in oklab, var(--brand-glow) 12%, transparent)",
               }}
               aria-hidden="true"
-            />
-            <div
-              className="pointer-events-none absolute -right-14 -top-14 -z-10 size-40 rounded-full border border-[var(--brand-glow)]/20"
-              aria-hidden="true"
-            />
-            <div className="text-[10px] uppercase tracking-[0.3em] text-[var(--brand-glow)]">
-              {STEPS[active].date}
+            >
+              {(() => {
+                const Icon = STEPS[active].icon;
+                return <Icon className="size-5 text-[var(--brand-glow)]" strokeWidth={1.6} />;
+              })()}
+            </span>
+            <div className="min-w-0">
+              <div className="text-[10px] font-medium uppercase tracking-[0.32em] text-[var(--brand-glow)]">
+                {STEPS[active].date}
+              </div>
+              <h3 className="mt-2 text-[22px] font-semibold tracking-tight text-foreground">
+                {STEPS[active].title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/75">
+                {STEPS[active].body}
+              </p>
             </div>
-            <h3 className="mt-2 text-xl font-semibold tracking-tight text-foreground">
-              {STEPS[active].title}
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-foreground/65">{STEPS[active].body}</p>
           </motion.article>
         </div>
       </div>
