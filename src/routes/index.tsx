@@ -3,6 +3,7 @@ import { ClientOnly } from "@/components/ClientOnly";
 import { PageLoader } from "@/components/PageLoader";
 import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
+import { OurStory } from "@/components/sections/OurStory";
 import { ProductExhibit } from "@/components/sections/ProductExhibit";
 import { ExpertiseNodes } from "@/components/sections/ExpertiseNodes";
 import { HomeJourney } from "@/components/sections/HomeJourney";
@@ -39,6 +40,7 @@ function Index() {
         <PageLoader />
       </ClientOnly>
       <Hero />
+      <OurStory />
       <TrustStrip />
       <HomeJourney />
       <ProductExhibit />
