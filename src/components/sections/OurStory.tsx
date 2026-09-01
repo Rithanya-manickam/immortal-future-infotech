@@ -9,29 +9,26 @@ const STORY_POINTS = [
 
 export function OurStory() {
   return (
-    <section id="our-story" className="px-6 py-10 md:py-14" aria-labelledby="our-story-title">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-        <div className="relative overflow-hidden rounded-[28px] border border-sky-200/70 bg-sky-50/70 p-2 shadow-[inset_8px_8px_20px_rgba(255,255,255,0.8),inset_-8px_-8px_20px_rgba(14,116,144,0.08),0_22px_55px_-30px_rgba(14,116,144,0.35)]">
-          <div
-            className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(135deg,rgba(255,255,255,0.2),transparent_45%,rgba(14,165,233,0.12))]"
-            aria-hidden="true"
-          />
-          <img
-            src={storyImage.src}
-            alt="Professionals collaborating across banking, technology, and business operations"
-            className="aspect-[4/3] w-full rounded-[22px] object-cover object-center"
-          />
-        </div>
-
-        <div className="flex flex-col gap-5">
+    <section id="our-story" className="px-6 py-8 md:py-12" aria-labelledby="our-story-title">
+      <div className="relative mx-auto min-h-[680px] max-w-[1200px] overflow-hidden rounded-[32px] border border-sky-200/70 bg-sky-50 shadow-[0_24px_60px_-30px_rgba(14,116,144,0.35)] md:min-h-[620px]">
+        <img
+          src={storyImage.src}
+          alt="Professionals collaborating across banking, technology, and business operations"
+          className="absolute inset-0 size-full object-cover object-center"
+        />
+        <div
+          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(239,248,251,0.98)_0%,rgba(239,248,251,0.94)_27%,rgba(239,248,251,0.48)_49%,rgba(239,248,251,0.04)_76%)]"
+          aria-hidden="true"
+        />
+        <div className="relative flex min-h-[680px] max-w-2xl flex-col justify-center gap-5 p-7 md:min-h-[620px] md:p-14 lg:p-16">
           <p className="font-mono text-xs uppercase tracking-[0.24em] text-primary">Our Story</p>
           <h2
             id="our-story-title"
-            className="max-w-xl font-serif text-4xl leading-[0.98] tracking-[-0.055em] text-balance md:text-5xl"
+            className="max-w-xl font-serif text-4xl leading-[0.98] tracking-[-0.055em] text-balance text-foreground md:text-5xl"
           >
             Built from the Ground Up for Indian Banking
           </h2>
-          <div className="flex flex-col gap-4 text-sm leading-7 text-muted-foreground md:text-base">
+          <div className="flex max-w-xl flex-col gap-4 text-sm leading-7 text-foreground/75 md:text-base">
             <p>
               When IFIT was founded in Tiruchirapalli, Tamil Nadu in May 2024, Indian banks were
               still running critical processes manually — end-of-day reconciliations, loan
@@ -48,7 +45,7 @@ export function OurStory() {
               cutting onboarding time by 3x.
             </p>
           </div>
-          <div className="grid gap-3 border-t border-border/60 pt-5 sm:grid-cols-3">
+          <div className="grid max-w-xl gap-3 border-t border-sky-900/15 pt-5 sm:grid-cols-3">
             {STORY_POINTS.map((point) => (
               <div
                 key={point.text}
@@ -60,10 +57,10 @@ export function OurStory() {
             ))}
           </div>
           <a
-            href="#journey"
-            className="inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary transition-colors hover:text-foreground"
+            href="/about"
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-primary px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-transform hover:-translate-y-0.5"
           >
-            Follow the journey <ArrowUpRight className="size-4" aria-hidden="true" />
+            Read our full story <ArrowUpRight className="size-4" aria-hidden="true" />
           </a>
         </div>
       </div>
