@@ -14,7 +14,11 @@ const CASES = [
     title: "EOD Automation",
     client: "Cooperative bank, Tamil Nadu",
     body: "Twelve manual end-of-day steps replaced by one automated sequence running on the bank's existing Finacle setup.",
-    metrics: [["80%", "Manual effort ↓"], ["4 hr", "Saved nightly"], ["0", "Recon errors"]],
+    metrics: [
+      ["80%", "Manual effort ↓"],
+      ["4 hr", "Saved nightly"],
+      ["0", "Recon errors"],
+    ],
     image: imgOps,
     accent: "var(--p-iis)",
   },
@@ -24,7 +28,11 @@ const CASES = [
     title: "ASKBOT Rollout",
     client: "Private bank · 200+ staff",
     body: "An assistant trained on internal banking documentation, deployed across branches with role-based access.",
-    metrics: [["3×", "Faster onboarding"], ["70%", "Faster answers"], ["200+", "Staff served"]],
+    metrics: [
+      ["3×", "Faster onboarding"],
+      ["70%", "Faster answers"],
+      ["200+", "Staff served"],
+    ],
     image: imgAi,
     accent: "var(--p-askbot)",
   },
@@ -34,7 +42,11 @@ const CASES = [
     title: "Core Banking on AWS",
     client: "Regional private bank",
     body: "Ageing on-premise infrastructure migrated to AWS with multi-AZ high availability and cost guardrails.",
-    metrics: [["40%", "Infra cost ↓"], ["99.9%", "Uptime"], ["3×", "Performance"]],
+    metrics: [
+      ["40%", "Infra cost ↓"],
+      ["99.9%", "Uptime"],
+      ["3×", "Performance"],
+    ],
     image: imgCloud,
     accent: "var(--brand-teal)",
   },
@@ -86,7 +98,10 @@ function Story({ c, i }: { c: (typeof CASES)[number]; i: number }) {
           transition={{ duration: 0.4 }}
         >
           {c.metrics.map(([k, v]) => (
-            <div key={v} className="rounded-xl border border-border/15 bg-[var(--glass-bg)] p-2.5 backdrop-blur-xl">
+            <div
+              key={v}
+              className="rounded-xl border border-border/15 bg-[var(--glass-bg)] p-2.5 backdrop-blur-xl"
+            >
               <div className="text-base font-semibold text-foreground">{k}</div>
               <div className="text-[10px] leading-tight text-foreground/55">{v}</div>
             </div>
@@ -105,7 +120,9 @@ function Story({ c, i }: { c: (typeof CASES)[number]; i: number }) {
           {c.title}
         </h3>
         <div className="mt-1 text-xs text-foreground/45">{c.client}</div>
-        <p className="mt-4 max-w-lg text-sm leading-relaxed text-foreground/65 lg:inline-block">{c.body}</p>
+        <p className="mt-4 max-w-lg text-sm leading-relaxed text-foreground/65 lg:inline-block">
+          {c.body}
+        </p>
         <div className="mt-6">
           <Link to="/portfolio" className="btn-secondary text-xs">
             Read the case study <ArrowUpRight className="h-3.5 w-3.5" />
@@ -118,12 +135,12 @@ function Story({ c, i }: { c: (typeof CASES)[number]; i: number }) {
 
 export function FeaturedWork() {
   return (
-    <section className="px-6 py-20 md:py-24">
+    <section className="px-6 py-14 md:py-18">
       <div className="mx-auto max-w-[1200px]">
         <SectionHead eyebrow="Featured work" title="Three deployments." accent="Measured outcomes.">
           Live engagements — the challenge, what we built and what changed.
         </SectionHead>
-        <div className="mt-14 space-y-20 md:space-y-28">
+        <div className="mt-10 space-y-14 md:space-y-20">
           {CASES.map((c, i) => (
             <Story key={c.no} c={c} i={i} />
           ))}

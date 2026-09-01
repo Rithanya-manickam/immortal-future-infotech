@@ -70,7 +70,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
   return (
     <section
       id="products"
-      className="relative px-6 py-16 md:py-24"
+      className="relative px-6 py-12 md:py-16"
       aria-label="Immortal product platforms"
     >
       <div className="mx-auto max-w-[1200px]">
