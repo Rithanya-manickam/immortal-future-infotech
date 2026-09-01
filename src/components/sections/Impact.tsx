@@ -10,7 +10,7 @@ const STATS = [
 
 export function Impact() {
   return (
-    <section aria-label="Impact" className="px-6 py-12">
+    <section aria-label="Impact" className="px-6 py-8">
       <div className="mx-auto grid max-w-[1200px] gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {STATS.map((s, i) => (
           <motion.div
@@ -27,7 +27,9 @@ export function Impact() {
             >
               {s.k}
             </div>
-            <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-foreground/50">{s.v}</div>
+            <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-foreground/50">
+              {s.v}
+            </div>
           </motion.div>
         ))}
       </div>

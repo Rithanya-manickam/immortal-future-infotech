@@ -3,6 +3,10 @@ import shotHrm from "@/assets/shot-hrm.png.asset.json";
 import shotCampus from "@/assets/shot-campus.png.asset.json";
 import shotWorktrack from "@/assets/shot-worktrack.png.asset.json";
 import holoAskbot from "@/assets/holo-askbot.jpg";
+import holoCampus from "@/assets/holo-campus.jpg";
+import holoHrm from "@/assets/holo-hrm.jpg";
+import holoIis from "@/assets/holo-iis.jpg";
+import holoWorktrack from "@/assets/holo-worktrack.jpg";
 
 export type ExhibitLayout = {
   image: string;
@@ -23,11 +27,11 @@ export type ExhibitLayout = {
 };
 
 export const PRODUCT_IMAGES: Record<string, string> = {
-  iis: shotIis.url,
+  iis: holoIis,
   askbot: holoAskbot,
-  hrm: shotHrm.url,
-  campus: shotCampus.url,
-  worktrack: shotWorktrack.url,
+  hrm: holoHrm,
+  campus: holoCampus,
+  worktrack: holoWorktrack,
 };
 
 /** Each product gets its own shape, position and motion — never the same card twice. */

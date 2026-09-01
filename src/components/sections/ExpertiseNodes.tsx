@@ -64,7 +64,7 @@ export function ExpertiseNodes() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <section id="expertise" className="px-6 py-20 md:py-24">
+    <section id="expertise" className="px-6 py-14 md:py-18">
       <div className="mx-auto max-w-[1200px]">
         <SectionHead eyebrow="Expertise" title="Six pillars." accent="One delivery standard.">
           Hover a node to expand what sits underneath it.
@@ -102,7 +102,9 @@ export function ExpertiseNodes() {
                   }}
                 />
                 <Icon className="h-5 w-5" style={{ color: n.accent }} />
-                <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">{n.title}</h3>
+                <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
+                  {n.title}
+                </h3>
                 <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/60">{n.body}</p>
 
                 <div
@@ -114,7 +116,10 @@ export function ExpertiseNodes() {
                       <li
                         key={d}
                         className="rounded-full px-2.5 py-1 text-[11px]"
-                        style={{ color: n.accent, background: `color-mix(in oklab, ${n.accent} 12%, transparent)` }}
+                        style={{
+                          color: n.accent,
+                          background: `color-mix(in oklab, ${n.accent} 12%, transparent)`,
+                        }}
                       >
                         {d}
                       </li>
