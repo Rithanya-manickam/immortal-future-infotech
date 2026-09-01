@@ -52,17 +52,13 @@ export function HomeJourney() {
           Select a milestone to read the story.
         </SectionHead>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-center">
+        <div className="mt-8 grid gap-6 lg:grid-cols-1">
           <div className="relative">
             <span
               aria-hidden
-              className="absolute left-0 right-0 top-[27px] h-px"
-              style={{
-                background: "linear-gradient(90deg, transparent, var(--brand-glow), transparent)",
-                opacity: 0.4,
-              }}
+              className="absolute left-4 right-4 top-1/2 h-px -translate-y-1/2 bg-[var(--brand-glow)]/30"
             />
-            <div className="flex gap-3 overflow-x-auto pb-3">
+            <div className="relative flex gap-0 overflow-x-auto rounded-[26px] border border-[var(--brand-glow)]/15 bg-[linear-gradient(90deg,rgba(15,118,110,0.08),rgba(255,255,255,0.5),rgba(15,118,110,0.08))] shadow-[inset_8px_8px_20px_rgba(255,255,255,0.55),inset_-8px_-8px_20px_rgba(15,118,110,0.06)] backdrop-blur-sm pb-2">
               {STEPS.map((s, i) => {
                 const on = i === active;
                 return (
@@ -72,10 +68,10 @@ export function HomeJourney() {
                     onMouseEnter={() => setActive(i)}
                     aria-pressed={on}
                     aria-label={`Show milestone: ${s.title}`}
-                    className={`group relative shrink-0 rounded-2xl border px-3 pb-2 pt-3 text-left transition-all duration-300 ${on ? "border-[var(--brand-glow)] bg-foreground/8 shadow-[0_8px_24px_-16px_var(--brand-glow)]" : "border-border/10 bg-background/20 hover:border-[var(--brand-glow)]/50"}`}
+                    className={`group relative min-w-[148px] shrink-0 rounded-[24px] border px-3 pb-3 pt-3 text-left transition-all duration-300 md:min-w-0 md:flex-1 ${on ? "border-[var(--brand-glow)] bg-[var(--brand-glow)]/10 shadow-[0_10px_28px_-16px_var(--brand-glow)]" : "border-transparent bg-background/15 hover:border-[var(--brand-glow)]/50 hover:bg-[var(--brand-glow)]/5"}`}
                   >
                     <span
-                      className="mx-auto flex size-11 items-center justify-center rounded-xl border transition-all duration-300"
+                      className={`mx-auto flex size-11 items-center justify-center rounded-2xl border bg-background/35 transition-all duration-300 ${on ? "scale-105" : "group-hover:scale-105"}`}
                       style={{
                         borderColor: on
                           ? "var(--brand-glow)"
@@ -106,7 +102,7 @@ export function HomeJourney() {
             initial={{ opacity: 0, y: 16, rotate: -0.6 }}
             animate={{ opacity: 1, y: 0, rotate: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="relative isolate min-w-0 overflow-hidden rounded-[28px] border border-border/15 bg-[var(--glass-bg)] p-7 shadow-[inset_12px_12px_28px_rgba(255,255,255,0.08),inset_-12px_-12px_28px_rgba(0,0,0,0.08),0_22px_50px_-32px_var(--brand-glow)] backdrop-blur-xl"
+            className="relative isolate mx-auto w-full max-w-[720px] overflow-hidden rounded-[28px] border border-border/15 bg-[var(--glass-bg)] p-7 shadow-[inset_12px_12px_28px_rgba(255,255,255,0.08),inset_-12px_-12px_28px_rgba(0,0,0,0.08),0_22px_50px_-32px_var(--brand-glow)] backdrop-blur-xl"
           >
             <div
               className="pointer-events-none absolute inset-0 -z-10 opacity-70"
