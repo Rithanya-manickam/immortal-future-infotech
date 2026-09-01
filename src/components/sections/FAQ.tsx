@@ -42,13 +42,13 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative px-6 py-14 md:py-16">
+    <section id="faq" className="relative px-6 py-10 md:py-12">
       <div className="mx-auto max-w-[1100px]">
         <SectionHead eyebrow="FAQ" title="Questions," accent="answered.">
           The things enterprises ask us most before an engagement starts.
         </SectionHead>
 
-        <div className="mt-8 divide-y divide-border/12 overflow-hidden rounded-[24px] border border-border/12 bg-[var(--glass-bg)] backdrop-blur-xl">
+        <div className="mt-6 divide-y divide-border/12 overflow-hidden rounded-[24px] border border-border/12 bg-[var(--glass-bg)] backdrop-blur-xl">
           {FAQS.map((f, i) => {
             const on = open === i;
             return (

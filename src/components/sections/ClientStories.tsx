@@ -63,7 +63,7 @@ export function ClientStories() {
   const s = STORIES[i];
 
   return (
-    <section id="client-stories" className="px-6 py-14 md:py-16">
+    <section id="client-stories" className="px-6 py-10 md:py-12">
       <div className="mx-auto max-w-[1200px]">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHead eyebrow="Client stories" title="Real engagements." accent="Real outcomes.">
