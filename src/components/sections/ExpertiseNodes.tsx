@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { BotMessageSquare, CloudCog, DatabaseZap, Landmark, ShieldCheck, LayoutGrid } from "lucide-react";
+import {
+  ArrowUpRight,
+  BotMessageSquare,
+  CloudCog,
+  DatabaseZap,
+  Landmark,
+  ShieldCheck,
+  LayoutGrid,
+} from "lucide-react";
 import { SectionHead } from "./SectionHead";
 
 const PILLARS = [
@@ -52,7 +60,7 @@ export function ExpertiseNodes() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <section id="expertise" className="relative isolate overflow-hidden px-6 py-14 md:py-16">
+    <section id="expertise" className="relative isolate overflow-hidden px-6 py-10 md:py-12">
       {/* soft corporate background: gradient wash + fine grid + glow orbs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div
@@ -86,7 +94,7 @@ export function ExpertiseNodes() {
           Hover a pillar to expand what sits underneath it.
         </SectionHead>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PILLARS.map(({ icon: Icon, ...n }, i) => {
             const on = open === n.title;
             return (
@@ -101,13 +109,13 @@ export function ExpertiseNodes() {
                 onFocus={() => setOpen(n.title)}
                 onBlur={() => setOpen(null)}
                 tabIndex={0}
-                className="group relative flex min-w-0 flex-col overflow-hidden rounded-[26px] border p-6 transition-transform duration-500 hover:-translate-y-1.5"
+                className="group relative flex min-h-[230px] min-w-0 flex-col overflow-hidden rounded-[26px] border bg-slate-950/90 p-5 text-slate-100 transition-all duration-500 hover:-translate-y-1.5"
                 style={{
                   borderColor: `color-mix(in oklab, ${n.accent} ${on ? 45 : 14}%, transparent)`,
-                  background: `linear-gradient(160deg, color-mix(in oklab, ${n.accent} ${on ? 10 : 5}%, var(--card)), var(--card))`,
+                  background: `linear-gradient(150deg, color-mix(in oklab, ${n.accent} ${on ? 18 : 10}%, oklch(0.17 0.03 190)), oklch(0.11 0.025 210))`,
                   boxShadow: on
-                    ? `0 30px 70px -46px color-mix(in oklab, ${n.accent} 85%, transparent)`
-                    : "0 18px 46px -40px rgba(0,0,0,.55)",
+                    ? `0 28px 55px -28px color-mix(in oklab, ${n.accent} 90%, transparent), inset 0 1px 0 color-mix(in oklab, ${n.accent} 36%, transparent)`
+                    : `0 18px 42px -28px rgba(0,0,0,.7), inset 0 1px 0 color-mix(in oklab, ${n.accent} 18%, transparent)`,
                 }}
               >
                 <span
@@ -132,10 +140,10 @@ export function ExpertiseNodes() {
                   <Icon className="size-5" strokeWidth={1.6} style={{ color: n.accent }} />
                 </span>
 
-                <h3 className="mt-5 text-[17px] font-semibold tracking-tight text-foreground">
+                <h3 className="mt-5 text-[17px] font-semibold tracking-tight text-slate-50">
                   {n.title}
                 </h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-foreground/70">{n.body}</p>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-slate-300">{n.body}</p>
 
                 <div
                   className="grid transition-all duration-500 ease-out"
@@ -156,6 +164,10 @@ export function ExpertiseNodes() {
                     ))}
                   </ul>
                 </div>
+                <ArrowUpRight
+                  className="mt-auto size-4 self-end text-slate-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  aria-hidden="true"
+                />
               </motion.div>
             );
           })}
