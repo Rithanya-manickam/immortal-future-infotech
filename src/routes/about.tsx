@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Compass, Gauge, Layers, Target } from "lucide-react";
 import {
   HolographicDashboard,
-  InteractiveWhyCard,
-  JourneyNode,
+  JourneyRail,
+  ValuesPanels,
+  WhyCarousel,
 } from "@/components/sections/AboutInteractive";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { CTABand } from "@/components/sections/CTABand";
@@ -128,11 +129,7 @@ function About() {
           <SectionHead eyebrow="Differentiators" title="Why" accent="IFIT?" center>
             Four reasons banks and enterprises keep working with us.
           </SectionHead>
-          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY.map((item, i) => (
-              <InteractiveWhyCard key={item.title} {...item} index={i} />
-            ))}
-          </div>
+          <WhyCarousel items={WHY} />
           <HolographicDashboard />
         </div>
       </section>
@@ -146,14 +143,7 @@ function About() {
         <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <div className="min-w-0">
             <SectionHead eyebrow="Our Values" title="What we hold" accent="constant." />
-            <div className="mt-6 divide-y divide-border/10 border-y border-border/10">
-              {VALUES.map(([t, b]) => (
-                <div key={t} className="py-4">
-                  <div className="text-sm font-semibold text-foreground">{t}</div>
-                  <div className="mt-1 text-xs text-foreground/60">{b}</div>
-                </div>
-              ))}
-            </div>
+            <ValuesPanels values={VALUES} />
             <div className="glass-panel mt-6 overflow-hidden rounded-2xl">
               <img
                 src={opsImg}
@@ -171,27 +161,7 @@ function About() {
 
           <div className="min-w-0">
             <SectionHead eyebrow="Our Journey" title="A year of" accent="shipping." />
-            <ol className="relative mt-7 space-y-4 pl-1 before:absolute before:bottom-5 before:left-5 before:top-5 before:w-px before:bg-gradient-to-b before:from-emerald-400 before:via-emerald-400/40 before:to-transparent">
-              {TIMELINE.map(([date, title, body], i) => (
-                <motion.li
-                  key={title}
-                  initial={{ opacity: 0, x: 12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="relative flex items-start gap-4 rounded-2xl border border-emerald-900/10 bg-white/45 p-3 backdrop-blur-md transition-transform hover:translate-x-1"
-                >
-                  <JourneyNode active={i === TIMELINE.length - 1}>{i + 1}</JourneyNode>
-                  <div className="min-w-0">
-                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-emerald-700">
-                      {date}
-                    </div>
-                    <div className="mt-1 text-sm font-semibold text-slate-950">{title}</div>
-                    <div className="mt-0.5 text-xs leading-5 text-slate-600">{body}</div>
-                  </div>
-                </motion.li>
-              ))}
-            </ol>
+            <JourneyRail timeline={TIMELINE} />
             <Link to="/portfolio" className="btn-secondary mt-4 text-xs">
               See the work <ArrowRight className="h-3.5 w-3.5" />
             </Link>
