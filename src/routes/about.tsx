@@ -1,6 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Compass, Gauge, Layers, Target } from "lucide-react";
+import {
+  HolographicDashboard,
+  InteractiveWhyCard,
+  JourneyNode,
+} from "@/components/sections/AboutInteractive";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { CTABand } from "@/components/sections/CTABand";
 import { DirectionCards } from "@/components/sections/DirectionCards";
@@ -123,29 +128,21 @@ function About() {
           <SectionHead eyebrow="Differentiators" title="Why" accent="IFIT?" center>
             Four reasons banks and enterprises keep working with us.
           </SectionHead>
-          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY.map(({ icon: Icon, title, body }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.55, delay: i * 0.06 }}
-                className="glass-panel p-6 transition-transform hover:-translate-y-1"
-              >
-                <span className="grid h-10 w-10 place-items-center rounded-xl border border-border/15 bg-foreground/[0.04]">
-                  <Icon className="h-4 w-4 text-[var(--brand-glow)]" />
-                </span>
-                <div className="mt-4 text-base font-semibold text-foreground">{title}</div>
-                <p className="mt-2 text-xs leading-relaxed text-foreground/60">{body}</p>
-              </motion.div>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {WHY.map((item, i) => (
+              <InteractiveWhyCard key={item.title} {...item} index={i} />
             ))}
           </div>
+          <HolographicDashboard />
         </div>
       </section>
 
       {/* Values + Journey */}
-      <section className="px-6 py-12 md:py-16">
+      <section className="relative isolate overflow-hidden px-6 py-10 md:py-14">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_75%_25%,rgba(52,211,153,.12),transparent_35%),linear-gradient(rgba(16,185,129,.06)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,.06)_1px,transparent_1px)] bg-[size:auto,42px_42px,42px_42px]"
+          aria-hidden="true"
+        />
         <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <div className="min-w-0">
             <SectionHead eyebrow="Our Values" title="What we hold" accent="constant." />
@@ -167,11 +164,14 @@ function About() {
                 className="h-44 w-full object-cover"
               />
             </div>
+            <div className="mt-5">
+              <HolographicDashboard />
+            </div>
           </div>
 
           <div className="min-w-0">
             <SectionHead eyebrow="Our Journey" title="A year of" accent="shipping." />
-            <ol className="mt-6 relative border-l border-border/15 pl-6">
+            <ol className="relative mt-7 space-y-4 pl-1 before:absolute before:bottom-5 before:left-5 before:top-5 before:w-px before:bg-gradient-to-b before:from-emerald-400 before:via-emerald-400/40 before:to-transparent">
               {TIMELINE.map(([date, title, body], i) => (
                 <motion.li
                   key={title}
@@ -179,14 +179,16 @@ function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="relative pb-6 last:pb-0"
+                  className="relative flex items-start gap-4 rounded-2xl border border-emerald-900/10 bg-white/45 p-3 backdrop-blur-md transition-transform hover:translate-x-1"
                 >
-                  <span className="absolute -left-[1.72rem] top-1.5 h-2 w-2 rounded-full bg-[var(--brand-glow)] shadow-[0_0_10px_var(--brand-glow)]" />
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--brand-glow)]">
-                    {date}
+                  <JourneyNode active={i === TIMELINE.length - 1}>{i + 1}</JourneyNode>
+                  <div className="min-w-0">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-emerald-700">
+                      {date}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-slate-950">{title}</div>
+                    <div className="mt-0.5 text-xs leading-5 text-slate-600">{body}</div>
                   </div>
-                  <div className="mt-1 text-sm font-semibold text-foreground">{title}</div>
-                  <div className="mt-0.5 text-xs text-foreground/60">{body}</div>
                 </motion.li>
               ))}
             </ol>
