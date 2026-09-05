@@ -1,18 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Compass, Gauge, Layers, Target } from "lucide-react";
-import {
-  HolographicDashboard,
-  JourneyRail,
-  ValuesPanels,
-  WhyCarousel,
-} from "@/components/sections/AboutInteractive";
+import { JourneyRail, ValuesPanels, WhyCarousel } from "@/components/sections/AboutInteractive";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { CTABand } from "@/components/sections/CTABand";
 import { DirectionCards } from "@/components/sections/DirectionCards";
 import { SectionHead } from "@/components/sections/SectionHead";
 import teamImg from "@/assets/img-team.jpg";
-import opsImg from "@/assets/img-ops.jpg";
 
 const WHY = [
   {
@@ -130,7 +124,6 @@ function About() {
             Four reasons banks and enterprises keep working with us.
           </SectionHead>
           <WhyCarousel items={WHY} />
-          <HolographicDashboard />
         </div>
       </section>
 
@@ -144,19 +137,6 @@ function About() {
           <div className="min-w-0">
             <SectionHead eyebrow="Our Values" title="What we hold" accent="constant." />
             <ValuesPanels values={VALUES} />
-            <div className="glass-panel mt-6 overflow-hidden rounded-2xl">
-              <img
-                src={opsImg}
-                alt="IFIT operations and delivery workspace in Tiruchirapalli"
-                loading="lazy"
-                width={1280}
-                height={860}
-                className="h-44 w-full object-cover"
-              />
-            </div>
-            <div className="mt-5">
-              <HolographicDashboard />
-            </div>
           </div>
 
           <div className="min-w-0">

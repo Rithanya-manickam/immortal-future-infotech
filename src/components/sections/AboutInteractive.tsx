@@ -2,14 +2,12 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowUpRight,
-  BarChart3,
   Boxes,
   Building2,
   ChevronLeft,
   ChevronRight,
   Cpu,
   LineChart,
-  Sparkles,
 } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { useRef, useState } from "react";
@@ -81,43 +79,79 @@ export function InteractiveWhyCard({ icon: Icon, title, body, index }: WhyCardPr
 
 export function WhyCarousel({ items }: { items: WhyCardProps[] }) {
   const [active, setActive] = useState(0);
+  const [dragStart, setDragStart] = useState<number | null>(null);
   const reduceMotion = useReducedMotion();
-  const current = items[active];
-  const Icon = current.icon;
 
   function move(direction: 1 | -1) {
     setActive((value) => (value + direction + items.length) % items.length);
   }
 
+  function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "ArrowLeft") move(-1);
+    if (event.key === "ArrowRight") move(1);
+  }
+
   return (
-    <div className="mt-7" aria-label="Why choose IFIT">
-      <div className="relative overflow-hidden rounded-[30px] border border-emerald-900/10 bg-white/45 p-4 shadow-[0_24px_70px_-48px_rgba(6,95,70,0.7)] backdrop-blur-xl sm:p-6">
+    <div
+      className="mt-7"
+      aria-label="Why choose IFIT"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      onPointerDown={(event) => setDragStart(event.clientX)}
+      onPointerUp={(event) => {
+        if (dragStart !== null && Math.abs(event.clientX - dragStart) > 45) {
+          move(event.clientX < dragStart ? 1 : -1);
+        }
+        setDragStart(null);
+      }}
+      onPointerCancel={() => setDragStart(null)}
+    >
+      <div className="relative overflow-hidden rounded-[30px] border border-emerald-900/10 bg-white/30 px-2 py-7 shadow-[0_24px_70px_-48px_rgba(6,95,70,0.7)] backdrop-blur-xl sm:px-10">
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_15%,rgba(45,212,191,.18),transparent_30%),linear-gradient(135deg,rgba(255,255,255,.6),transparent)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(45,212,191,.2),transparent_32%),linear-gradient(135deg,rgba(255,255,255,.4),transparent)]"
           aria-hidden="true"
         />
-        <div className="relative grid items-center gap-6 md:grid-cols-[0.8fr_1.2fr]">
-          <div className="flex items-center gap-4 md:flex-col md:items-start">
-            <span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-emerald-400/30 bg-emerald-50 text-emerald-700 shadow-[0_10px_30px_-18px_rgba(5,150,105,.8)]">
-              <Icon className="size-7" aria-hidden="true" />
-            </span>
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-emerald-700">
-                0{active + 1} / 0{items.length}
-              </p>
-              <h3 className="mt-2 text-xl font-semibold text-slate-950">{current.title}</h3>
-            </div>
-          </div>
-          <motion.p
-            key={current.title}
-            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-base leading-7 text-slate-600 md:text-lg"
-          >
-            {current.body}
-          </motion.p>
+        <div className="relative flex min-h-[320px] items-center justify-center [perspective:1200px]">
+          {items.map((item, index) => {
+            const offset = (index - active + items.length) % items.length;
+            const signedOffset = offset > items.length / 2 ? offset - items.length : offset;
+            const Icon = item.icon;
+            const visible = Math.abs(signedOffset) <= 2;
+            return (
+              <motion.article
+                key={item.title}
+                initial={false}
+                animate={{
+                  x: `${signedOffset * 76}%`,
+                  scale: signedOffset === 0 ? 1 : 0.78,
+                  rotateY: signedOffset * -7,
+                  opacity: visible ? (signedOffset === 0 ? 1 : 0.72) : 0,
+                  zIndex: 10 - Math.abs(signedOffset),
+                }}
+                transition={{ duration: reduceMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute w-[76%] max-w-[290px] rounded-[26px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,.8),rgba(207,250,238,.55))] p-5 text-center shadow-[0_24px_60px_-28px_rgba(6,95,70,.55)] backdrop-blur-xl sm:w-[38%]"
+                aria-hidden={signedOffset !== 0}
+              >
+                <span
+                  className={`mx-auto grid size-14 place-items-center rounded-full border ${signedOffset === 0 ? "border-emerald-300 bg-emerald-50 text-emerald-700 shadow-[0_0_28px_rgba(45,212,191,.45)]" : "border-emerald-900/10 bg-white/60 text-emerald-700/75"}`}
+                >
+                  <Icon className="size-7" aria-hidden="true" />
+                </span>
+                <h3 className="mt-5 text-base font-semibold text-slate-950">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{item.body}</p>
+              </motion.article>
+            );
+          })}
         </div>
-        <div className="relative mt-6 flex items-center justify-between border-t border-emerald-900/10 pt-4">
+        <div className="relative mt-5 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={() => move(-1)}
+            aria-label="Previous reason"
+            className="grid size-10 place-items-center rounded-full border border-emerald-900/15 bg-white/70 text-emerald-800 shadow-sm transition hover:bg-emerald-50"
+          >
+            <ChevronLeft className="size-5" aria-hidden="true" />
+          </button>
           <div className="flex gap-2" role="tablist" aria-label="Why IFIT slides">
             {items.map((item, index) => (
               <button
@@ -127,28 +161,18 @@ export function WhyCarousel({ items }: { items: WhyCardProps[] }) {
                 aria-selected={index === active}
                 aria-label={`Show ${item.title}`}
                 onClick={() => setActive(index)}
-                className={`h-1.5 rounded-full transition-all ${index === active ? "w-10 bg-emerald-600" : "w-5 bg-emerald-900/15 hover:bg-emerald-900/30"}`}
+                className={`size-2.5 rounded-full transition-all ${index === active ? "scale-125 bg-emerald-600" : "bg-emerald-900/20 hover:bg-emerald-900/40"}`}
               />
             ))}
           </div>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => move(-1)}
-              aria-label="Previous reason"
-              className="grid size-9 place-items-center rounded-full border border-emerald-900/15 bg-white/60 text-emerald-800 transition-colors hover:bg-emerald-50"
-            >
-              <ChevronLeft className="size-4" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={() => move(1)}
-              aria-label="Next reason"
-              className="grid size-9 place-items-center rounded-full border border-emerald-900/15 bg-white/60 text-emerald-800 transition-colors hover:bg-emerald-50"
-            >
-              <ChevronRight className="size-4" aria-hidden="true" />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => move(1)}
+            aria-label="Next reason"
+            className="grid size-10 place-items-center rounded-full border border-emerald-900/15 bg-white/70 text-emerald-800 shadow-sm transition hover:bg-emerald-50"
+          >
+            <ChevronRight className="size-5" aria-hidden="true" />
+          </button>
         </div>
       </div>
     </div>
@@ -157,16 +181,16 @@ export function WhyCarousel({ items }: { items: WhyCardProps[] }) {
 
 export function ValuesPanels({ values }: { values: Array<[string, string]> }) {
   return (
-    <div className="relative mt-6 grid gap-3 sm:grid-cols-2">
+    <div className="relative mt-6 flex flex-col gap-3 sm:flex-row sm:items-stretch sm:justify-center">
       {values.map(([title, body], index) => (
         <motion.article
           key={title}
-          initial={{ opacity: 0, y: 16, rotate: index % 2 === 0 ? -1.2 : 1.2 }}
-          whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -1.2 : 1.2 }}
-          whileHover={{ y: -6, rotate: 0, scale: 1.015 }}
+          initial={{ opacity: 0, y: 16, rotate: index % 2 === 0 ? -3 : 3 }}
+          whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -3 : 3 }}
+          whileHover={{ y: -8, rotate: 0, scale: 1.035, zIndex: 10 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.55, delay: index * 0.06 }}
-          className="group relative overflow-hidden rounded-[22px] border border-emerald-900/10 bg-white/60 p-5 shadow-[0_20px_45px_-36px_rgba(6,95,70,.8)] backdrop-blur-xl"
+          className="group relative min-h-[205px] flex-1 overflow-hidden rounded-[22px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,.72),rgba(184,243,224,.42))] p-5 shadow-[0_24px_45px_-30px_rgba(6,95,70,.72)] backdrop-blur-xl sm:-ml-2 first:ml-0"
         >
           <div
             className="pointer-events-none absolute -right-8 -top-8 size-24 rounded-full bg-emerald-300/20 blur-2xl transition-transform duration-500 group-hover:scale-150"
@@ -185,92 +209,41 @@ export function ValuesPanels({ values }: { values: Array<[string, string]> }) {
   );
 }
 
-export function HolographicDashboard() {
-  const reduceMotion = useReducedMotion();
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24, rotateX: 8 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8 }}
-      className="relative overflow-hidden rounded-[30px] border border-emerald-900/15 bg-slate-950/[0.94] p-5 text-slate-100 shadow-[0_32px_85px_-45px_rgba(0,82,60,0.75)] md:p-7"
-    >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(52,211,153,.16),transparent_40%,rgba(14,165,233,.12))]"
-        aria-hidden="true"
-      />
-      <div className="relative flex items-center justify-between border-b border-white/10 pb-4">
-        <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-emerald-300">
-            IFIT intelligence layer
-          </p>
-          <h3 className="mt-2 text-xl font-semibold">Operational clarity, surfaced.</h3>
-        </div>
-        <Sparkles className="size-5 text-emerald-300" aria-hidden="true" />
-      </div>
-      <div className="relative mt-5 grid gap-3 sm:grid-cols-3">
-        {["Revenue", "Projects", "Clients"].map((label) => (
-          <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
-            <p className="text-xs text-slate-400">{label}</p>
-            <p className="mt-2 text-lg font-semibold text-white">Live view</p>
-          </div>
-        ))}
-      </div>
-      <div className="relative mt-3 rounded-2xl border border-white/10 bg-white/[0.05] p-4">
-        <div className="flex items-center justify-between text-xs text-slate-400">
-          <span>Performance signal</span>
-          <BarChart3 className="size-4 text-emerald-300" aria-hidden="true" />
-        </div>
-        <div
-          className="mt-5 flex h-24 items-end gap-2"
-          aria-label="Abstract performance visualization"
-        >
-          {[32, 48, 40, 68, 55, 78, 64, 88].map((height, index) => (
-            <motion.span
-              key={height + index}
-              initial={{ height: 0 }}
-              whileInView={{ height: `${height}%` }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.06, duration: 0.6 }}
-              className="flex-1 rounded-t-md bg-gradient-to-t from-emerald-500/80 to-cyan-300/70"
-            />
-          ))}
-        </div>
-      </div>
-      {!reduceMotion && (
-        <div
-          className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-emerald-400/15 blur-3xl"
-          aria-hidden="true"
-        />
-      )}
-    </motion.div>
-  );
-}
-
 export function JourneyRail({ timeline }: { timeline: Array<[string, string, string]> }) {
   return (
-    <div className="relative mt-7 overflow-x-auto pb-3">
-      <div className="flex min-w-[760px] items-start gap-3">
-        {timeline.map(([date, title, body], index) => (
-          <motion.article
-            key={title}
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.45, delay: index * 0.05 }}
-            className={`relative flex-1 rounded-[22px] border p-4 ${index === timeline.length - 1 ? "border-emerald-400 bg-emerald-50/80 shadow-[0_15px_35px_-20px_rgba(5,150,105,.8)]" : "border-emerald-900/10 bg-white/55"}`}
-          >
-            <div className="flex items-center gap-3">
-              <JourneyNode active={index === timeline.length - 1}>{index + 1}</JourneyNode>
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-700">
-                {date}
-              </div>
-            </div>
-            <h3 className="mt-5 text-sm font-semibold text-slate-950">{title}</h3>
-            <p className="mt-2 text-xs leading-5 text-slate-600">{body}</p>
-          </motion.article>
-        ))}
-      </div>
+    <div className="relative mt-7 space-y-5">
+      {[timeline.slice(0, 3), timeline.slice(3)].map((row, rowIndex) => (
+        <div key={rowIndex} className="relative grid gap-3 sm:grid-cols-3">
+          <div
+            className="pointer-events-none absolute left-[12%] right-[12%] top-5 hidden h-px bg-gradient-to-r from-emerald-300/20 via-emerald-500/70 to-emerald-300/20 sm:block"
+            aria-hidden="true"
+          />
+          {row.map(([date, title, body], index) => {
+            const globalIndex = rowIndex * 3 + index;
+            return (
+              <motion.article
+                key={title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: globalIndex * 0.05 }}
+                className="relative rounded-[22px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,.72),rgba(190,243,226,.45))] p-4 shadow-[0_22px_45px_-32px_rgba(6,95,70,.7)] backdrop-blur-xl transition-transform hover:-translate-y-1"
+              >
+                <div className="relative flex items-center gap-3">
+                  <JourneyNode active={globalIndex === timeline.length - 1}>
+                    {globalIndex + 1}
+                  </JourneyNode>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-700">
+                    {date}
+                  </div>
+                </div>
+                <h3 className="mt-5 text-sm font-semibold text-slate-950">{title}</h3>
+                <p className="mt-2 text-xs leading-5 text-slate-600">{body}</p>
+              </motion.article>
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 }
