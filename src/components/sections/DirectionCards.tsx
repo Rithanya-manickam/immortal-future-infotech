@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import type { MouseEvent } from "react";
 import { CheckCircle2, CircleDot, Rocket, Star } from "lucide-react";
 
 const CARDS = [
