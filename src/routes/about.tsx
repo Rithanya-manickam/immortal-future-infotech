@@ -1,6 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Compass, Gauge, Layers, Target } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Compass,
+  Gauge,
+  HeartHandshake,
+  Layers,
+  ShieldCheck,
+  Sparkles,
+  Target,
+} from "lucide-react";
 import { JourneyRail, ValuesPanels, WhyCarousel } from "@/components/sections/AboutInteractive";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { CTABand } from "@/components/sections/CTABand";
