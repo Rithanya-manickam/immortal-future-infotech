@@ -31,14 +31,14 @@ const WHY = [
   },
 ];
 
-const VALUES = [
+const VALUES: [string, string][] = [
   ["Trust First", "Transparent delivery and long-term customer relationships."],
   ["Intelligent Innovation", "We apply AI only where it produces measurable value."],
   ["Domain Depth", "Banking, healthcare and enterprise IT — no generalists."],
   ["Quality Certified", "Structured processes with certified delivery gates."],
 ];
 
-const TIMELINE = [
+const TIMELINE: [string, string, string][] = [
   ["May 2024", "Company Founded", "IFIT Pvt. Ltd. incorporated in Tiruchirapalli."],
   ["Jun 2024", "First Finacle Client", "Cooperative bank implementation and customization."],
   ["Aug 2024", "IIS Launched", "AI automation platform for Infosys Finacle."],

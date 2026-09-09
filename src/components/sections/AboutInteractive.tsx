@@ -77,7 +77,7 @@ export function InteractiveWhyCard({ icon: Icon, title, body, index }: WhyCardPr
   );
 }
 
-export function WhyCarousel({ items }: { items: WhyCardProps[] }) {
+export function WhyCarousel({ items }: { items: Omit<WhyCardProps, "index">[] }) {
   const [active, setActive] = useState(0);
   const [dragStart, setDragStart] = useState<number | null>(null);
   const reduceMotion = useReducedMotion();
