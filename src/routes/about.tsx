@@ -31,11 +31,20 @@ const WHY = [
   },
 ];
 
-const VALUES: [string, string][] = [
-  ["Trust First", "Transparent delivery and long-term customer relationships."],
-  ["Intelligent Innovation", "We apply AI only where it produces measurable value."],
-  ["Domain Depth", "Banking, healthcare and enterprise IT — no generalists."],
-  ["Quality Certified", "Structured processes with certified delivery gates."],
+const VALUES: [string, string, typeof ShieldCheck][] = [
+  [
+    "Trust First",
+    "Transparent delivery and long-term customer relationships.",
+    ShieldCheck,
+  ],
+  [
+    "Intelligent Innovation",
+    "We apply AI only where it produces measurable value.",
+    Sparkles,
+  ],
+  ["Domain Depth", "Banking, healthcare and enterprise IT — no generalists.", Layers],
+  ["Quality Certified", "Structured processes with certified delivery gates.", BadgeCheck],
+  ["Customer Focus", "Practical solutions built around real customer needs.", HeartHandshake],
 ];
 
 const TIMELINE: [string, string, string][] = [
