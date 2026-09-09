@@ -10,6 +10,8 @@ import { HomeJourney } from "@/components/sections/HomeJourney";
 import { Impact } from "@/components/sections/Impact";
 import { FeaturedWork } from "@/components/sections/FeaturedWork";
 import { CTABand } from "@/components/sections/CTABand";
+import { ClientStories } from "@/components/sections/ClientStories";
+import { FAQ } from "@/components/sections/FAQ";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,6 +49,8 @@ function Index() {
       <ExpertiseNodes />
       <Impact />
       <FeaturedWork />
+      <ClientStories />
+      <FAQ />
       <CTABand />
     </>
   );
