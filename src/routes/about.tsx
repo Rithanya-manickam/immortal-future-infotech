@@ -1,6 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Compass, Gauge, Layers, Target } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Compass,
+  Gauge,
+  HeartHandshake,
+  Layers,
+  ShieldCheck,
+  Sparkles,
+  Target,
+} from "lucide-react";
 import { JourneyRail, ValuesPanels, WhyCarousel } from "@/components/sections/AboutInteractive";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { CTABand } from "@/components/sections/CTABand";
@@ -31,11 +41,20 @@ const WHY = [
   },
 ];
 
-const VALUES: [string, string][] = [
-  ["Trust First", "Transparent delivery and long-term customer relationships."],
-  ["Intelligent Innovation", "We apply AI only where it produces measurable value."],
-  ["Domain Depth", "Banking, healthcare and enterprise IT — no generalists."],
-  ["Quality Certified", "Structured processes with certified delivery gates."],
+const VALUES: [string, string, typeof ShieldCheck][] = [
+  [
+    "Trust First",
+    "Transparent delivery and long-term customer relationships.",
+    ShieldCheck,
+  ],
+  [
+    "Intelligent Innovation",
+    "We apply AI only where it produces measurable value.",
+    Sparkles,
+  ],
+  ["Domain Depth", "Banking, healthcare and enterprise IT — no generalists.", Layers],
+  ["Quality Certified", "Structured processes with certified delivery gates.", BadgeCheck],
+  ["Customer Focus", "Practical solutions built around real customer needs.", HeartHandshake],
 ];
 
 const TIMELINE: [string, string, string][] = [
@@ -133,18 +152,18 @@ function About() {
           className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_75%_25%,rgba(52,211,153,.12),transparent_35%),linear-gradient(rgba(16,185,129,.06)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,.06)_1px,transparent_1px)] bg-[size:auto,42px_42px,42px_42px]"
           aria-hidden="true"
         />
-        <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-          <div className="min-w-0">
-            <SectionHead eyebrow="Our Values" title="What we hold" accent="constant." />
-            <ValuesPanels values={VALUES} />
-          </div>
+        <div className="mx-auto max-w-[1200px]">
+          <SectionHead eyebrow="Our Values" title="What we hold" accent="constant." center />
+          <ValuesPanels values={VALUES} />
 
-          <div className="min-w-0">
-            <SectionHead eyebrow="Our Journey" title="A year of" accent="shipping." />
+          <div className="mt-16 md:mt-20">
+            <SectionHead eyebrow="Our Journey" title="A year of" accent="shipping." center />
             <JourneyRail timeline={TIMELINE} />
-            <Link to="/portfolio" className="btn-secondary mt-4 text-xs">
-              See the work <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            <div className="mt-8 flex justify-center">
+              <Link to="/portfolio" className="btn-secondary text-xs">
+                See the work <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

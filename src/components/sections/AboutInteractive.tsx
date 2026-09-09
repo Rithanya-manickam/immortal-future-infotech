@@ -179,30 +179,45 @@ export function WhyCarousel({ items }: { items: Omit<WhyCardProps, "index">[] })
   );
 }
 
-export function ValuesPanels({ values }: { values: Array<[string, string]> }) {
+export function ValuesPanels({
+  values,
+}: {
+  values: Array<[string, string, LucideIcon]>;
+}) {
   return (
-    <div className="relative mt-6 flex flex-col gap-3 sm:flex-row sm:items-stretch sm:justify-center">
-      {values.map(([title, body], index) => (
+    <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      {values.map(([title, body, Icon], index) => (
         <motion.article
           key={title}
-          initial={{ opacity: 0, y: 16, rotate: index % 2 === 0 ? -3 : 3 }}
-          whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -3 : 3 }}
-          whileHover={{ y: -8, rotate: 0, scale: 1.035, zIndex: 10 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          whileHover={{ y: -6 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.55, delay: index * 0.06 }}
-          className="group relative min-h-[205px] flex-1 overflow-hidden rounded-[22px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,.72),rgba(184,243,224,.42))] p-5 shadow-[0_24px_45px_-30px_rgba(6,95,70,.72)] backdrop-blur-xl sm:-ml-2 first:ml-0"
+          transition={{ duration: 0.45, delay: index * 0.06 }}
+          className="group relative flex h-full flex-col overflow-hidden rounded-[22px] border p-5 backdrop-blur-xl"
+          style={{
+            borderColor: "color-mix(in oklab, var(--brand-glow) 26%, transparent)",
+            background:
+              "linear-gradient(155deg, color-mix(in oklab, var(--brand-glow) 8%, var(--card)), var(--card))",
+            boxShadow: "0 24px 55px -40px color-mix(in oklab, var(--brand-glow) 90%, transparent)",
+          }}
         >
-          <div
-            className="pointer-events-none absolute -right-8 -top-8 size-24 rounded-full bg-emerald-300/20 blur-2xl transition-transform duration-500 group-hover:scale-150"
-            aria-hidden="true"
-          />
-          <div className="relative flex items-start justify-between gap-4">
-            <h3 className="text-base font-semibold text-slate-950">{title}</h3>
-            <span className="grid size-7 shrink-0 place-items-center rounded-full border border-emerald-500/20 bg-emerald-50 text-xs font-semibold text-emerald-700">
+          <div className="flex items-center justify-between">
+            <span
+              className="grid size-11 place-items-center rounded-2xl border transition-transform duration-300 group-hover:scale-110"
+              style={{
+                borderColor: "color-mix(in oklab, var(--brand-glow) 40%, transparent)",
+                background: "color-mix(in oklab, var(--brand-glow) 12%, transparent)",
+              }}
+            >
+              <Icon className="size-5 text-[var(--brand-glow)]" strokeWidth={1.6} aria-hidden="true" />
+            </span>
+            <span className="font-mono text-[10px] tracking-[0.24em] text-foreground/45">
               0{index + 1}
             </span>
           </div>
-          <p className="relative mt-3 text-sm leading-6 text-slate-600">{body}</p>
+          <h3 className="mt-5 text-base font-semibold tracking-tight text-foreground">{title}</h3>
+          <p className="mt-2 text-sm leading-6 text-foreground/65">{body}</p>
         </motion.article>
       ))}
     </div>
@@ -211,39 +226,54 @@ export function ValuesPanels({ values }: { values: Array<[string, string]> }) {
 
 export function JourneyRail({ timeline }: { timeline: Array<[string, string, string]> }) {
   return (
-    <div className="relative mt-7 space-y-5">
-      {[timeline.slice(0, 3), timeline.slice(3)].map((row, rowIndex) => (
-        <div key={rowIndex} className="relative grid gap-3 sm:grid-cols-3">
-          <div
-            className="pointer-events-none absolute left-[12%] right-[12%] top-5 hidden h-px bg-gradient-to-r from-emerald-300/20 via-emerald-500/70 to-emerald-300/20 sm:block"
-            aria-hidden="true"
-          />
-          {row.map(([date, title, body], index) => {
-            const globalIndex = rowIndex * 3 + index;
-            return (
+    <div className="relative mt-10">
+      <div
+        className="pointer-events-none absolute bottom-0 left-5 top-0 w-px bg-gradient-to-b from-transparent via-[var(--brand-glow)] to-transparent md:left-1/2 md:-translate-x-1/2"
+        aria-hidden="true"
+      />
+      <ol className="relative space-y-8 md:space-y-10">
+        {timeline.map(([date, title, body], index) => {
+          const right = index % 2 === 1;
+          return (
+            <li
+              key={title}
+              className="relative pl-14 md:grid md:grid-cols-2 md:items-center md:gap-12 md:pl-0"
+            >
+              <span
+                className="absolute left-5 top-4 z-10 -translate-x-1/2 md:left-1/2"
+                aria-hidden="true"
+              >
+                <JourneyNode active={index === timeline.length - 1}>{index + 1}</JourneyNode>
+              </span>
               <motion.article
-                key={title}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45, delay: globalIndex * 0.05 }}
-                className="relative rounded-[22px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,.72),rgba(190,243,226,.45))] p-4 shadow-[0_22px_45px_-32px_rgba(6,95,70,.7)] backdrop-blur-xl transition-transform hover:-translate-y-1"
+                transition={{ duration: 0.45 }}
+                className={`relative rounded-[22px] border p-5 backdrop-blur-xl ${
+                  right ? "md:col-start-2" : "md:col-start-1 md:text-right"
+                }`}
+                style={{
+                  borderColor: "color-mix(in oklab, var(--brand-glow) 26%, transparent)",
+                  background:
+                    "linear-gradient(150deg, color-mix(in oklab, var(--brand-glow) 8%, var(--card)), var(--card))",
+                  boxShadow:
+                    "0 26px 60px -44px color-mix(in oklab, var(--brand-glow) 90%, transparent)",
+                }}
               >
-                <div className="relative flex items-center gap-3">
-                  <JourneyNode active={globalIndex === timeline.length - 1}>
-                    {globalIndex + 1}
-                  </JourneyNode>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-700">
-                    {date}
-                  </div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--brand-glow)]">
+                  {date}
                 </div>
-                <h3 className="mt-5 text-sm font-semibold text-slate-950">{title}</h3>
-                <p className="mt-2 text-xs leading-5 text-slate-600">{body}</p>
+                <h3 className="mt-2 text-base font-semibold tracking-tight text-foreground">
+                  {title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-foreground/65">{body}</p>
               </motion.article>
-            );
-          })}
-        </div>
-      ))}
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }
