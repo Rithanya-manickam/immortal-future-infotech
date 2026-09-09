@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -58,11 +59,17 @@ const PILLARS = [
 
 export function ExpertiseNodes() {
   const [open, setOpen] = useState<string | null>(null);
+  const reduceMotion = useReducedMotion();
 
   return (
     <section id="expertise" className="relative isolate overflow-hidden px-6 py-10 md:py-12">
-      {/* soft corporate background: gradient wash + fine grid + glow orbs */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+      {/* Animated background with soft gradients and subtle motion */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{ perspective: "1000px" }}
+      >
+        {/* Base gradient wash */}
         <div
           className="absolute inset-0"
           style={{
@@ -70,6 +77,8 @@ export function ExpertiseNodes() {
               "linear-gradient(180deg, transparent, color-mix(in oklab, var(--brand-glow) 6%, transparent) 45%, transparent)",
           }}
         />
+
+        {/* Animated fine grid */}
         <div
           className="absolute inset-0 opacity-[0.35]"
           style={{
@@ -77,16 +86,44 @@ export function ExpertiseNodes() {
               "linear-gradient(to right, color-mix(in oklab, var(--brand-glow) 12%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--brand-glow) 12%, transparent) 1px, transparent 1px)",
             backgroundSize: "64px 64px",
             maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent 78%)",
+            animation: reduceMotion ? "none" : "float 24s ease-in-out infinite",
           }}
         />
+
+        {/* Left animated glow orb */}
         <div
           className="absolute -left-24 top-10 size-[420px] rounded-full blur-3xl"
-          style={{ background: "color-mix(in oklab, var(--brand-glow) 14%, transparent)" }}
+          style={{
+            background: "color-mix(in oklab, var(--brand-glow) 14%, transparent)",
+            animation: reduceMotion ? "none" : "float-delayed 32s ease-in-out infinite",
+          }}
         />
+
+        {/* Right animated glow orb */}
         <div
           className="absolute -right-28 bottom-0 size-[380px] rounded-full blur-3xl"
-          style={{ background: "color-mix(in oklab, var(--brand-teal) 12%, transparent)" }}
+          style={{
+            background: "color-mix(in oklab, var(--brand-teal) 12%, transparent)",
+            animation: reduceMotion ? "none" : "float-reverse 28s ease-in-out infinite",
+          }}
         />
+
+        {/* CSS animations */}
+        <style>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-12px) translateX(6px); }
+          }
+          @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-8px) translateX(-4px); }
+            66% { transform: translateY(8px) translateX(4px); }
+          }
+          @keyframes float-reverse {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(10px) translateX(-6px); }
+          }
+        `}</style>
       </div>
 
       <div className="mx-auto max-w-[1200px]">

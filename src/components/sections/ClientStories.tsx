@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
-import imgOps from "@/assets/accent-dashboard.jpg";
-import imgAi from "@/assets/img-ai.jpg";
-import imgCloud from "@/assets/img-cloud.jpg";
+import imgOps from "@/assets/client_1.png";
+import imgAi from "@/assets/Client_2.png";
+import imgCloud from "@/assets/Clinet2.jpg";
 import { SectionHead } from "./SectionHead";
 
 /**

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import faqBg from "@/assets/faq_bg.jpg";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { SectionHead } from "./SectionHead";
@@ -42,13 +43,26 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative px-6 py-10 md:py-12">
+    <section id="faq" className="relative isolate px-6 py-10 md:py-12 overflow-hidden">
+      {/* Subtle blurred background image */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          backgroundImage: `url(${faqBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(18px)",
+          opacity: 0.22,
+          transform: "scale(1.05)",
+        }}
+        aria-hidden="true"
+      />
       <div className="mx-auto max-w-[1100px]">
         <SectionHead eyebrow="FAQ" title="Questions," accent="answered.">
           The things enterprises ask us most before an engagement starts.
         </SectionHead>
 
-        <div className="mt-6 divide-y divide-border/12 overflow-hidden rounded-[24px] border border-border/12 bg-[var(--glass-bg)] backdrop-blur-xl">
+        <div className="relative mt-6 divide-y divide-border/12 overflow-hidden rounded-[24px] border border-border/12 bg-[var(--glass-bg)] backdrop-blur-xl z-10">
           {FAQS.map((f, i) => {
             const on = open === i;
             return (
