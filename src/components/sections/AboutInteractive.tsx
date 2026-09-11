@@ -1,16 +1,16 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import {
-  ArrowUpRight,
-  Boxes,
-  Building2,
-  ChevronLeft,
-  ChevronRight,
-  Cpu,
-  LineChart,
-} from "lucide-react";
+import { ArrowUpRight, Boxes, Building2, Cpu, LineChart } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
+
+import accentCircuit from "@/assets/accent-circuit.jpg";
+import imgAi from "@/assets/img-ai.jpg";
+import imgCloud from "@/assets/img-cloud.jpg";
+import imgOps from "@/assets/img-ops.jpg";
+import imgTeam from "@/assets/img-team.jpg";
+
 
 type WhyCardProps = {
   icon: LucideIcon;
@@ -77,107 +77,97 @@ export function InteractiveWhyCard({ icon: Icon, title, body, index }: WhyCardPr
   );
 }
 
+const WHY_ACCENTS = ["#06b6d4", "#8b5cf6", "#ec4899", "#f59e0b"];
+const WHY_VISUALS = [imgTeam, imgAi, imgCloud, imgOps];
+
 export function WhyCarousel({ items }: { items: Omit<WhyCardProps, "index">[] }) {
-  const [active, setActive] = useState(0);
-  const [dragStart, setDragStart] = useState<number | null>(null);
-  const reduceMotion = useReducedMotion();
-
-  function move(direction: 1 | -1) {
-    setActive((value) => (value + direction + items.length) % items.length);
-  }
-
-  function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
-    if (event.key === "ArrowLeft") move(-1);
-    if (event.key === "ArrowRight") move(1);
-  }
-
   return (
-    <div
-      className="mt-7"
-      aria-label="Why choose IFIT"
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      onPointerDown={(event) => setDragStart(event.clientX)}
-      onPointerUp={(event) => {
-        if (dragStart !== null && Math.abs(event.clientX - dragStart) > 45) {
-          move(event.clientX < dragStart ? 1 : -1);
-        }
-        setDragStart(null);
-      }}
-      onPointerCancel={() => setDragStart(null)}
-    >
-      <div className="relative overflow-hidden rounded-[30px] border border-emerald-900/10 bg-white/30 px-2 py-7 shadow-[0_24px_70px_-48px_rgba(6,95,70,0.7)] backdrop-blur-xl sm:px-10">
+    <div className="mt-8" aria-label="Why choose IFIT">
+      <div className="relative isolate overflow-hidden rounded-[30px] border border-emerald-900/10 shadow-[0_24px_70px_-48px_rgba(6,95,70,0.7)]">
+        {/* Subtle technology backdrop */}
+        <img
+          src={accentCircuit}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover opacity-[0.16]"
+        />
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(45,212,191,.2),transparent_32%),linear-gradient(135deg,rgba(255,255,255,.4),transparent)]"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(150deg,color-mix(in_oklab,var(--card)_88%,transparent),color-mix(in_oklab,var(--card)_72%,transparent))] backdrop-blur-[2px]"
           aria-hidden="true"
         />
-        <div className="relative flex min-h-[320px] items-center justify-center [perspective:1200px]">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_0%,color-mix(in_oklab,var(--brand-glow)_18%,transparent),transparent_45%),radial-gradient(circle_at_85%_100%,rgba(139,92,246,.14),transparent_45%)]"
+          aria-hidden="true"
+        />
+
+        <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-4 lg:gap-7 lg:p-10">
           {items.map((item, index) => {
-            const offset = (index - active + items.length) % items.length;
-            const signedOffset = offset > items.length / 2 ? offset - items.length : offset;
+            const accent = WHY_ACCENTS[index % WHY_ACCENTS.length];
+            const visual = WHY_VISUALS[index % WHY_VISUALS.length];
             const Icon = item.icon;
-            const visible = Math.abs(signedOffset) <= 2;
             return (
               <motion.article
                 key={item.title}
-                initial={false}
-                animate={{
-                  x: `${signedOffset * 76}%`,
-                  scale: signedOffset === 0 ? 1 : 0.78,
-                  rotateY: signedOffset * -7,
-                  opacity: visible ? (signedOffset === 0 ? 1 : 0.72) : 0,
-                  zIndex: 10 - Math.abs(signedOffset),
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -8 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.45, delay: index * 0.06 }}
+                className="group relative flex h-full flex-col items-center overflow-hidden rounded-[24px] border p-6 text-center transition-shadow duration-300"
+                style={{
+                  borderColor: `color-mix(in oklab, ${accent} 26%, transparent)`,
+                  background: `linear-gradient(165deg, color-mix(in oklab, ${accent} 10%, var(--card)), var(--card))`,
+                  boxShadow: `0 24px 56px -42px color-mix(in oklab, ${accent} 95%, transparent), inset 0 1px 0 color-mix(in oklab, ${accent} 20%, transparent)`,
                 }}
-                transition={{ duration: reduceMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute w-[76%] max-w-[290px] rounded-[26px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,.8),rgba(207,250,238,.55))] p-5 text-center shadow-[0_24px_60px_-28px_rgba(6,95,70,.55)] backdrop-blur-xl sm:w-[38%]"
-                aria-hidden={signedOffset !== 0}
               >
+                <div
+                  className="pointer-events-none absolute -top-16 left-1/2 size-40 -translate-x-1/2 rounded-full opacity-50 blur-3xl transition-opacity duration-300 group-hover:opacity-90"
+                  style={{ background: `color-mix(in oklab, ${accent} 22%, transparent)` }}
+                  aria-hidden="true"
+                />
                 <span
-                  className={`mx-auto grid size-14 place-items-center rounded-full border ${signedOffset === 0 ? "border-emerald-300 bg-emerald-50 text-emerald-700 shadow-[0_0_28px_rgba(45,212,191,.45)]" : "border-emerald-900/10 bg-white/60 text-emerald-700/75"}`}
+                  className="relative grid size-[74px] place-items-center overflow-hidden rounded-full border transition-transform duration-500 group-hover:scale-105"
+                  style={{
+                    borderColor: `color-mix(in oklab, ${accent} 40%, transparent)`,
+                    boxShadow: `0 12px 30px -18px ${accent}`,
+                  }}
                 >
-                  <Icon className="size-7" aria-hidden="true" />
+                  <img
+                    src={visual}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <span
+                    className="absolute inset-0"
+                    style={{ background: `color-mix(in oklab, ${accent} 55%, transparent)` }}
+                    aria-hidden="true"
+                  />
+                  <Icon className="relative size-7 text-white" strokeWidth={1.6} aria-hidden="true" />
                 </span>
-                <h3 className="mt-5 text-base font-semibold text-slate-950">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{item.body}</p>
+                <h3
+                  className="relative mt-5 text-base font-semibold tracking-tight text-foreground"
+                  style={{ textDecorationColor: accent }}
+                >
+                  {item.title}
+                </h3>
+                <span
+                  className="relative mt-3 block h-px w-10 rounded-full transition-all duration-300 group-hover:w-16"
+                  style={{ background: accent }}
+                  aria-hidden="true"
+                />
+                <p className="relative mt-3 text-sm leading-6 text-foreground/70">{item.body}</p>
               </motion.article>
             );
           })}
-        </div>
-        <div className="relative mt-5 flex items-center justify-center gap-4">
-          <button
-            type="button"
-            onClick={() => move(-1)}
-            aria-label="Previous reason"
-            className="grid size-10 place-items-center rounded-full border border-emerald-900/15 bg-white/70 text-emerald-800 shadow-sm transition hover:bg-emerald-50"
-          >
-            <ChevronLeft className="size-5" aria-hidden="true" />
-          </button>
-          <div className="flex gap-2" role="tablist" aria-label="Why IFIT slides">
-            {items.map((item, index) => (
-              <button
-                key={item.title}
-                type="button"
-                role="tab"
-                aria-selected={index === active}
-                aria-label={`Show ${item.title}`}
-                onClick={() => setActive(index)}
-                className={`size-2.5 rounded-full transition-all ${index === active ? "scale-125 bg-emerald-600" : "bg-emerald-900/20 hover:bg-emerald-900/40"}`}
-              />
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={() => move(1)}
-            aria-label="Next reason"
-            className="grid size-10 place-items-center rounded-full border border-emerald-900/15 bg-white/70 text-emerald-800 shadow-sm transition hover:bg-emerald-50"
-          >
-            <ChevronRight className="size-5" aria-hidden="true" />
-          </button>
         </div>
       </div>
     </div>
   );
 }
+
 
 const VALUE_ACCENTS = ["#06b6d4", "#3b82f6", "#8b5cf6", "#ec4899", "#f59e0b"];
 
@@ -262,6 +252,10 @@ export function ValuesPanels({
 }
 
 export function JourneyRail({ timeline }: { timeline: Array<[string, string, string]> }) {
+  const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
+  const book = !reduceMotion && !isMobile;
+
   return (
     <div className="relative mt-10">
       <div
@@ -275,6 +269,7 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
             <li
               key={title}
               className="relative pl-14 md:grid md:grid-cols-2 md:items-center md:gap-12 md:pl-0"
+              style={{ perspective: 1400 }}
             >
               <span
                 className="absolute left-5 top-4 z-10 -translate-x-1/2 md:left-1/2"
@@ -285,13 +280,27 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
               <motion.article
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -5 }}
+                whileHover={
+                  book
+                    ? {
+                        rotateY: right ? 13 : -13,
+                        y: -4,
+                        scale: 1.015,
+                        zIndex: 20,
+                        boxShadow: right
+                          ? "-28px 34px 70px -40px color-mix(in oklab, var(--brand-glow) 95%, transparent)"
+                          : "28px 34px 70px -40px color-mix(in oklab, var(--brand-glow) 95%, transparent)",
+                      }
+                    : { y: -5 }
+                }
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45 }}
-                className={`relative rounded-[22px] border p-5 backdrop-blur-xl ${
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className={`relative rounded-[22px] border p-5 backdrop-blur-xl will-change-transform ${
                   right ? "md:col-start-2" : "md:col-start-1 md:text-right"
                 }`}
                 style={{
+                  transformStyle: "preserve-3d",
+                  transformOrigin: right ? "left center" : "right center",
                   borderColor: "color-mix(in oklab, var(--brand-glow) 26%, transparent)",
                   background:
                     "linear-gradient(150deg, color-mix(in oklab, var(--brand-glow) 8%, var(--card)), var(--card))",
@@ -299,6 +308,14 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
                     "0 26px 60px -44px color-mix(in oklab, var(--brand-glow) 90%, transparent)",
                 }}
               >
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-y-3 w-px ${right ? "left-0" : "right-0"}`}
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, transparent, color-mix(in oklab, var(--brand-glow) 55%, transparent), transparent)",
+                  }}
+                />
                 <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--brand-glow)]">
                   {date}
                 </div>
@@ -307,6 +324,7 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-foreground/65">{body}</p>
               </motion.article>
+
             </li>
           );
         })}
