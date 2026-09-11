@@ -179,47 +179,84 @@ export function WhyCarousel({ items }: { items: Omit<WhyCardProps, "index">[] })
   );
 }
 
+const VALUE_ACCENTS = ["#06b6d4", "#3b82f6", "#8b5cf6", "#ec4899", "#f59e0b"];
+
 export function ValuesPanels({
   values,
 }: {
   values: Array<[string, string, LucideIcon]>;
 }) {
   return (
-    <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-      {values.map(([title, body, Icon], index) => (
-        <motion.article
-          key={title}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          whileHover={{ y: -6 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.45, delay: index * 0.06 }}
-          className="group relative flex h-full flex-col overflow-hidden rounded-[22px] border p-5 backdrop-blur-xl"
-          style={{
-            borderColor: "color-mix(in oklab, var(--brand-glow) 26%, transparent)",
-            background:
-              "linear-gradient(155deg, color-mix(in oklab, var(--brand-glow) 8%, var(--card)), var(--card))",
-            boxShadow: "0 24px 55px -40px color-mix(in oklab, var(--brand-glow) 90%, transparent)",
-          }}
-        >
-          <div className="flex items-center justify-between">
-            <span
-              className="grid size-11 place-items-center rounded-2xl border transition-transform duration-300 group-hover:scale-110"
+    <div className="relative mt-10">
+      <div
+        className="pointer-events-none absolute left-[10%] right-[10%] top-[86px] hidden h-px lg:block"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(6,182,212,.45), rgba(59,130,246,.45), rgba(139,92,246,.45), rgba(236,72,153,.45), rgba(245,158,11,.45))",
+        }}
+        aria-hidden="true"
+      />
+      <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        {values.map(([title, body, Icon], index) => {
+          const accent = VALUE_ACCENTS[index % VALUE_ACCENTS.length];
+          return (
+            <motion.article
+              key={title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -8 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.45, delay: index * 0.07 }}
+              className="group relative flex h-full flex-col items-center overflow-hidden rounded-[26px] border p-6 text-center"
               style={{
-                borderColor: "color-mix(in oklab, var(--brand-glow) 40%, transparent)",
-                background: "color-mix(in oklab, var(--brand-glow) 12%, transparent)",
+                borderColor: `color-mix(in oklab, ${accent} 28%, transparent)`,
+                background: `linear-gradient(165deg, color-mix(in oklab, ${accent} 9%, var(--card)), var(--card))`,
+                boxShadow: `0 26px 60px -42px color-mix(in oklab, ${accent} 95%, transparent), inset 0 1px 0 color-mix(in oklab, ${accent} 22%, transparent)`,
               }}
             >
-              <Icon className="size-5 text-[var(--brand-glow)]" strokeWidth={1.6} aria-hidden="true" />
-            </span>
-            <span className="font-mono text-[10px] tracking-[0.24em] text-foreground/45">
-              0{index + 1}
-            </span>
-          </div>
-          <h3 className="mt-5 text-base font-semibold tracking-tight text-foreground">{title}</h3>
-          <p className="mt-2 text-sm leading-6 text-foreground/65">{body}</p>
-        </motion.article>
-      ))}
+              <div
+                className="pointer-events-none absolute -top-16 left-1/2 size-40 -translate-x-1/2 rounded-full opacity-60 blur-3xl transition-opacity duration-300 group-hover:opacity-100"
+                style={{ background: `color-mix(in oklab, ${accent} 20%, transparent)` }}
+                aria-hidden="true"
+              />
+              <span
+                className="relative rounded-full px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] transition-colors"
+                style={{
+                  color: accent,
+                  background: `color-mix(in oklab, ${accent} 14%, transparent)`,
+                  border: `1px solid color-mix(in oklab, ${accent} 34%, transparent)`,
+                }}
+              >
+                Step 0{index + 1}
+              </span>
+              <span
+                className="relative mt-5 grid size-16 place-items-center rounded-full border transition-transform duration-300 group-hover:scale-110"
+                style={{
+                  borderColor: `color-mix(in oklab, ${accent} 38%, transparent)`,
+                  background: `color-mix(in oklab, ${accent} 12%, var(--card))`,
+                  boxShadow: `0 10px 26px -16px ${accent}`,
+                }}
+              >
+                <Icon className="size-7" style={{ color: accent }} strokeWidth={1.5} aria-hidden="true" />
+              </span>
+              <h3 className="relative mt-5 text-base font-semibold tracking-tight text-foreground">
+                {title}
+              </h3>
+              <p className="relative mt-2 text-sm leading-6 text-foreground/70">{body}</p>
+              <span
+                className="relative mt-5 grid size-9 place-items-center rounded-full border transition-transform duration-300 group-hover:translate-x-1"
+                style={{
+                  borderColor: `color-mix(in oklab, ${accent} 34%, transparent)`,
+                  background: `color-mix(in oklab, ${accent} 10%, transparent)`,
+                }}
+                aria-hidden="true"
+              >
+                <ArrowUpRight className="size-4" style={{ color: accent }} />
+              </span>
+            </motion.article>
+          );
+        })}
+      </div>
     </div>
   );
 }
