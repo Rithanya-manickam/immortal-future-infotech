@@ -1,16 +1,14 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import {
-  ArrowUpRight,
-  Boxes,
-  Building2,
-  ChevronLeft,
-  ChevronRight,
-  Cpu,
-  LineChart,
-} from "lucide-react";
+import { ArrowUpRight, Boxes, Building2, Cpu, LineChart } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import accentCircuit from "@/assets/accent-circuit.jpg";
+import imgAi from "@/assets/img-ai.jpg";
+import imgCloud from "@/assets/img-cloud.jpg";
+import imgOps from "@/assets/img-ops.jpg";
+import imgTeam from "@/assets/img-team.jpg";
+
 
 type WhyCardProps = {
   icon: LucideIcon;
