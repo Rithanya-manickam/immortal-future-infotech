@@ -277,9 +277,10 @@
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1;
-  color: oklch(0.14 0.02 180);
-  background: var(--gradient-hero);
-  box-shadow: 0 10px 30px -12px oklch(0.62 0.14 170 / 0.75);
+  color: oklch(0.22 0.04 175);
+  border: 1px solid oklch(0.55 0.12 175 / 0.28);
+  background: linear-gradient(135deg, oklch(1 0 0 / 0.92), oklch(0.92 0.05 175 / 0.72));
+  box-shadow: 0 10px 30px -12px oklch(0.55 0.12 175 / 0.35);
   transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease, filter .25s ease;
 }
 @utility btn-secondary {

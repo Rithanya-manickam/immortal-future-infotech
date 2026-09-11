@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { type CSSProperties, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   Bot,
@@ -10,7 +10,6 @@ import {
   Cloud,
   Code2,
 } from "lucide-react";
-import { TiltCard } from "@/components/TiltCard";
 
 type Cat = "All" | "AI & Banking" | "Cloud & Infra" | "Development" | "Business";
 
@@ -320,6 +319,7 @@ export const Route = createFileRoute("/services")({
 
 function Services() {
   const [cat, setCat] = useState<Cat>("All");
+  const [expandedService, setExpandedService] = useState<string | null>(null);
   const items = useMemo(() => SERVICES.filter((s) => cat === "All" || s.cat === cat), [cat]);
   const featuredRef = useRef<HTMLDivElement>(null);
 
@@ -332,7 +332,7 @@ function Services() {
 
   return (
     <>
-      <section className="relative overflow-hidden px-6 pb-14 pt-36 md:pb-20 md:pt-44">
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_72%_42%,rgba(153,246,228,.32),transparent_32%),linear-gradient(135deg,#f7fffc_0%,#effbff_55%,#f7f5ff_100%)] px-6 pb-12 pt-24 md:pb-16 md:pt-28">
         <div className="mx-auto grid max-w-[1400px] items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-4">
           <div className="relative z-10 max-w-2xl">
             <div className="inline-flex items-center rounded-full border border-emerald-900/15 bg-white/60 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.32em] text-foreground/55 shadow-sm backdrop-blur">
@@ -357,7 +357,7 @@ function Services() {
               </a>
             </div>
           </div>
-          <div className="relative min-h-[300px] lg:min-h-[460px]">
+          <div className="relative min-h-[270px] lg:min-h-[410px]">
             <div
               className="absolute inset-10 rounded-full bg-emerald-300/20 blur-3xl"
               aria-hidden="true"
@@ -365,7 +365,7 @@ function Services() {
             <img
               src="/services-hero-3d.png"
               alt="Abstract illustration of connected enterprise technology services"
-              className="relative z-10 mx-auto h-auto w-full max-w-[680px] object-contain"
+              className="relative z-10 mx-auto h-auto w-full max-w-[620px] mix-blend-multiply object-contain drop-shadow-[0_24px_38px_rgba(20,184,166,.14)]"
             />
           </div>
         </div>
@@ -462,85 +462,32 @@ function Services() {
         </div>
       </section>
 
-      {/* Category groups — horizontal panels with tech + outcomes */}
-      <section className="px-6 pb-10">
-        <div className="mx-auto grid max-w-[1400px] gap-4 lg:grid-cols-2">
-          {GROUPS.map((g, i) => (
-            <motion.div
-              key={g.cat}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: (i % 2) * 0.06 }}
-            >
-              <TiltCard className="h-full">
-                <div
-                  className="group relative h-full overflow-hidden rounded-[28px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,.76),rgba(220,252,241,.48))] p-6 shadow-[0_26px_65px_-42px_rgba(15,118,110,.55)] backdrop-blur-xl transition-shadow duration-500 hover:shadow-[0_34px_76px_-42px_rgba(15,118,110,.72)] md:p-7"
-                  style={
-                    {
-                      "--service-accent": CATEGORY_META[g.cat].accent,
-                      "--service-tint": CATEGORY_META[g.cat].tint,
-                    } as CSSProperties
-                  }
-                >
-                  <div
-                    className="pointer-events-none absolute -right-16 -top-16 size-44 rounded-full bg-[var(--service-tint)] blur-3xl transition-transform duration-700 group-hover:scale-150"
-                    aria-hidden="true"
-                  />
-                  <div className="relative flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <span className="grid size-11 place-items-center rounded-2xl border border-[var(--service-accent)]/25 bg-[var(--service-tint)] text-[var(--service-accent)]">
-                        {(() => {
-                          const Icon = CATEGORY_META[g.cat].icon;
-                          return <Icon className="size-5" aria-hidden="true" />;
-                        })()}
-                      </span>
-                      <h2 className="text-lg font-semibold text-slate-950">{g.cat}</h2>
-                    </div>
-                    <button
-                      onClick={() => setCat(g.cat)}
-                      className="inline-flex items-center gap-1.5 text-[12px] text-[var(--brand-glow)]"
-                    >
-                      View services <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                  <p className="relative mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
-                    {g.blurb}
-                  </p>
-                  <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                    <div>
-                      <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500">
-                        Technologies
-                      </div>
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        {g.tech.map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-lg border border-border/15 bg-foreground/[0.03] px-2.5 py-1 font-mono text-[11px] text-slate-600"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500">
-                        Outcomes
-                      </div>
-                      <ul className="mt-2 space-y-1">
-                        {g.outcomes.map((o) => (
-                          <li key={o} className="flex gap-2 text-[13px] text-foreground/65">
-                            <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-[var(--brand-glow)]" />
-                            {o}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+      {/* Compact delivery timeline */}
+      <section className="px-6 py-10 md:py-12">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-foreground/50">
+            How we deliver
+          </div>
+          <ol className="relative mt-6 grid gap-6 md:grid-cols-6 md:gap-3 md:before:absolute md:before:left-[8%] md:before:right-[8%] md:before:top-5 md:before:h-px md:before:bg-emerald-900/15">
+            {PROCESS.map(([step, body], i) => (
+              <motion.li
+                key={step}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: i * 0.04 }}
+                className="relative flex gap-3 md:block md:text-center"
+              >
+                <span className="relative z-10 grid size-10 shrink-0 place-items-center rounded-full border border-emerald-900/15 bg-[#f7fffc] font-mono text-[11px] text-emerald-700 shadow-sm">
+                  0{i + 1}
+                </span>
+                <div className="pt-1 md:pt-3">
+                  <div className="text-sm font-semibold text-foreground">{step}</div>
+                  <p className="mt-1 text-[11px] leading-relaxed text-foreground/55">{body}</p>
                 </div>
-              </TiltCard>
-            </motion.div>
-          ))}
+              </motion.li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -639,22 +586,47 @@ function Services() {
                       {s.cat}
                     </span>
                   </div>
-                  <h3 className="relative mt-5 text-base font-semibold text-slate-950">{s.name}</h3>
-                  <p className="relative mt-2 text-xs leading-relaxed text-slate-600">{s.body}</p>
-                  <div className="relative mt-4 flex flex-wrap gap-1.5">
-                    {s.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-slate-900/10 bg-white/45 px-2 py-0.5 text-[10px] text-slate-600"
-                      >
-                        {t}
-                      </span>
-                    ))}
+                  <div className="relative mt-4 flex items-start justify-between gap-3">
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                        {s.cat}
+                      </div>
+                      <h3 className="mt-1 text-base font-semibold text-slate-950">{s.name}</h3>
+                    </div>
+                    <button
+                      type="button"
+                      aria-expanded={expandedService === s.name}
+                      aria-label={`${expandedService === s.name ? "Collapse" : "Expand"} ${s.name}`}
+                      onClick={() => setExpandedService(expandedService === s.name ? null : s.name)}
+                      className="grid size-8 shrink-0 place-items-center rounded-full border border-slate-900/10 bg-white/60 text-slate-600 transition hover:bg-white"
+                    >
+                      <ArrowRight
+                        className={`size-4 transition-transform ${expandedService === s.name ? "rotate-90" : ""}`}
+                      />
+                    </button>
                   </div>
-                  <ArrowRight
-                    className="absolute bottom-5 right-5 size-4 text-slate-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-slate-700"
-                    aria-hidden="true"
-                  />
+                  <AnimatePresence initial={false}>
+                    {expandedService === s.name && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0, y: -4 }}
+                        animate={{ height: "auto", opacity: 1, y: 0 }}
+                        exit={{ height: 0, opacity: 0, y: -4 }}
+                        className="relative overflow-hidden"
+                      >
+                        <p className="mt-3 text-xs leading-relaxed text-slate-600">{s.body}</p>
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {s.tags.map((t) => (
+                            <span
+                              key={t}
+                              className="rounded-full border border-slate-900/10 bg-white/45 px-2 py-0.5 text-[10px] text-slate-600"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.article>
               );
             })}
