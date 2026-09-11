@@ -1,8 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { type CSSProperties, useMemo, useState } from "react";
+import { type CSSProperties, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Bot, BriefcaseBusiness, Cloud, Code2 } from "lucide-react";
-import { PageHeader } from "@/components/PageHeader";
+import {
+  ArrowRight,
+  Bot,
+  BriefcaseBusiness,
+  ChevronLeft,
+  ChevronRight,
+  Cloud,
+  Code2,
+} from "lucide-react";
 import { TiltCard } from "@/components/TiltCard";
 
 type Cat = "All" | "AI & Banking" | "Cloud & Infra" | "Development" | "Business";
@@ -314,13 +321,146 @@ export const Route = createFileRoute("/services")({
 function Services() {
   const [cat, setCat] = useState<Cat>("All");
   const items = useMemo(() => SERVICES.filter((s) => cat === "All" || s.cat === cat), [cat]);
+  const featuredRef = useRef<HTMLDivElement>(null);
+
+  function moveFeatured(direction: number) {
+    featuredRef.current?.scrollBy({
+      left: direction * featuredRef.current.clientWidth * 0.78,
+      behavior: "smooth",
+    });
+  }
 
   return (
     <>
-      <PageHeader eyebrow="Services" title="Thirty-two offerings.|One delivery bar.">
-        Everything IFIT ships — from AI banking automation to enterprise networking — organized so
-        you can find what you need in seconds.
-      </PageHeader>
+      <section className="relative overflow-hidden px-6 pb-14 pt-36 md:pb-20 md:pt-44">
+        <div className="mx-auto grid max-w-[1400px] items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-4">
+          <div className="relative z-10 max-w-2xl">
+            <div className="inline-flex items-center rounded-full border border-emerald-900/15 bg-white/60 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.32em] text-foreground/55 shadow-sm backdrop-blur">
+              Our services
+            </div>
+            <h1 className="mt-5 max-w-3xl text-[clamp(2.75rem,6.2vw,5.8rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-foreground">
+              Thirty-two offerings.<span className="text-gradient"> One delivery bar.</span>
+            </h1>
+            <p className="mt-7 max-w-xl text-base leading-relaxed text-foreground/60 md:text-lg">
+              Everything IFIT ships — from AI banking automation to enterprise networking —
+              organized so you can find what you need in seconds.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#featured-services" className="btn-primary text-xs">
+                Explore services <ArrowRight className="size-4" />
+              </a>
+              <a
+                href="/contact"
+                className="rounded-full border border-foreground/15 px-5 py-3 text-xs font-medium text-foreground/70 transition-colors hover:border-foreground/35 hover:text-foreground"
+              >
+                Talk to an expert
+              </a>
+            </div>
+          </div>
+          <div className="relative min-h-[300px] lg:min-h-[460px]">
+            <div
+              className="absolute inset-10 rounded-full bg-emerald-300/20 blur-3xl"
+              aria-hidden="true"
+            />
+            <img
+              src="/services-hero-3d.png"
+              alt="Abstract illustration of connected enterprise technology services"
+              className="relative z-10 mx-auto h-auto w-full max-w-[680px] object-contain"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="featured-services" className="px-6 pb-12 md:pb-16">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-foreground/50">
+                Featured services
+              </div>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                Built around your next move.
+              </h2>
+              <p className="mt-2 text-sm text-foreground/60">
+                Explore our core services designed to empower your business.
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                aria-label="Previous featured service"
+                onClick={() => moveFeatured(-1)}
+                className="grid size-10 place-items-center rounded-full border border-foreground/15 bg-white/60 transition hover:bg-white"
+              >
+                <ChevronLeft className="size-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next featured service"
+                onClick={() => moveFeatured(1)}
+                className="grid size-10 place-items-center rounded-full border border-foreground/15 bg-white/60 transition hover:bg-white"
+              >
+                <ChevronRight className="size-4" />
+              </button>
+            </div>
+          </div>
+          <div
+            ref={featuredRef}
+            className="mt-7 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {GROUPS.map((g) => {
+              const meta = CATEGORY_META[g.cat];
+              return (
+                <button
+                  type="button"
+                  key={g.cat}
+                  onClick={() => setCat(g.cat)}
+                  className="group relative min-w-[82%] snap-start overflow-hidden rounded-[28px] border border-white/80 bg-white/65 p-5 text-left shadow-[0_24px_60px_-42px_rgba(15,118,110,.65)] transition hover:-translate-y-1 sm:min-w-[46%] lg:min-w-[31%]"
+                  style={{
+                    background: `linear-gradient(145deg,rgba(255,255,255,.82),${meta.tint})`,
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div
+                        className="text-[10px] uppercase tracking-[0.25em]"
+                        style={{ color: meta.accent }}
+                      >
+                        0{GROUPS.indexOf(g) + 1} / category
+                      </div>
+                      <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">
+                        {g.cat}
+                      </h3>
+                    </div>
+                    <span
+                      className="grid size-10 place-items-center rounded-2xl"
+                      style={{ background: meta.tint, color: meta.accent }}
+                    >
+                      {(() => {
+                        const Icon = meta.icon;
+                        return <Icon className="size-5" aria-hidden="true" />;
+                      })()}
+                    </span>
+                  </div>
+                  <img
+                    src={`/category-${g.cat.toLowerCase().replaceAll(" & ", "-").replaceAll(" ", "-")}.png`}
+                    alt=""
+                    className="mt-3 h-40 w-full object-contain transition duration-500 group-hover:scale-105"
+                  />
+                  <p className="text-sm leading-relaxed text-slate-600">{g.blurb}</p>
+                  <span
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-medium"
+                    style={{ color: meta.accent }}
+                  >
+                    View category{" "}
+                    <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Category groups — horizontal panels with tech + outcomes */}
       <section className="px-6 pb-10">
