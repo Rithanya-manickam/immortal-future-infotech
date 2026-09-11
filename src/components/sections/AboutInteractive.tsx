@@ -3,6 +3,8 @@ import type { LucideIcon } from "lucide-react";
 import { ArrowUpRight, Boxes, Building2, Cpu, LineChart } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
+
 import accentCircuit from "@/assets/accent-circuit.jpg";
 import imgAi from "@/assets/img-ai.jpg";
 import imgCloud from "@/assets/img-cloud.jpg";
