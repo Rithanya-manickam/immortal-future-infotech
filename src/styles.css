@@ -103,13 +103,19 @@
   --brand-jade: oklch(0.7 0.15 160);
   --brand-deep: oklch(0.32 0.08 180);
   --brand-glow: oklch(0.72 0.16 168);
-  --gradient-hero: linear-gradient(135deg, oklch(0.72 0.16 168), oklch(0.55 0.14 185) 55%, oklch(0.42 0.1 195));
+  --gradient-hero: linear-gradient(
+    135deg,
+    oklch(0.72 0.16 168),
+    oklch(0.55 0.14 185) 55%,
+    oklch(0.42 0.1 195)
+  );
   --gradient-radial:
     radial-gradient(1200px 700px at 20% 10%, oklch(0.62 0.14 170 / 0.28), transparent 60%),
     radial-gradient(900px 600px at 90% 30%, oklch(0.55 0.12 195 / 0.24), transparent 65%),
     radial-gradient(1000px 800px at 60% 100%, oklch(0.7 0.15 160 / 0.2), transparent 70%);
   --shadow-glow: 0 0 60px -10px oklch(0.62 0.14 170 / 0.5);
-  --shadow-elegant: 0 30px 80px -30px oklch(0.18 0.03 175 / 0.25), 0 0 0 1px oklch(0.18 0.03 175 / 0.06);
+  --shadow-elegant:
+    0 30px 80px -30px oklch(0.18 0.03 175 / 0.25), 0 0 0 1px oklch(0.18 0.03 175 / 0.06);
   --glass-bg: oklch(1 0 0 / 0.55);
   --glass-border: oklch(0.18 0.03 175 / 0.08);
   --bg-base: oklch(0.985 0.005 160);
@@ -177,11 +183,16 @@
     overflow-x: hidden;
   }
 
-  html, body {
+  html,
+  body {
     background: var(--bg-base);
   }
 
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: var(--font-display);
     letter-spacing: -0.025em;
     font-feature-settings: "ss01", "ss02";
@@ -205,7 +216,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
@@ -237,24 +250,50 @@
 }
 
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0) }
-  50% { transform: translateY(-14px) }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
 }
 @keyframes shimmer {
-  0% { background-position: -200% 0 }
-  100% { background-position: 200% 0 }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 @keyframes pulse-glow {
-  0%, 100% { opacity: .6; transform: scale(1) }
-  50% { opacity: 1; transform: scale(1.05) }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
 }
 
-.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
-.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
 
 @keyframes hero-line {
-  0% { opacity: 0; transform: translateY(30px) }
-  100% { opacity: 1; transform: translateY(0) }
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-hero-line {
   opacity: 0;
@@ -262,8 +301,12 @@
 }
 
 @keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* ---------- Buttons: consistent, obviously clickable ---------- */
@@ -280,7 +323,10 @@
   color: oklch(0.14 0.02 180);
   background: var(--gradient-hero);
   box-shadow: 0 10px 30px -12px oklch(0.62 0.14 170 / 0.75);
-  transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease, filter .25s ease;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 }
 @utility btn-secondary {
   display: inline-flex;
@@ -296,8 +342,23 @@
   border: 1px solid var(--glass-border);
   background: var(--glass-bg);
   backdrop-filter: blur(14px);
-  transition: transform .25s cubic-bezier(.16,1,.3,1), border-color .25s ease, background .25s ease;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
-.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 16px 40px -12px oklch(0.62 0.14 170 / 0.9); }
-.btn-secondary:hover { transform: translateY(-2px); border-color: var(--brand-glow); background: color-mix(in oklab, var(--brand-glow) 10%, transparent); }
-.btn-primary:focus-visible, .btn-secondary:focus-visible { outline: 2px solid var(--brand-glow); outline-offset: 3px; }
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 16px 40px -12px oklch(0.62 0.14 170 / 0.9);
+}
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: var(--brand-glow);
+  background: color-mix(in oklab, var(--brand-glow) 10%, transparent);
+}
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--brand-glow);
+  outline-offset: 3px;
+}
