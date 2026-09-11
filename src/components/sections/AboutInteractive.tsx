@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import { ArrowUpRight, Boxes, Building2, Cpu, LineChart } from "lucide-react";
+import { ArrowUpRight, Boxes, Building2, ChevronLeft, ChevronRight, Cpu, LineChart } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -81,6 +81,12 @@ const WHY_ACCENTS = ["#06b6d4", "#8b5cf6", "#ec4899", "#f59e0b"];
 const WHY_VISUALS = [imgTeam, imgAi, imgCloud, imgOps];
 
 export function WhyCarousel({ items }: { items: Omit<WhyCardProps, "index">[] }) {
+  const railRef = useRef<HTMLDivElement>(null);
+
+  function moveRail(direction: number) {
+    railRef.current?.scrollBy({ left: direction * railRef.current.clientWidth * 0.82, behavior: "smooth" });
+  }
+
   return (
     <div className="mt-8" aria-label="Why choose IFIT">
       <div className="relative isolate overflow-hidden rounded-[30px] border border-emerald-900/10 shadow-[0_24px_70px_-48px_rgba(6,95,70,0.7)]">
@@ -101,7 +107,11 @@ export function WhyCarousel({ items }: { items: Omit<WhyCardProps, "index">[] })
           aria-hidden="true"
         />
 
-        <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-4 lg:gap-7 lg:p-10">
+        <div
+          ref={railRef}
+          className="flex snap-x snap-mandatory gap-5 overflow-x-auto p-6 [scrollbar-width:none] sm:gap-6 sm:p-8 lg:gap-7 lg:p-10 [&::-webkit-scrollbar]:hidden"
+          aria-label="IFIT differentiators carousel"
+        >
           {items.map((item, index) => {
             const accent = WHY_ACCENTS[index % WHY_ACCENTS.length];
             const visual = WHY_VISUALS[index % WHY_VISUALS.length];
@@ -114,7 +124,7 @@ export function WhyCarousel({ items }: { items: Omit<WhyCardProps, "index">[] })
                 whileHover={{ y: -8 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.45, delay: index * 0.06 }}
-                className="group relative flex h-full flex-col items-center overflow-hidden rounded-[24px] border p-6 text-center transition-shadow duration-300"
+                className="group relative flex min-w-[calc(100%-1.25rem)] snap-center flex-col items-center overflow-hidden rounded-[24px] border p-6 text-center transition-shadow duration-300 sm:min-w-[calc(50%-0.75rem)] lg:min-w-[calc(25%-1.3125rem)]"
                 style={{
                   borderColor: `color-mix(in oklab, ${accent} 26%, transparent)`,
                   background: `linear-gradient(165deg, color-mix(in oklab, ${accent} 10%, var(--card)), var(--card))`,
@@ -162,6 +172,15 @@ export function WhyCarousel({ items }: { items: Omit<WhyCardProps, "index">[] })
               </motion.article>
             );
           })}
+        </div>
+        <div className="flex items-center justify-center gap-2 border-t border-emerald-900/10 px-6 py-4 sm:justify-end sm:px-8 lg:px-10">
+          <button type="button" onClick={() => moveRail(-1)} aria-label="Previous differentiator" className="grid size-9 place-items-center rounded-full border border-emerald-900/15 bg-white/50 text-foreground/70 transition-colors hover:bg-white hover:text-foreground">
+            <ChevronLeft className="size-4" />
+          </button>
+          <span className="px-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">Explore the difference</span>
+          <button type="button" onClick={() => moveRail(1)} aria-label="Next differentiator" className="grid size-9 place-items-center rounded-full border border-emerald-900/15 bg-white/50 text-foreground/70 transition-colors hover:bg-white hover:text-foreground">
+            <ChevronRight className="size-4" />
+          </button>
         </div>
       </div>
     </div>
@@ -284,6 +303,7 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
                   book
                     ? {
                         rotateY: right ? 13 : -13,
+                        x: right ? 34 : -34,
                         y: -4,
                         scale: 1.015,
                         zIndex: 20,
