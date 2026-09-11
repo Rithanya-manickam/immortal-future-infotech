@@ -250,6 +250,10 @@ export function ValuesPanels({
 }
 
 export function JourneyRail({ timeline }: { timeline: Array<[string, string, string]> }) {
+  const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
+  const book = !reduceMotion && !isMobile;
+
   return (
     <div className="relative mt-10">
       <div
@@ -263,6 +267,7 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
             <li
               key={title}
               className="relative pl-14 md:grid md:grid-cols-2 md:items-center md:gap-12 md:pl-0"
+              style={{ perspective: 1400 }}
             >
               <span
                 className="absolute left-5 top-4 z-10 -translate-x-1/2 md:left-1/2"
@@ -273,13 +278,27 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
               <motion.article
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -5 }}
+                whileHover={
+                  book
+                    ? {
+                        rotateY: right ? 13 : -13,
+                        y: -4,
+                        scale: 1.015,
+                        zIndex: 20,
+                        boxShadow: right
+                          ? "-28px 34px 70px -40px color-mix(in oklab, var(--brand-glow) 95%, transparent)"
+                          : "28px 34px 70px -40px color-mix(in oklab, var(--brand-glow) 95%, transparent)",
+                      }
+                    : { y: -5 }
+                }
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45 }}
-                className={`relative rounded-[22px] border p-5 backdrop-blur-xl ${
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className={`relative rounded-[22px] border p-5 backdrop-blur-xl will-change-transform ${
                   right ? "md:col-start-2" : "md:col-start-1 md:text-right"
                 }`}
                 style={{
+                  transformStyle: "preserve-3d",
+                  transformOrigin: right ? "left center" : "right center",
                   borderColor: "color-mix(in oklab, var(--brand-glow) 26%, transparent)",
                   background:
                     "linear-gradient(150deg, color-mix(in oklab, var(--brand-glow) 8%, var(--card)), var(--card))",
@@ -287,6 +306,14 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
                     "0 26px 60px -44px color-mix(in oklab, var(--brand-glow) 90%, transparent)",
                 }}
               >
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-y-3 w-px ${right ? "left-0" : "right-0"}`}
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, transparent, color-mix(in oklab, var(--brand-glow) 55%, transparent), transparent)",
+                  }}
+                />
                 <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--brand-glow)]">
                   {date}
                 </div>
@@ -295,6 +322,7 @@ export function JourneyRail({ timeline }: { timeline: Array<[string, string, str
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-foreground/65">{body}</p>
               </motion.article>
+
             </li>
           );
         })}
