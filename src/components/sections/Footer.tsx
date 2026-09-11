@@ -7,7 +7,7 @@ import footerBg from "@/assets/footer-bg.jpg";
 export function Footer() {
   return (
     <footer
-      className="relative z-10 mt-12 overflow-hidden border-t border-emerald-900/10 bg-white px-6 py-12 text-slate-800 md:py-14"
+      className="relative z-10 mt-12 overflow-hidden border-t border-[var(--brand-teal)]/20 px-6 py-12 text-slate-800 md:py-14"
       style={
         {
           "--foreground": "oklch(0.22 0.04 210)",
@@ -15,7 +15,7 @@ export function Footer() {
         } as CSSProperties
       }
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 opacity-0">
+      <div className="pointer-events-none absolute inset-0 -z-10">
         <img
           src={footerBg}
           alt=""

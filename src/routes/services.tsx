@@ -2,13 +2,30 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  Activity,
   ArrowRight,
   Bot,
   BriefcaseBusiness,
+  Calculator,
   ChevronLeft,
   ChevronRight,
   Cloud,
   Code2,
+  Database,
+  FileCheck2,
+  Gauge,
+  Headphones,
+  Landmark,
+  LockKeyhole,
+  Network,
+  Palette,
+  ReceiptText,
+  ScanText,
+  ServerCog,
+  Smartphone,
+  Sparkles,
+  UsersRound,
+  Workflow,
 } from "lucide-react";
 
 type Cat = "All" | "AI & Banking" | "Cloud & Infra" | "Development" | "Business";
@@ -220,6 +237,41 @@ const CATEGORY_META: Record<
   Business: { icon: BriefcaseBusiness, accent: "#c2410c", tint: "rgba(251,146,60,.16)" },
 };
 
+const SERVICE_ICONS: Record<string, typeof Bot> = {
+  "Immortal Intelligence Suite (IIS)": Sparkles,
+  ASKBOT: Bot,
+  "Finacle Implementation": Landmark,
+  "Finacle Training": UsersRound,
+  "AWS Cloud Services": Cloud,
+  "Enterprise Networking": Network,
+  "IoT Solutions": Activity,
+  "Cyber Security": LockKeyhole,
+  "Full Stack Development": Code2,
+  "Mobile App Development": Smartphone,
+  "E-Commerce Development": ReceiptText,
+  "UI/UX Design": Palette,
+  "Data Science & Analytics": Database,
+  "CRM Implementation": Workflow,
+  "ERP & SAP": ServerCog,
+  "Customized Billing Software": Calculator,
+  "HR & Payroll": UsersRound,
+  "Digital Marketing": Gauge,
+  "Core Banking Support (AMS)": Headphones,
+  "Digital Banking Channels": Smartphone,
+  "RBI Compliance & Reporting": FileCheck2,
+  "Loan Origination Automation": ScanText,
+  "DevOps & SRE": ServerCog,
+  "Disaster Recovery & BCP": Activity,
+  "Managed IT & Helpdesk": Headphones,
+  "Data Engineering & Warehousing": Database,
+  "API & System Integration": Workflow,
+  "QA & Test Automation": Gauge,
+  "Generative AI Solutions": Sparkles,
+  "IT Consulting & Advisory": Landmark,
+  "Staff Augmentation": UsersRound,
+  "Document Management System": FileCheck2,
+};
+
 const GROUPS: { cat: Exclude<Cat, "All">; blurb: string; tech: string[]; outcomes: string[] }[] = [
   {
     cat: "AI & Banking",
@@ -332,7 +384,7 @@ function Services() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_72%_42%,rgba(153,246,228,.32),transparent_32%),linear-gradient(135deg,#f7fffc_0%,#effbff_55%,#f7f5ff_100%)] px-6 pb-12 pt-24 md:pb-16 md:pt-28">
+      <section className="relative overflow-hidden px-6 pb-12 pt-24 md:pb-16 md:pt-28">
         <div className="mx-auto grid max-w-[1400px] items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-4">
           <div className="relative z-10 max-w-2xl">
             <div className="inline-flex items-center rounded-full border border-emerald-900/15 bg-white/60 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.32em] text-foreground/55 shadow-sm backdrop-blur">
@@ -491,31 +543,6 @@ function Services() {
         </div>
       </section>
 
-      {/* Process */}
-      <section className="px-6 py-10">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-foreground/50">
-            How we deliver
-          </div>
-          <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
-            {PROCESS.map(([step, body], i) => (
-              <motion.li
-                key={step}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="rounded-2xl border border-border/15 p-4"
-              >
-                <span className="font-mono text-[11px] text-[var(--brand-glow)]">0{i + 1}</span>
-                <div className="mt-1.5 text-sm font-semibold text-foreground">{step}</div>
-                <p className="mt-1 text-[12px] leading-relaxed text-foreground/60">{body}</p>
-              </motion.li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
       {/* Quality */}
       <section className="px-6 py-10">
         <div className="mx-auto max-w-[1400px]">
@@ -553,7 +580,7 @@ function Services() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((s, i) => {
               const meta = CATEGORY_META[s.cat];
-              const Icon = meta.icon;
+              const Icon = SERVICE_ICONS[s.name] ?? meta.icon;
               return (
                 <motion.article
                   key={s.name}
